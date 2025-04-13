@@ -37,10 +37,10 @@ class userService {
         return result.rows[0];
     }
 
-    async patchUserRole(id, role) {
+    async patchUserRole(id,role) {
         const query = {
-            text: 'UPDATE "USER" SET Role = $2 WHERE id = $1',
-            values: [id, role]
+            text: 'UPDATE "User" SET Role = $2 Where id = $1 Returning *',
+            values: [id,role]
         };
     
         const result = await data.query(query);
@@ -59,9 +59,20 @@ class userService {
             text: 'INSERT INTO "User" (id,email,name) VALUES ($1,$2,$3)',
             values: [id,email,name]
         };
-        const result = await data.query(query);
+
+        try {
+            const result = await data.query(query);
+    
+            return result.rows;
+        } catch (error) {
+            if (error.code === '23505') {
+                return { error: 'User already registered.' };
+            }
+    
+
         return result.rows;
     }
+}
 
 
     
