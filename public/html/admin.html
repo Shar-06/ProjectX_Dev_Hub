@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>AdminPage</title>
+        <link rel="stylesheet" href="/styles/admin-styles.css">
+        <script src="/js/admin.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>Admin Dashboard</h1>
+        </header>
+
+        <aside>
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>Events</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <section aria-label="search-users" class="search-section">
+                <form role="search" id="search-form">
+                    <input type="search" id="user-search" name="q" placeholder="search user by name or id" />
+                    <button type="submit">Search</button>
+                </form>
+            </section>
+
+            <section aria-labelledby="user-details-heading">
+                <h2 id="user-details-heading">Users Details</h2>
+                <article class="user-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">UserID</th>
+                                <th scope="col">UserName</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </article>
+            </section>
+        </main>
+    </body>
+</html>
