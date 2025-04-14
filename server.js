@@ -17,9 +17,11 @@ app.use('/api/v1/users', userRouter);
 
 //Middleware setup
 //app.use(express.static('public/html'));
-app.use(express.static(path.join(__dirname, 'public/html')));
+//app.use(express.static(path.join(__dirname, 'public/html')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('*', (req, res) => {
+
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/html', 'index.html'));
   });
 
