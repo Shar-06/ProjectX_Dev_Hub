@@ -8,24 +8,25 @@ const userRouter = require('./src/api/routes/user.routes.js');
 
 //Instantiate a new express app
 const app = express();
-
-//Middleware setup
-app.use(express.static('public'));
-
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
-  
 app.use(express.json());
 app.use(morgan('combined'));
 app.use(cors());
 
+//Route registration [v1]
+app.use('/api/v1/users', userRouter);
+
+//Middleware setup
+app.use(express.static('public/'));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/', 'index.html'));
+  });
+
 //Configure port and database connection
 const PORT = process.env.PORT || 3500;
 
-//Route registration [v1]
-app.use('/api/v1/users', userRouter);
+
+
 
 //Open up the server to listen for requests
 app.listen(PORT, () => {
