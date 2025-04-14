@@ -12,9 +12,6 @@ const app = express();
 //Middleware setup
 app.use(express.static('public'));
 //app.use(express.static(path.join(__dirname, 'public')));
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'RegistrationPage.html'));
-});
 
 app.use(express.json());
 app.use(morgan('combined'));
