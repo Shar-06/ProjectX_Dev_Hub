@@ -16,10 +16,11 @@ app.use(cors());
 app.use('/api/v1/users', userRouter);
 
 //Middleware setup
-app.use(express.static('public/'));
+//app.use(express.static('public/html'));
+app.use(express.static(path.join(__dirname, 'public/html')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public/html', 'index.html'));
   });
 
 //Configure port and database connection
