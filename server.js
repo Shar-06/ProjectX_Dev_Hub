@@ -28,9 +28,6 @@ app.get('/', (req, res) => {
 //Configure port and database connection
 const PORT = process.env.PORT || 3500;
 
-
-
-
 //Open up the server to listen for requests
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);

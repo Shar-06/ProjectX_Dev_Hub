@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const roles = ["Resident", "Facility Staff"];
     const tableBody = document.querySelector("table tbody");
 
-    fetch('http://localhost:3500/api/v1/users/', {
+    fetch('https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
