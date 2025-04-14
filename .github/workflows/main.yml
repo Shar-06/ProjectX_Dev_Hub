@@ -21,12 +21,14 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build (if needed)
-        run: npm run build --if-present
+      # Remove the build step, since there's no build if you're not using Vite or React
+      # - name: Build (if needed)
+      #   run: npm run build --if-present
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           app-name: SportX
-          package: .
+          package: .  # Deploy the whole directory
+
