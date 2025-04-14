@@ -70,5 +70,5 @@ jobs:
         with:
           app-name: 'communitysportsX'
           slot-name: 'Production'
-          package: .
+          package: release.zip
           
