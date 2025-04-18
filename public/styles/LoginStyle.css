@@ -24,7 +24,7 @@ figcaption{
   opacity: 0.2;
 }
 figcaption:hover{
-  color:#2c3e50;
+  color:white;
   opacity: 1;
   font-size: 90px;
 }
@@ -49,11 +49,12 @@ button{
   width: 100%;
   height: 40px;
   font-size: 20px;
-  color: white;
-  background-color: #293620;
+  color: black;
+  background-color: white;
 }
 button:active{
-  background-color: #455739;
+  color: white;
+  background-color: #395775;
 }
 #forgotPwd{
   margin-left: 47%;
@@ -62,10 +63,10 @@ p{
   color: white;
 }
 h1{
-  color: #293620;
+  color: white;
 }
 label{
-  color: #293620;
+  color: white;
   font-weight: bold;
 }
 

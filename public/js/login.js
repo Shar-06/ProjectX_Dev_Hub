@@ -56,14 +56,10 @@ window.addEventListener("DOMContentLoaded", () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      console.log("user verified: "+ user.emailVerified);
-      console.log("user name: "+user.displayName);
-      console.log("user email: "+user.email);
-      console.log("user ID: "+user.uid);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
       const userEmail = user.email;
-      let userRole;
+      let userRole = "";
       
       //fetch user role from database using email after a successful user authentication
       fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users?email=${encodeURIComponent(userEmail)}`, {
