@@ -62,7 +62,41 @@ window.addEventListener("DOMContentLoaded", () => {
       console.log("user ID: "+user.uid);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
-      window.location.href="admin.html";
+      const userEmail = user.email;
+      let userRole;
+      
+      //fetch user role from database using email after a successful user authentication
+      fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users?email=${encodeURIComponent(userEmail)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data && data.role) {
+              userRole = data.role;
+
+              //redirect to correct user page based on user role
+              if(userRole == "admin"){
+                window.location.href="admin.html";
+              }
+              if(userRole == "resident"){
+                window.location.href="#";
+              }
+              if(userRole == "staff"){
+                window.location.href="#";
+              }
+              else{
+                alert("You are registered but you have not been assigned a role as a user");
+                window.location.href="#"; //redirect to waiting page
+              }
+          } else {
+            userRole = data.role;
+          }
+      })
+      .catch(error => console.error('Error:', error));
+      
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;

@@ -25,5 +25,17 @@
     ],
     "coverageDirectory": "coverage",
     "testEnvironment": "node"
-  }
+  },
+  "main": "app.test.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shar-06/ProjectX_Dev_Hub.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shar-06/ProjectX_Dev_Hub/issues"
+  },
+  "homepage": "https://github.com/Shar-06/ProjectX_Dev_Hub#readme",
+  "description": ""
 }
