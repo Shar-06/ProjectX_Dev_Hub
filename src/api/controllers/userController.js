@@ -57,6 +57,25 @@ class userController {
         }
     }
 
+    async getUserByEmail(req, res, next) {
+        try {
+            
+            //retrieve id from request parameters
+            const email = req.params.email;
+
+            //use retrieved id to find user using the service method
+            const user = await userService.getUserByEmail(email);
+
+            res.json({
+                success: true,
+                data: user
+            });
+                
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async patchUserRole(req, res, next) {
         try {
             

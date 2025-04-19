@@ -37,6 +37,21 @@ class userService {
         return result.rows[0];
     }
 
+    async getUserByEmail(email) {
+        const query = {
+            text: 'SELECT * FROM "User" WHERE email = $1',
+            values: [email]
+        };
+
+        const result = await data.query(query);
+
+        if (result.rows.length === 0) {
+            throw new Error('User not found');
+        }
+
+        return result.rows[0];
+    }
+
     async patchUserRole(id,role) {
         const query = {
             text: 'UPDATE "User" SET Role = $2 Where id = $1 Returning *',
