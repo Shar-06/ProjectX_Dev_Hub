@@ -6,15 +6,15 @@ const userBookingsTable = document.querySelector(
     'section[aria-labelledby="user-bookings-heading"] tbody'
 );
 
-fetch("https://your-api-endpoint/bookings")
+fetch("https://localhost:3500/api/v1/booking/")
     .then((response) => response.json())
     .then((data) => {
     data.forEach((booking) => {
         const row = document.createElement("tr");
         row.innerHTML = `
         <td>${booking.id}</td>
-        <td>${booking.userName}</td>
-        <td>${booking.facilityName}</td>
+        <td>${booking.resident_id}</td>
+        <td>${booking.facility_id}</td>
         <td>${booking.timeSlot}</td>
         <td>${booking.date}</td>
         <td class="status">${booking.status}</td>
@@ -54,7 +54,7 @@ fetch("https://your-api-endpoint/bookings")
     });
 
 function updateBookingStatus(id, newStatus, row) {
-    fetch(`${BOOKINGS_API_URL}/${id}`, {
+    fetch(`https://localhost:3500/api/v1/bookings/${id}`, {
     method: "PATCH",
     headers: {
         "Content-Type": "application/json",

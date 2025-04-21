@@ -5,6 +5,7 @@ const path = require('path');
 require('dotenv').config();
 
 const userRouter = require('./src/api/routes/user.routes.js');
+const bookingRouter = require('./src/api/routes/booking.routes.js');
 
 //Instantiate a new express app
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 
 //Route registration [v1]
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 //Middleware setup
 //app.use(express.static('public/html'));
