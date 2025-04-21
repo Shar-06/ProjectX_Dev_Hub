@@ -7,7 +7,7 @@ class bookingController {
             const bookings = await bookingService.getAllBookings();
 
             //validation using if statement
-            if (users) {
+            if (bookings) {
                 res.json({
                     success: true,
                     data: bookings
@@ -26,7 +26,7 @@ class bookingController {
             const id = req.params.id;
 
             //use retrieved id to find brand using the service method
-            const booking = await bookingService.getBookingByID();
+            const booking = await bookingService.getBookingByID(id);
 
             res.json({
                 success: true,
@@ -50,7 +50,7 @@ class bookingController {
 
             res.json({
                 success: true,
-                data: user
+                data: booking
             });
                 
         } catch (error) {
@@ -69,7 +69,7 @@ class bookingController {
 
             res.json({
                 success: true,
-                data: user
+                data: booking
             });
                 
         } catch (error) {
@@ -79,4 +79,4 @@ class bookingController {
 
 }
 
-module.exports = new userController();
+module.exports = new bookingController();

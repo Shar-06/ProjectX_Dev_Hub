@@ -7,6 +7,7 @@ require('dotenv').config();
 const userRouter = require('./src/api/routes/user.routes.js');
 const bookingRouter = require('./src/api/routes/booking.routes.js');
 
+
 //Instantiate a new express app
 const app = express();
 app.use(express.json());

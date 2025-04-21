@@ -1,13 +1,13 @@
 const data = require('../../config/database');
 
-class bookingService {
+class bookingService{
     async getAllBookings() {
         const query = 'SELECT * FROM Booking ORDER BY id ASC';
         const result = await data.query(query);
         return result.rows;
     }
 
-    async getBookingById(id) {
+    async getBookingByID(id) {
         const query = {
             text: 'SELECT * FROM Booking WHERE id = $1',
             values: [id]
@@ -40,8 +40,8 @@ class bookingService {
     async postNewBooking(id,start_time,end_time,status,date,facility_id,resident_id) {
 
         const query = {
-            text: 'INSERT INTO Booking (id,start_time,end_time,status,date,facility_id,resident_id) VALUES ($1,$2,$3,$4,$5,$6)',
-            values: [id,start_time,end_time,status,date,facility_id,resident_id]
+            text: 'INSERT INTO Booking (id,status,date,facility_id,resident_id,time) VALUES ($1,$2,$3,$4,$5,$6)',
+            values: [id,status,date,facility_id,resident_id,time]
         };
 
         try {
@@ -59,7 +59,9 @@ class bookingService {
 }
 
 
+
+
     
 }
 
-module.exports = new userService();
+module.exports = new bookingService();
