@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility Management Dashboard</title>
+    <link rel="stylesheet" href="staff.css">
+</head>
+<body>
+    <header>
+        <h1>Facility Management Dashboard</h1>
+        <p>Monitor maintenance issues and usage trends</p>
+    </header>
+    
+    <main>
+        <header>
+            <button class="nav-btn active" id="maintenanceBtn">Home</button>
+            <button class="nav-btn" id="trendsBtn">Analytics</button>
+        </header>
+        
+        <section class="content-section active" id="maintenanceSection">
+            <h2>Maintenance Issues</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Brief</th>
+                        <th>Facility</th>
+                        <th>Logged by</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="issuesTableBody">
+                    
+                </tbody>
+            </table>
+        </section>
+        
+        <section class="content-section" id="trendsSection">
+            <h2>Facility Usage Trends</h2>
+            <figure class="chart-container">
+                <canvas id="usageChart" width="350" height="350"></canvas>
+            </figure>
+            <ul class="legend" id="chartLegend">
+               
+            </ul>
+        </section>
+    </main>
+    
+    <aside class="notification" id="notification">Status updated successfully!</aside>
+
+    <script src="staff.js"></script>
+</body>
+</html>
