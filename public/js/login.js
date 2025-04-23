@@ -8,13 +8,12 @@ import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopu
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAsU3NSYzqjCKZFr7ktapDMKAoLnXuOODE",
-  authDomain: "projectxloginpage.firebaseapp.com",
-  projectId: "projectxloginpage",
-  storageBucket: "projectxloginpage.firebasestorage.app",
-  messagingSenderId: "485642614683",
-  appId: "1:485642614683:web:93603fb88f7948bd1d533e",
-  measurementId: "G-4Z3F4NWJNH"
+  apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
+  authDomain: "login-c94f8.firebaseapp.com",
+  projectId: "login-c94f8",
+  storageBucket: "login-c94f8.firebasestorage.app",
+  messagingSenderId: "277803117358",
+  appId: "1:277803117358:web:6d2f387bff41859bf3e8bf"
 };
 
 
@@ -36,6 +35,8 @@ window.addEventListener("DOMContentLoaded", () => {
       console.log("logged in, auth successful")
       window.location.href="admin.html";
       // ...
+
+      
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -60,9 +61,11 @@ window.addEventListener("DOMContentLoaded", () => {
       // ...
       const userEmail = user.email;
       let userRole = "";
+      const userID = user.uid;
+      
       
       //fetch user role from database using email after a successful user authentication
-      fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users?email=${encodeURIComponent(userEmail)}`, {
+      fetch(`https://localhost:3500/api/v1/users/id/${userID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -72,8 +75,8 @@ window.addEventListener("DOMContentLoaded", () => {
       .then(data => {
           if (data && data.role) {
               userRole = data.role;
-
-              //redirect to correct user page based on user role
+              console.log("User role: " + userRole);
+             //redirect to correct user page based on user role
               if(userRole == "admin"){
                 window.location.href="admin.html";
               }
@@ -91,8 +94,9 @@ window.addEventListener("DOMContentLoaded", () => {
             userRole = data.role;
           }
       })
-      .catch(error => console.error('Error:', error));
-      
+      .catch(error => {
+          console.error('Error fetching user role:', error);
+      });
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
