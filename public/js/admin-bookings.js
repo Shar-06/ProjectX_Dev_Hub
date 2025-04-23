@@ -6,18 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
         'section[aria-labelledby="user-bookings-heading"] tbody'
     );
 
-    fetch("https://localhost:3500/api/v1/bookings/")
+    fetch("http://localhost:3500/api/v1/bookings/")
         .then((response) => response.json())
         .then((data) => {
-            data.forEach((booking) => {
+            if (!Array.isArray(data.data)) {
+                throw new Error("Expected an array but received something else.");
+            }
+
+            data.data.forEach((booking) => {
                 const row = document.createElement("tr");
+
+                if(booking.status === null){
+                    booking.status = "Pending";
+                }
 
                 row.innerHTML = `
                     <td>${booking.id}</td>
                     <td>${booking.resident_id}</td>
                     <td>${booking.facility_id}</td>
-                    <td>${booking.timeSlot || "N/A"}</td>
-                    <td>${booking.date}</td>
+                    <td>${booking.time || "N/A"}</td>
+                    <td>${new Date(booking.date).toLocaleDateString()}</td>
                     <td class="status">${booking.status}</td>
                 `;
 
@@ -57,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     function updateBookingStatus(id, newStatus, row) {
-        fetch(`https://localhost:3500/api/v1/bookings/update-status/:${id}/:${status}`, {
+        fetch(`http://localhost:3500/api/v1/bookings/update-status/${id}/${newStatus}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -68,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) throw new Error("Failed to update booking");
                 return response.json();
             })
-            .then((updatedBooking) => {
+            .then(() => {
                 const statusCell = row.querySelector(".status");
                 statusCell.textContent = newStatus;
 
