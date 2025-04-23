@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // IdP data available using getAdditionalUserInfo(result)
       // ...
       const userEmail = user.email;
-      let userRole = "";
+      
       const userID = user.uid;
       console.log("User ID: " + userID);
       
@@ -75,17 +75,19 @@ window.addEventListener("DOMContentLoaded", () => {
       .then(response => response.json())
       .then(data => {
         
-              userRole = data.role;
+              const userRole = data.data.role;          
               console.log("User role: " + userRole);
              //redirect to correct user page based on user role
               if(userRole == "Admin"){
                 window.location.href="admin.html";
               }
-              if(userRole == "Resident"){
+              else if(userRole == "Resident"){
                 window.location.href="#";
+                alert("Redirect to resident page");
               }
-              if(userRole == "Staff"){
+              else if(userRole == "Facility Staff"){
                 window.location.href="#";
+                alert("Redirect to facility staff page");
               }
               else{
                 alert("You are registered but you have not been assigned a role as a user");
