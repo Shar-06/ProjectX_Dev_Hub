@@ -62,10 +62,11 @@ window.addEventListener("DOMContentLoaded", () => {
       const userEmail = user.email;
       let userRole = "";
       const userID = user.uid;
+      console.log("User ID: " + userID);
       
       
       //fetch user role from database using email after a successful user authentication
-      fetch(`https://localhost:3500/api/v1/users/id/${userID}`, {
+      fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/id/${userID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -73,26 +74,24 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .then(response => response.json())
       .then(data => {
-          if (data && data.role) {
+        
               userRole = data.role;
               console.log("User role: " + userRole);
              //redirect to correct user page based on user role
-              if(userRole == "admin"){
+              if(userRole == "Admin"){
                 window.location.href="admin.html";
               }
-              if(userRole == "resident"){
+              if(userRole == "Resident"){
                 window.location.href="#";
               }
-              if(userRole == "staff"){
+              if(userRole == "Staff"){
                 window.location.href="#";
               }
               else{
                 alert("You are registered but you have not been assigned a role as a user");
                 window.location.href="#"; //redirect to waiting page
               }
-          } else {
-            userRole = data.role;
-          }
+          
       })
       .catch(error => {
           console.error('Error fetching user role:', error);
