@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Community sports facility booking system">
+    <title>Community Sports Facility Booking</title>
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+<body>
+    <header class="site-header">
+        <h1>Community Sports Facility Management</h1>
+        <nav aria-label="Primary navigation">
+            <ul>
+                <li><a href="#facilities" aria-current="page">Our Facilities</a></li>
+            </ul>
+        </nav>
+        
+        <section id="user-profile" hidden aria-label="User profile">
+            <figure>
+                <img id="user-avatar" hidden alt="User profile picture">
+                <figcaption>
+                    <p id="user-name"></p>
+                </figcaption>
+            </figure>
+            <button id="sign-out-button" class="auth-button">Sign out</button>
+        </section>
+    </header>
+
+    <main id="main-content">
+        <section id="facilities" aria-labelledby="facilities-heading">
+            <h2 id="facilities-heading">Our Sports Facilities</h2>
+            
+            <section class="facilities-container">
+                <article id="soccer" class="facility">
+                    <h3>Soccer Field</h3>
+                    <figure>
+                        <img src="soccer-field.jpg" alt="Professional soccer field with green turf and white markings">
+                    </figure>
+                    <button class="book-button" data-facility="soccer-field">Book Soccer Field</button>
+                </article>
+
+                <article id="swimming" class="facility">
+                    <h3>Swimming Pool</h3>
+                    <figure>
+                        <img src="swimming.jpg" alt="Olympic-sized swimming pool with clear blue water and lane markers">
+                    </figure>
+                    <button class="book-button" data-facility="swimming-pool">Book Swimming Pool</button>
+                </article>
+
+                <article id="basketball" class="facility">
+                    <h3>Basketball Court</h3>
+                    <figure>
+                        <img src="basketball.jpg" alt="Outdoor basketball court with acrylic surface and bright markings">
+                    </figure>
+                    <button class="book-button" data-facility="basketball-court">Book Basketball Court</button>
+                </article>
+
+                <article id="gym" class="facility">
+                    <h3>Gymnasium</h3>
+                    <figure>
+                        <img src="gym.jpg" alt="Modern gym with weight machines and cardio equipment">
+                    </figure>
+                    <button class="book-button" data-facility="gymnasium">Book Gymnasium</button>
+                </article>
+            </section>
+        </section>
+
+        <section id="booking-section" hidden aria-labelledby="booking-heading">
+            <h2 id="booking-heading">Book Your Session</h2>
+            <form id="booking-form" class="booking-form">
+                <fieldset>
+                    <legend>Booking Details</legend>
+                    
+                    <p>
+                        <label for="facility-name">Facility:</label>
+                        <output id="facility-name" name="facility">Not selected</output>
+                    </p>
+
+                    <p>
+                        <label for="booking-date">Choose Date:</label>
+                        <input type="date" id="booking-date" name="date" required min="">
+                    </p>
+
+                    <p>
+                        <label for="time-slot">Available Time Slots:</label>
+                        <select id="time-slot" name="time" required>
+                            <option value="">-- Select Time --</option>
+                        </select>
+                    </p>
+
+                    <p id="swimmers-field" hidden>
+                        <label for="swimmers">Number of Swimmers:</label>
+                        <input type="number" id="swimmers" name="swimmers" min="1" max="20" value="1">
+                    </p>
+
+                    <p id="gym-capacity-field" hidden>
+                        <label for="participants">Number of Participants:</label>
+                        <input type="number" id="participants" name="participants" min="1" max="15" value="1">
+                    </p>
+                </fieldset>
+
+                <button type="submit" class="confirm-button">Confirm Booking</button>
+            </form>
+        </section>
+
+        <section id="confirmation-section" hidden aria-labelledby="confirmation-heading">
+            <h2 id="confirmation-heading">Booking Confirmed!</h2>
+            <article class="booking-receipt">
+                <h3>Your Booking Details</h3>
+                <p id="confirmed-facility"></p>
+                <p id="confirmed-date"></p>
+                <p id="confirmed-time"></p>
+                <p id="confirmed-participants" hidden></p>
+            </article>
+            <button id="new-booking-button" class="confirm-button">Make Another Booking</button>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <address>
+            Contact our facility manager at <a href="mailto:bookings@community.org">bookings@community.org</a>
+        </address>
+        <p><small>&copy; 2025 Community Sports Association</small></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
