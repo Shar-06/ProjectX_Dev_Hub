@@ -1,4 +1,4 @@
-jest.mock('../api/services/bookingService', () => ({
+jest.mock('../api/services/bookingService.js', () => ({
     getAllBookings: jest.fn(),
     getBookingByID: jest.fn(),
     patchBookingStatus: jest.fn(),
