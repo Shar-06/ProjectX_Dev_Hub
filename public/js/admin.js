@@ -24,15 +24,29 @@ document.addEventListener("DOMContentLoaded", () => {
             nameCell.textContent = user.name;
 
             const roleCell = document.createElement("td");
-            roleCell.textContent = user.role || "None";
+            const normalizedRole = (!user.role || user.role.trim() === '""') ? "" : user.role;
+            roleCell.textContent = normalizedRole;
 
             const actionsCell = document.createElement("td");
 
+            // Role Button: Assign Role or Edit Role
             const roleButton = document.createElement("button");
-            // Set initial button text based on role
-            roleButton.textContent = (user.role === null || user.role === "None") ? "Assign Role" : "Edit Role";
             roleButton.className = "role-button";
+            roleButton.textContent = normalizedRole === "" ? "Assign Role" : "Edit Role";
 
+            // Revoke Access Button
+            const revokeButton = document.createElement("button");
+            revokeButton.className = "access-button danger";
+
+            if (normalizedRole === "") {
+                revokeButton.textContent = "Access Denied";
+                revokeButton.disabled = true;
+            } else {
+                revokeButton.textContent = "Revoke Access";
+                revokeButton.disabled = false;
+            }
+
+            // Role Assignment Logic
             roleButton.addEventListener("click", () => {
                 const select = document.createElement("select");
                 roles.forEach(role => {
@@ -42,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     select.appendChild(option);
                 });
 
-                select.value = (user.role === null || user.role === "None") ? roles[0] : user.role;
+                select.value = normalizedRole === "" ? roles[0] : normalizedRole;
 
                 const confirmBtn = document.createElement("button");
                 confirmBtn.textContent = "Confirm";
@@ -75,10 +89,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         roleCell.textContent = selectedRole;
                         user.role = selectedRole;
 
+                        // Update button text/content after assigning role
+                        roleButton.textContent = "Edit Role";
+                        roleButton.style.display = "inline-block";
+                        revokeButton.textContent = "Revoke Access";
+                        revokeButton.disabled = false;
+
                         select.remove();
                         confirmBtn.remove();
-                        roleButton.style.display = "inline-block";
-                        roleButton.textContent = "Edit Role";
                     })
                     .catch(error => {
                         alert(`Failed to update role: ${error.message}`);
@@ -89,13 +107,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
 
-            const revokeButton = document.createElement("button");
-            revokeButton.textContent = "Revoke Access";
-            revokeButton.className = "access-button danger";
-
+            // Revoke Access Logic
             revokeButton.addEventListener("click", () => {
-                revokeButton.textContent = "Access Denied";
-                revokeButton.disabled = true;
+                if (user.role === "") return;
+
+                const selectedID = user.id;
+
+                fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/update-role/${selectedID}/""`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(err.message || "Failed to revoke access");
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    roleCell.textContent = "";
+                    user.role = "";
+
+                    // Update button text/content after revoking access
+                    roleButton.textContent = "Assign Role";
+                    revokeButton.textContent = "Access Denied";
+                    revokeButton.disabled = true;
+                })
+                .catch(error => {
+                    alert(`Failed to revoke access: ${error.message}`);
+                });
             });
 
             actionsCell.appendChild(roleButton);
@@ -113,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error('Error fetching users:', error);
     });
 
+    // Search functionality
     const searchForm = document.getElementById("search-form");
     const searchInput = document.getElementById("user-search");
 

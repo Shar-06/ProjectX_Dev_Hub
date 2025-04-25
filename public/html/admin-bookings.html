@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Admin Bookings</title>
+        <link rel="stylesheet" href="/styles/admin-bookings-styles.css">
+        <script src="/js/admin-bookings.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>Sports Facility Bookings</h1>
+        </header>
+
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="/html/admin.html">Home</a></li>
+                    <li><a href="/html/admin-bookings.html">Bookings</a></li>
+                    <li>Events</li>
+                    <li>Notifications</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <section aria-label="search-bookings" class="search-bookings-section">
+                <form role="search" id="search-bookings-form">
+                    <input type="search" id="search-bookings" name="q" placeholder="search bookings by date or facility" />
+                    <button type="submit">Search</button>
+                </form>
+            </section>
+
+            <section aria-labelledby="booking-requests-heading">
+                <h2 id="booking-requests-heading">User Booking Requests</h2>
+                <article class="requests-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BookingID</th>
+                                <th>UserName</th>
+                                <th>Facility</th>
+                                <th>Time Slot</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </article>
+            </section>
+
+            <section aria-labelledby="user-bookings-heading">
+                <h2 id="user-bookings-heading">Users Bookings</h2>
+                <article class="bookings-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BookingID</th>
+                                <th>UserName</th>
+                                <th>Facility</th>
+                                <th>Time Slot</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </article>
+            </section>
+        </main>
+    </body>
+</html>
