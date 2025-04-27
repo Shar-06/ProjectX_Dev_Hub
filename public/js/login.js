@@ -60,12 +60,9 @@ window.addEventListener("DOMContentLoaded", () => {
       // IdP data available using getAdditionalUserInfo(result)
       // ...
       const userEmail = user.email;
-      
       const userID = user.uid;
 
-      
       console.log("User ID: " + userID);
-      
       
       //fetch user role from database using email after a successful user authentication
       fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/id/${userID}`, {
@@ -76,10 +73,9 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .then(response => response.json())
       .then(data => {
-        
+        if(data.data){
               const userRole = data.data.role;
               const userEmail = data.data.email;          
-              console.log("User role: " + userRole);
              //redirect to correct user page based on user role
               if( userEmail == "msesenyanelevi@gmail.com"){
                 window.location.href="../html/admin.html";
@@ -94,10 +90,11 @@ window.addEventListener("DOMContentLoaded", () => {
                 alert("You are registered but you have not been assigned a role as a user");
                 window.location.href="#"; //redirect to waiting page
               }
-          
+        }
       })
       .catch(error => {
           console.error('Error fetching user role:', error);
+          alert("User not registered, please register first!!!");
       });
     }).catch((error) => {
       // Handle Errors here.
