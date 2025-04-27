@@ -1,5 +1,18 @@
 // script.js - Sports Facility Booking System
-import { loggedInID } from '../js/login.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
+    authDomain: "login-c94f8.firebaseapp.com",
+    projectId: "login-c94f8",
+    storageBucket: "login-c94f8.firebasestorage.app",
+    messagingSenderId: "277803117358",
+    appId: "1:277803117358:web:6d2f387bff41859bf3e8bf"
+  };
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
@@ -214,4 +227,24 @@ document.addEventListener('DOMContentLoaded', () => {
             facilitiesSection.scrollIntoView({ behavior: 'smooth' });
         });
     }
+
+    // Logged-in user data
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            const email = user.email;
+            const displayName = user.displayName;
+
+            console.log("User ID: " + uid);
+            console.log("User Email: " + email);
+            console.log("User Display Name: " + displayName);
+            // ...
+        } else {
+            // User is signed out
+            // ...
+        }
+        });
+
 });
