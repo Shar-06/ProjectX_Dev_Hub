@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         'section[aria-labelledby="user-bookings-heading"] tbody'
     );
 
-    fetch("https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/bookings/")
+    fetch("/api/v1/bookings/")
         .then((response) => response.json())
         .then((data) => {
             if (!Array.isArray(data.data)) {
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     function updateBookingStatus(id, newStatus, row) {
-        fetch(`http://localhost:3500/api/v1/bookings/update-status/${id}/${newStatus}`, {
+        fetch(`/api/v1/bookings/update-status/${id}/${newStatus}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

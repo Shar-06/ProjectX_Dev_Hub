@@ -18,12 +18,10 @@ app.use(cors());
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/bookings', bookingRouter);
 
-//Middleware setup
-//app.use(express.static('public/html'));
-//app.use(express.static(path.join(__dirname, 'public/html')));
+//file to start in
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//file to open at start
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/html', 'LoginPage.html'));
   });

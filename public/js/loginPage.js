@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // Signed in 
       const user = userCredential.user;
       console.log("logged in, auth successful")
-      window.location.href="admin.html";
+      window.location.href="adminPage.html";
       // ...
 
       
@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
       
       
       //fetch user role from database using email after a successful user authentication
-      fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/id/${userID}`, {
+      fetch(`/api/v1/users/id/${userID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -82,13 +82,13 @@ window.addEventListener("DOMContentLoaded", () => {
               console.log("User role: " + userRole);
              //redirect to correct user page based on user role
               if( userEmail == "msesenyanelevi@gmail.com"){
-                window.location.href="../html/admin.html";
+                window.location.href="../html/adminPage.html";
               }
               else if(userRole == "Resident"){
                 window.location.href="../html/bookingPage.html";
               }
               else if(userRole == "Facility Staff"){
-                window.location.href="../html/staff.html";
+                window.location.href="../html/facilityStaffPage.html";
               }
               else{
                 alert("You are registered but you have not been assigned a role as a user");

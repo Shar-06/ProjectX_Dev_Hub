@@ -48,7 +48,7 @@ googleSignUpBtn.addEventListener('click', () => {
       
       // 2. Send to your backend ( using fetch)
 
-      fetch('https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/post-user', {
+      fetch('/api/v1/users/post-user', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
