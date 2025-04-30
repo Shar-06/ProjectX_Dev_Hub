@@ -58,7 +58,7 @@ class reportController {
         }
     }
 
-    async postNewStatus(req, res, next) {
+    async patchNewStatus(req, res, next) {
         try {
             
             //retrieve id from request parameters
@@ -99,4 +99,4 @@ class reportController {
 
 }
 
-module.exports = new userController();
+module.exports = new reportController();

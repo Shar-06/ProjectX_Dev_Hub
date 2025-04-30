@@ -6,6 +6,6 @@ const router = express.Router();
 router.get('/', reportController.getAllReports);
 router.get('/id/:id', reportController.getReportByID);
 //router.patch('/report/:id/:status',reportController.getReportByFacility);
-//router.post('/updateStatus',reportController.postNewStatus);
+router.patch('/updateStatus/:id/:status',reportController.patchNewStatus);
 
 module.exports = router; 

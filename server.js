@@ -18,14 +18,14 @@ app.use(cors());
 //Route registration [v1]
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/bookings', bookingRouter);
-app.use('/api/v1/reports', )
+app.use('/api/v1/reports',reportRouter);
 
 //file to start in
 app.use(express.static(path.join(__dirname, 'public')));
 
 //file to open at start
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/html', 'LoginPage.html'));
+    res.sendFile(path.join(__dirname, 'public/html', 'facilityStaffPage.html'));
   });
 
 //Configure port and database connection
