@@ -1,67 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Admin Events Creation Form</title>
-        <link rel="stylesheet" href="/styles/admin-event-form.css">
-        <script src="/js/admin-event-form.js"></script>
-    </head>
+<head>
+    <title>Admin Events Creation Form</title>
+    <link rel="stylesheet" href="/styles/admin-event-form.css">
+    <script src="/js/admin-event-form.js" defer></script>
+</head>
 
-    <body>
-        <header>
-            <h1>ADMIN MANAGEMENT DASHBOARD</h1>
-        </header>
+<body>
+    <header>
+        <h1>ADMIN MANAGEMENT DASHBOARD</h1>
+    </header>
 
-        <aside>
-            <nav>
-                <ul>
-                    <li><button onclick="window.location.href='/html/admin.html'">Home</button></li>
-                    <li><button onclick="window.location.href='/html/admin-bookings.html'">Bookings</button></li>
-                    <li><button onclick="window.location.href='/html/admin-events.html'">Events</button></li>
-                    <li><button onclick="window.location.href='/html/admin-notifications.html'">Notifications</button></li>
-                </ul>
-            </nav>
-        </aside>
+    <aside>
+        <nav>
+            <ul>
+                <li><button onclick="window.location.href='/html/admin.html'">Home</button></li>
+                <li><button onclick="window.location.href='/html/admin-bookings.html'">Bookings</button></li>
+                <li><button onclick="window.location.href='/html/admin-events.html'">Events</button></li>
+                <li><button onclick="window.location.href='/html/admin-notifications.html'">Notifications</button></li>
+            </ul>
+        </nav>
+    </aside>
 
-        <main>
-            <section aria-label="event-form-section" class="event-form-section">
-                <h2>EVENT CREATION</h2>
-                <form class="event-form">
-                    <fieldset>
-                        <legend>Event Details</legend>
+    <main>
+        <section aria-label="event-form-section" class="event-form-section">
+            <h2>EVENT CREATION</h2>
+            <form class="event-form" id="eventForm">
+                <fieldset>
+                    <legend>Event Details</legend>
 
-                        <label for="eventTitle">Event Title:</label>
-                        <input type="text" id="eventTitle" name="eventTitle" required>
+                    <label for="eventTitle">Event Title:</label>
+                    <input type="text" id="eventTitle" name="eventTitle" required>
 
-                        <label for="facility">Choose Facility:</label>
-                        <input type="text" id="facility" name="facility">
+                    <label for="facility">Choose Facility:</label>
+                    <select id="facility" name="facility" required>
+                        <option value="">-- Select Facility --</option>
+                        <option value="Gymnasium">Gymnasium</option>
+                        <option value="Soccer Field">Soccer Field</option>
+                        <option value="Swimming Pool">Swimming Pool</option>
+                        <option value="Basketball">Basketball</option>
+                    </select>
 
-                        <label for="eventDate">Choose Date:</label>
-                        <input type="date" id="eventDate" name="eventDate">
+                    <label for="eventDate">Choose Date:</label>
+                    <input type="date" id="eventDate" name="eventDate" required>
 
-                        <label for="timeSlot">Choose Time Slot:</label>
-                        <input type="text" id="timeSlot" name="timeSlot">
+                    <label for="hostedBy">Hosted By:</label>
+                    <input type="text" id="hostedBy" name="hostedBy" required>
+                </fieldset>
 
-                        <label for="hostedBy">Hosted By:</label>
-                        <input type="text" id="hostedBy" name="hostedBy">
-                    </fieldset>
+                <fieldset>
+                    <legend>Upload</legend>
 
-                    <fieldset>
-                        <legend>Upload</legend>
+                    <label for="uploadImage">Upload Image:</label>
+                    <input type="file" id="uploadImage" name="uploadImage">
+                </fieldset>
 
-                        <label for="uploadImage">Upload Image:</label>
-                        <input type="file" id="uploadImage" name="uploadImage">
-                    </fieldset>
+                <fieldset>
+                    <legend>Description</legend>
 
-                    <fieldset>
-                        <legend>Description</legend>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4"></textarea>
+                </fieldset>
 
-                        <label for="description">Description:</label>
-                        <textarea id="description" name="description" rows="4"></textarea>
-                    </fieldset>
-
-                    <button type="submit" class="event-create-button">Create</button>
-                </form>
-            </section>
-        </main>
-    </body>
+                <button type="submit" class="event-create-button">Create</button>
+            </form>
+        </section>
+    </main>
+</body>
 </html>
