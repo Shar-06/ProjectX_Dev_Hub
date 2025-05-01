@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         'section[aria-labelledby="user-bookings-heading"] tbody'
     );
 
-    fetch("/api/v1/bookings/")
+    fetch('/api/v1/bookings/')
         .then((response) => response.json())
         .then((data) => {
             if (!Array.isArray(data.data)) {

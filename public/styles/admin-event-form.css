@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #cfd2d7;
+}
+
+aside {
+    width: 200px;
+    background-color: #0b2143;
+    color: #fff;
+    padding: 1rem;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 2;
+}
+
+aside nav ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+aside li {
+    margin-top: 1rem;
+}
+
+aside nav button {
+    width: 100%;
+    background-color: #E64525;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    text-align: left;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+aside nav button:hover {
+    background-color: #cc3d1f;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 200px;
+    right: 0;
+    height: 60px;
+    background-color: #0b2143;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 1;
+    border-bottom: 4px solid #0054A6;
+}
+
+main {
+    margin-left: 200px;
+    padding: 2rem;
+    padding-top: 80px;
+    width: calc(100% - 200px);
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event-form-section {
+    background-color: #e6e9ee;
+    padding: 20px;
+    border-radius: 4px;
+    max-width: 960px;
+}
+
+.event-form h2 {
+    background-color: #ddd;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.event-form {
+    display: grid;
+    gap: 20px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #cfd2d7;
+}
+
+legend {
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.event-create-button {
+    background-color: #0a2a54;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+}
