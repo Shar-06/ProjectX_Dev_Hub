@@ -9,7 +9,7 @@ class bookingService{
 
     async getBookingByID(id) {
         const query = {
-            text: 'SELECT * FROM "Booking" WHERE id = $1',
+            text: 'SELECT * FROM "Booking" WHERE resident_id = $1',
             values: [id]
         };
 
@@ -19,7 +19,7 @@ class bookingService{
             throw new Error('User not found');
         }
 
-        return result.rows[0];
+        return result.rows;
     }
 
     async patchBookingStatus(id,status) {

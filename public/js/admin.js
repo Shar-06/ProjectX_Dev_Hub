@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const roles = ["Resident", "Facility Staff"];
     const tableBody = document.querySelector("table tbody");
 
-    fetch('https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/', {
+    fetch('/api/v1/users/', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         console.error('Failed to send welcome email:', emailError);
                     });
                 })
+
                     .catch(error => {
                         alert(`Failed to update role: ${error.message}`);
                         select.remove();
@@ -128,7 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         roleButton.style.display = "inline-block";
                     });
                 });
-            });
 
             revokeButton.addEventListener("click", () => {
                 if (user.role === "") return;

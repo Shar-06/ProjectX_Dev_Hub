@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // Signed in 
       const user = userCredential.user;
       console.log("logged in, auth successful")
-      window.location.href="adminPage.html";
+      window.location.href='./html/admin.html';
       // ...
 
       
@@ -78,7 +78,7 @@ window.addEventListener("DOMContentLoaded", () => {
               const userEmail = data.data.email;          
              //redirect to correct user page based on user role
               if( userEmail == "msesenyanelevi@gmail.com"){
-                window.location.href="../html/adminPage.html";
+                window.location.href="../html/admin.html";
               }
               else if(userRole == "Resident"){
                 window.location.href="../html/bookingPage.html";

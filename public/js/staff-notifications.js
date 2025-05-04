@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    fetch('/api/v1/notifications/type/booking-created', {
+    fetch('/api/v1/notifications/type/event', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
         const notifications = data.data || data;
-        const notificationBookingsList = document.getElementById("notification-bookings-list");
+        const notificationBookingsList = document.getElementById("notification-events-list");
         console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
@@ -28,10 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const displayTime = `${formattedDate} ${notification.timeslot}`;
 
             li.innerHTML = `
-                <p>${notification.message} by user 
-                <strong>${notification.username}</strong> 
-                with user ID 
-                <strong >${notification.userid}</strong>.
+                <p>${notification.message}
                 </p>
                 <time>${displayTime}</time>
             `;
@@ -42,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
        console.log("error while fetching notifications: "+ error)
     })
 
-    fetch('/api/v1/notifications/type/user-created', {
+    fetch('/api/v1/notifications/type/report-created', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -51,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
         const notifications = data.data || data;
-        const notificationBookingsList = document.getElementById("notification-role-list");
+        const notificationBookingsList = document.getElementById("notification-reports-list");
         console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
