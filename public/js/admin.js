@@ -194,5 +194,4 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.style.display = "none";
             }
         });
-    });
 });
