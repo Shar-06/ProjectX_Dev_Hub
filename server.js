@@ -9,11 +9,13 @@ const userRouter = require('./src/api/routes/user.routes.js');
 const bookingRouter = require('./src/api/routes/booking.routes.js');
 const reportRouter = require('./src/api/routes/report.routes.js');
 const eventRouter = require('./src/api/routes/event.routes.js');
+const emailRouter = require('./src/api/routes/email.routes.js'); 
 
 
 //Instantiate a new express app
 const app = express();
 app.use(express.json());
+
 app.use(morgan('combined'));
 app.use(cors());
 
@@ -22,6 +24,8 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/bookings', bookingRouter);
 app.use('/api/v1/reports',reportRouter);
 app.use('/api/v1/events',eventRouter);
+app.use('/api/v1/email', emailRouter);
+
 
 //file to start in
 app.use(express.static(path.join(__dirname, 'public')));
