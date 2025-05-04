@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         console.error('Failed to send welcome email:', emailError);
                     });
                 })
+
                     .catch(error => {
                         alert(`Failed to update role: ${error.message}`);
                         select.remove();
@@ -128,7 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         roleButton.style.display = "inline-block";
                     });
                 });
-            });
 
             revokeButton.addEventListener("click", () => {
                 if (user.role === "") return;
@@ -194,4 +194,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.style.display = "none";
             }
         });
+    });
 });

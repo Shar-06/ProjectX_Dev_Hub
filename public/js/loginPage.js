@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     signInWithEmailAndPassword(auth, userName, pwd)
     .then((userCredential) => {
-      // Signed in 
+      // Signed in
       const user = userCredential.user;
       console.log("logged in, auth successful")
       window.location.href="adminPage.html";
@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
       .then(data => {
         if(data.data){
               const userRole = data.data.role;
-              const userEmail = data.data.email;          
+              const userEmail = data.data.email;
              //redirect to correct user page based on user role
               if( userEmail == "msesenyanelevi@gmail.com"){
                 window.location.href="../html/adminPage.html";
