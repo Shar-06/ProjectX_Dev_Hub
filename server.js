@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
+const http = require("http");
+const socketIO = require("socket.io");
 require('dotenv').config();
 
 const userRouter = require('./src/api/routes/user.routes.js');
@@ -29,10 +31,31 @@ app.get('/', (req, res) => {
 //Configure port and database connection
 const PORT = process.env.PORT || 3500;
 
-//Open up the server to listen for requests
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`);
+let server = http.createServer(app);
+let io = socketIO(server);
+
+//Socket.io connection
+io.on('connection', (socket) => {
+  console.log('A new user just connected');
+
+  socket.on('createNewUser', () => {
+    console.log('New user signed up');
+  });
+  socket.on('createNewUser', (message) => {
+    console.log('New user signed up:', message);
+
+    socket.broadcast.emit('newUserCreated', {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().getTime()
+    })
+  });
 });
+
+server.listen(PORT, () =>{
+  console.log(`SocketIO server is running on PORT ${PORT}`);
+});
+
 
 
 
