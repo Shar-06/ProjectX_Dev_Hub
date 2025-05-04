@@ -10,6 +10,7 @@ class userController {
             if (users) {
                 res.json({
                     success: true,
+                    
                     data: users
                 });
             }

@@ -1,4 +1,6 @@
 const eventService = require('../services/eventService');
+const path = require('path');
+const { containerClient } =  require('../../config/azureStorage');
 
 class eventController {
     async getAllEvents(req, res, next) {
@@ -38,7 +40,7 @@ class eventController {
         }
     }
     
-    async postNewEvent(req, res, next) {
+   /* async postNewEvent(req, res, next) {
         try {
             
             const {id,title,description,timeslot,facility_id,date,host} = req.body;
@@ -54,7 +56,38 @@ class eventController {
         } catch (error) {
             next(error);
         }
+   }*/
+
+
+   async postNewEvent(req, res, next) {
+    try {
+        const { id, title, description, timeslot, facility_id, date, host } = req.body;
+
+        let imageUrl = null;
+
+        if (req.file) {
+            const blobName = Date.now() + path.extname(req.file.originalname);
+            const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+            await blockBlobClient.uploadData(req.file.buffer, {
+                blobHTTPHeaders: { blobContentType: req.file.mimetype },
+            });
+
+            imageUrl = blockBlobClient.url;
+        }
+
+        const event = await eventService.postNewEvent(id,title,description,timeslot,facility_id,date,host,imageUrl);
+
+        res.json({
+            success: true,
+            data: event
+        });
+
+    } catch (error) {
+        next(error);
     }
+}
+
 
 }
 

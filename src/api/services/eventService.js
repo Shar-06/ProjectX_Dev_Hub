@@ -8,18 +8,19 @@ class eventService {
         return result.rows;
     }
 
-    async postNewEvent(id,title,description,timeslot,facility_id,date,host) {
+    async postNewEvent(id,title,description,timeslot,facility_id,date,host,imageURL) {
 
         const query = {
-            text: 'INSERT INTO "Event" (id,title,description,timeslot,facility_id,date,host) VALUES ($1,$2,$3,$4,$5,$6,$7)',
-            values: [id,title,description,timeslot,facility_id,date,host]
+            text: 'INSERT INTO "Event" (id,title,description,timeslot,facility_id,date,host,imageURL) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+            values: [id,title,description,timeslot,facility_id,date,host,imageURL]
         };
 
         try {
             const result = await data.query(query);
             return result.rows;
         } catch (error) {
-            console.log("Error");
+            console.error("Error inserting event", error);
+            throw error;
     }
 }
 

@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
+const { containerClient } = require('./src/config/azureStorage.js');
 require('dotenv').config();
 
 const userRouter = require('./src/api/routes/user.routes.js');

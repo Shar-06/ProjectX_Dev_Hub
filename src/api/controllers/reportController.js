@@ -1,5 +1,4 @@
 const reportService = require('../services/reportService');
-const userService = require('../services/userService');
 
 class reportController {
     async getAllReports(req, res, next) {
@@ -82,10 +81,10 @@ class reportController {
     async postNewReport(req, res, next) {
         try {
             
-            const {id,status,description,feedback,facility_id,resident_id,facilityStaff_id} = req.body;
+            const {id,status,feedback,facility_id,resident_id,equipment,description,problem_group} = req.body;
 
             //use retrieved id to find user using the service method
-            const report = await reportService.postNewReport(id,status,description,feedback,facility_id,resident_id,facilityStaff_id);
+            const report = await reportService.postNewReport(id,status,feedback,facility_id,resident_id,equipment,description,problem_group);
 
             res.json({
                 success: true,

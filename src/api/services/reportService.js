@@ -38,20 +38,20 @@ class reportService {
         return result.rows[0];
     }
 
-    async postNewReport(id,status,description,feedback,facility_id,resident_id,facilityStaff_id) {
+    async postNewReport(id,status,feedback,facility_id,resident_id,equipment,description,problem_group) {
 
         const query = {
-            text: 'INSERT INTO "MaintenanceReport" (id,status,description,feedback,facility_id,resident_id,facilityStaff_id) VALUES (id,status,description,feedback,facility_id,resident_id,facilityStaff_id)',
-            values: [id,status,description,feedback,facility_id,resident_id,facilityStaff_id]
+            text: 'INSERT INTO "MaintenanceReport" (status,feedback,facility_id,resident_id,equipment,description,problem_group) VALUES ($1,$2,$3,$4,$5,$6,$7)'
+            +'Returning *',
+            values: [status,feedback,facility_id,resident_id,equipment,description,problem_group]
         };
 
         try {
             const result = await data.query(query);
-    
             return result.rows;
         } catch (error) {
 
-        return result.rows;
+        console.error("Error insterting report");
     }
 }
 
