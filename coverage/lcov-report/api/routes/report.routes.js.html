@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for api/routes/booking.routes.js</title>
+    <title>Code coverage report for api/routes/report.routes.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">api/routes</a> booking.routes.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">api/routes</a> report.routes.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -81,19 +81,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
-const bookingController = <span class="cstat-no" title="statement not covered" >require('../controllers/bookingController');</span>
+const reportController = <span class="cstat-no" title="statement not covered" >require('../controllers/reportController');</span>
 const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
 &nbsp;
 // Public routes
-<span class="cstat-no" title="statement not covered" >router.get('/', bookingController.getAllBookings);</span>
-<span class="cstat-no" title="statement not covered" >router.get('/id/:id', bookingController.getBookingByID);</span>
-<span class="cstat-no" title="statement not covered" >router.patch('/update-status/:id/:status',bookingController.patchBookingStatus);</span>
-<span class="cstat-no" title="statement not covered" >router.post('/post-booking',bookingController.postNewBooking);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/', reportController.getAllReports);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/id/:id', reportController.getReportByID);</span>
+//router.patch('/report/:id/:status',reportController.getReportByFacility);
+<span class="cstat-no" title="statement not covered" >router.patch('/updateStatus/:id/:status',reportController.patchNewStatus);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >module.exports = router; </span>
 &nbsp;</pre></td></tr></table></pre>

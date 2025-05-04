@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for api/routes/booking.routes.js</title>
+    <title>Code coverage report for api/routes/event.routes.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">api/routes</a> booking.routes.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">api/routes</a> event.routes.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -74,26 +74,38 @@
 <a name='L9'></a><a href='#L9'>9</a>
 <a name='L10'></a><a href='#L10'>10</a>
 <a name='L11'></a><a href='#L11'>11</a>
-<a name='L12'></a><a href='#L12'>12</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
-const bookingController = <span class="cstat-no" title="statement not covered" >require('../controllers/bookingController');</span>
+const eventController = <span class="cstat-no" title="statement not covered" >require('../controllers/eventController');</span>
 const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
+const multer = <span class="cstat-no" title="statement not covered" >require('multer');</span>
+&nbsp;
+const storage = <span class="cstat-no" title="statement not covered" >multer.memoryStorage();</span>
+const upload = <span class="cstat-no" title="statement not covered" >multer({ storage });</span>
 &nbsp;
 // Public routes
-<span class="cstat-no" title="statement not covered" >router.get('/', bookingController.getAllBookings);</span>
-<span class="cstat-no" title="statement not covered" >router.get('/id/:id', bookingController.getBookingByID);</span>
-<span class="cstat-no" title="statement not covered" >router.patch('/update-status/:id/:status',bookingController.patchBookingStatus);</span>
-<span class="cstat-no" title="statement not covered" >router.post('/post-booking',bookingController.postNewBooking);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/', eventController.getAllEvents);</span>
+//router.get('/id/:id', reportController.getReportByID);
+//router.patch('/report/:id/:status',reportController.getReportByFacility);
+<span class="cstat-no" title="statement not covered" >router.post('/postEvent', upload.single('image'),eventController.postNewEvent);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >module.exports = router; </span>
 &nbsp;</pre></td></tr></table></pre>
