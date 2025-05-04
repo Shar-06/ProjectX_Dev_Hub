@@ -58,22 +58,33 @@ class bookingController {
         }
     }
 
-    
     async postNewBooking(req, res, next) {
         try {
+            const { id, start_time, end_time, status, date, facility_id, resident_id } = req.body;
             
-            const {id,start_time,end_time,status,date,facility_id,resident_id} = req.body;
-
-            //use retrieved id to find user using the service method
-            const booking = await bookingService.postNewBooking(id,start_time,end_time,status,date,facility_id,resident_id);
-
+            // Validate required fields
+            if (!id || !start_time || !end_time || !date || !facility_id || !resident_id) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Missing required booking fields'
+                });
+            }
+    
+            const booking = await bookingService.postNewBooking(
+                id, start_time, end_time, status || 'Pending', 
+                date, facility_id, resident_id
+            );
+    
             res.json({
                 success: true,
                 data: booking
             });
-                
         } catch (error) {
-            next(error);
+            console.error('Booking creation error:', error);
+            res.status(500).json({
+                success: false,
+                message: error.message || 'Failed to create booking'
+            });
         }
     }
 

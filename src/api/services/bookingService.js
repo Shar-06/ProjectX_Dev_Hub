@@ -2,14 +2,14 @@ const data = require('../../config/database');
 
 class bookingService{
     async getAllBookings() {
-        const query = 'SELECT * FROM Booking ORDER BY id ASC';
+        const query = 'SELECT * FROM "Booking" ORDER BY id ASC';
         const result = await data.query(query);
         return result.rows;
     }
 
     async getBookingByID(id) {
         const query = {
-            text: 'SELECT * FROM Booking WHERE id = $1',
+            text: 'SELECT * FROM "Booking" WHERE resident_id = $1',
             values: [id]
         };
 
@@ -24,7 +24,7 @@ class bookingService{
 
     async patchBookingStatus(id,status) {
         const query = {
-            text: 'UPDATE Booking SET status = $2 Where id = $1 Returning *',
+            text: 'UPDATE "Booking" SET status = $2 Where id = $1 Returning *',
             values: [id,status]
         };
     
@@ -36,28 +36,26 @@ class bookingService{
     
         return result.rows[0];
     }
-
-    async postNewBooking(id,start_time,end_time,status,date,facility_id,resident_id) {
-
+    async postNewBooking(id, start_time, end_time, status, date, facility_id, resident_id) {
+        // Combine start and end times into the format your database expects
+        const time = `${start_time}-${end_time}`;
+        
         const query = {
-            text: 'INSERT INTO Booking (id,status,date,facility_id,resident_id,time) VALUES ($1,$2,$3,$4,$5,$6)',
-            values: [id,status,date,facility_id,resident_id,time]
+            text: 'INSERT INTO "Booking" (id, date, facility_id, resident_id, status, time) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            values: [id, date, facility_id, resident_id, status, time]
         };
-
+    
         try {
             const result = await data.query(query);
-    
-            return result.rows;
+            return result.rows[0];
         } catch (error) {
-            if (error.code === '23505') {
-                return { error: 'Booking already exists.' };
+            console.error('Database error:', error);
+            if (error.code === '23505') { // Unique violation
+                throw new Error('Booking ID already exists');
             }
-    
-
-        return result.rows;
+            throw new Error('Failed to create booking');
+        }
     }
-}
-
 
 
 

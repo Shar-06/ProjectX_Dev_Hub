@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your sports facility bookings">
+    <title>My Bookings | Community Sports Facility</title>
+    <link rel="stylesheet" href="../styles/viewBookings.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Community Sports Facility Management</h1>
+        <nav aria-label="Primary navigation">
+            <ul>
+                <li><a href="" class="nav-link" aria-current="page">Our Facilities</a></li>
+            
+                <li><a href="#my-bookings" class="nav-link" aria-current="page">My Bookings</a></li>
+            </ul>
+        </nav>
+        
+        <section id="user-profile" aria-label="User profile">
+            <figure>
+                <img id="user-avatar" hidden alt="User profile picture">
+                <figcaption>
+                    <p id="user-name"></p>
+                </figcaption>
+            </figure>
+            <button id="sign-out-button" class="auth-button">Sign out</button>
+        </section>
+    </header>
+
+    <main id="main-content">
+        <section id="my-bookings" aria-labelledby="bookings-heading">
+            <h2 id="bookings-heading">My Bookings</h2>
+            
+            <section id="bookings-list" aria-label="List of bookings">
+                <p id="no-bookings-message">Loading your bookings...</p>
+                <!-- Bookings will be inserted here by JavaScript -->
+            </section>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <address>
+            Contact our facility manager at <a href="mailto:bookings@community.org">bookings@community.org</a>
+        </address>
+        <p><small>&copy; 2025 Community Sports Association</small></p>
+    </footer>
+
+    <script src="../js/viewBookings.js" type="module"></script>
+</body>
+</html>

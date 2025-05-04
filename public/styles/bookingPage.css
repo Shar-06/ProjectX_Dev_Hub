@@ -325,3 +325,407 @@ details summary {
 #new-booking-button:hover {
     background: #2768ae;
 }
+/* View Bookings Section - Additional Styles */
+#view-bookings {
+    padding: 1rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 2rem;
+}
+
+#view-bookings-heading {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+#view-bookings-button {
+    margin-bottom: 1rem;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#view-bookings-button:hover {
+    background-color: #2980b9;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.bookings-table th, 
+.bookings-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.bookings-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.bookings-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Status classes */
+.status-approved {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.status-cancelled {
+    color: #e74c3c;
+    text-decoration: line-through;
+}
+
+.status-completed {
+    color: #3498db;
+}
+
+/* Action buttons */
+.cancel-booking-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.cancel-booking-button:hover {
+    background-color: #c0392b;
+}
+
+.no-actions-available {
+    color: #7f8c8d;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+#no-bookings-message {
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+    color: #7f8c8d;
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+}
+
+#back-to-facilities {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.2rem;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#back-to-facilities:hover {
+    background-color: #7f8c8d;
+}
+
+/* Toast notification for success/error messages */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    background-color: rgba(44, 62, 80, 0.9);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-notification.success {
+    background-color: rgba(39, 174, 96, 0.9);
+}
+
+.toast-notification.error {
+    background-color: rgba(231, 76, 60, 0.9);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .bookings-table {
+        font-size: 0.9rem;
+    }
+
+    .bookings-table th, 
+    .bookings-table td {
+        padding: 0.5rem;
+    }
+    
+    /* Create a card-like display for mobile */
+    .bookings-table, 
+    .bookings-table tbody, 
+    .bookings-table tr, 
+    .bookings-table th, 
+    .bookings-table td {
+        display: block;
+    }
+    
+    .bookings-table thead {
+        display: none;
+    }
+    
+    .bookings-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+    
+    .bookings-table td {
+        padding: 0.5rem;
+        text-align: right;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .bookings-table td:last-child {
+        border-bottom: none;
+    }
+    
+    .bookings-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: var(--primary);
+    }
+}
+/*111 Maintenance Reporting Form Styles */
+#maintenance-reporting {
+    padding: 1rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 2rem;
+}
+
+#maintenance-reporting-heading {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.maintenance-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.maintenance-form fieldset {
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+.maintenance-form legend {
+    font-weight: bold;
+    padding: 0 0.5rem;
+    color: var(--primary);
+}
+
+.maintenance-form p {
+    margin-bottom: 1.2rem;
+}
+
+.maintenance-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.maintenance-form select,
+.maintenance-form input,
+.maintenance-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.maintenance-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.maintenance-form .submit-button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.maintenance-form .submit-button:hover {
+    background-color: #2980b9;
+}
+
+/* View Maintenance Reports Styles */
+#view-maintenance {
+    padding: 1rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 2rem;
+}
+
+#view-maintenance-heading {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.maintenance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.maintenance-table th, 
+.maintenance-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.maintenance-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.maintenance-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Status classes for maintenance reports */
+.status-resolved {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.status-in-progress {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #95a5a6;
+    font-weight: bold;
+}
+
+#no-reports-message {
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+    color: #7f8c8d;
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+}
+
+#back-to-facilities-from-maintenance {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.2rem;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#back-to-facilities-from-maintenance:hover {
+    background-color: #7f8c8d;
+}
+
+/* Responsive adjustments for maintenance table */
+@media (max-width: 768px) {
+    .maintenance-table {
+        font-size: 0.9rem;
+    }
+
+    .maintenance-table th, 
+    .maintenance-table td {
+        padding: 0.5rem;
+    }
+    
+    /* Create a card-like display for mobile */
+    .maintenance-table, 
+    .maintenance-table tbody, 
+    .maintenance-table tr, 
+    .maintenance-table th, 
+    .maintenance-table td {
+        display: block;
+    }
+    
+    .maintenance-table thead {
+        display: none;
+    }
+    
+    .maintenance-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+    
+    .maintenance-table td {
+        padding: 0.5rem;
+        text-align: right;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .maintenance-table td:last-child {
+        border-bottom: none;
+    }
+    
+    .maintenance-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: var(--primary);
+    }
+}
