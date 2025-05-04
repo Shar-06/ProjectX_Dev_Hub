@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Events Creation Form</title>
+    <link rel="stylesheet" href="/styles/admin-event-form.css">
+    <script src="/js/admin-event-form.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>ADMIN MANAGEMENT DASHBOARD</h1>
+    </header>
+
+    <aside>
+        <nav>
+            <ul>
+                <li><button onclick="window.location.href='/html/admin.html'">Home</button></li>
+                <li><button onclick="window.location.href='/html/admin-bookings.html'">Bookings</button></li>
+                <li><button onclick="window.location.href='/html/admin-events.html'">Events</button></li>
+                <li><button onclick="window.location.href='/html/admin-notifications.html'">Notifications</button></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <section aria-label="event-form-section" class="event-form-section">
+            <h2>EVENT CREATION</h2>
+            <form class="event-form" id="eventForm">
+                <fieldset>
+                    <legend>Event Details</legend>
+
+                    <label for="eventTitle">Event Title:</label>
+                    <input type="text" id="eventTitle" name="eventTitle" required>
+
+                    <label for="facility">Choose Facility:</label>
+                    <select id="facility" name="facility" required>
+                        <option value="">-- Select Facility --</option>
+                        <option value="1">Gymnasium</option>
+                        <option value="2">Swimming Pool</option>
+                        <option value="3">Soccer Field</option>
+                        <option value="4">Basketball Court</option>
+                    </select>
+
+                    <label for="eventDate">Choose Date:</label>
+                    <input type="date" id="eventDate" name="eventDate" required>
+
+                    <label for="timeslot">Choose Time Slot:</label>
+                    <select id="timeslot" name="timeslot" required>
+                        <option value="">-- Select Time Slot --</option>
+                        <option value="06:00-08:00">06:00 - 10:00</option>
+                        <option value="08:00-10:00">10:00 - 14:00</option>
+                        <option value="10:00-12:00">14:00 - 18:00</option>
+                        <option value="12:00-14:00">06:00 - 18:00 (All Day)</option>
+                    </select>
+
+                    <label for="hostedBy">Hosted By:</label>
+                    <input type="text" id="hostedBy" name="hostedBy" required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Upload</legend>
+
+                    <label for="uploadImage">Upload Image:</label>
+                    <input type="file" id="uploadImage" name="uploadImage">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Description</legend>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4"></textarea>
+                </fieldset>
+
+                <button type="submit" class="event-create-button">Create</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
