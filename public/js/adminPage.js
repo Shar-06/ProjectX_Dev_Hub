@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
         const users = data.data || data;
 
+
+        
         tableBody.innerHTML = "";
 
         users.forEach(user => {
@@ -105,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         roleButton.style.display = "inline-block";
                     });
                 });
-            });
+            });N
 
             // Revoke Access Logic
             revokeButton.addEventListener("click", () => {
