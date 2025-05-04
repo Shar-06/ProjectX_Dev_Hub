@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
         tableBody.innerHTML = "";
 
         users.forEach(user => {
+
+            const userName = user.name;
+            const userEmail = user.email;
+
             const row = document.createElement("tr");
 
             const idCell = document.createElement("td");
@@ -98,6 +102,25 @@ document.addEventListener("DOMContentLoaded", () => {
                         select.remove();
                         confirmBtn.remove();
                     })
+
+                    fetch('/api/v1/send-welcome-email', { //Link for email api
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: userEmail,
+                            name: userName
+                        }),
+                    })
+                    .then(emailResponse => emailResponse.json())
+                    .then(emailData => {
+                        console.log('Welcome email sent:', emailData);
+                    })
+                    .catch(emailError => {
+                        console.error('Failed to send welcome email:', emailError);
+                    });
+                })
                     .catch(error => {
                         alert(`Failed to update role: ${error.message}`);
                         select.remove();

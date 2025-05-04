@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 card.classList.add('event-card');
 
                 const image = document.createElement('img');
-                image.src = '/images/placeholder-event.jpg';
+                image.src = event.imageurl;
                 image.alt = 'Event cover image';
                 image.classList.add('event-cover');
 

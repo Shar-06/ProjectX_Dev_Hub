@@ -1,49 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("eventForm");
+    
+    if (!form) {
+        console.error("Event form not found.");
+        return;
+    }
 
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
-
-        // Extract values from form
-        const title = document.getElementById("eventTitle").value;
-        const facility_id = parseInt(document.getElementById("facility").value);
-        const date = new Date(document.getElementById("eventDate").value).toISOString(); // Format correctly
-        const host = document.getElementById("hostedBy").value;
-        const description = document.getElementById("description").value;
-        const timeslot = document.getElementById("timeslot").value; // You need a field for this
-        const imageurl = document.getElementById("imageurl").value || null; // Optional
-
-        const jsonData = JSON.stringify({
-            title,
-            description,
-            timeslot,
-            facility_id,
-            date,
-            host,
-            imageurl
-        });
-
+    
+        const formData = new FormData();
+        formData.append("id", "11");
+        formData.append("title", document.getElementById("eventTitle")?.value || "");
+        formData.append("description", document.getElementById("description")?.value || "");
+        formData.append("timeslot", document.getElementById("timeslot")?.value || "");
+        formData.append("facility_id", document.getElementById("facility")?.value || "");
+        formData.append("date", new Date(document.getElementById("eventDate")?.value).toISOString() || "");
+        formData.append("host", document.getElementById("hostedBy")?.value || "");
+    
+        const imageInput = document.getElementById("imageurl");
+        if (!imageInput || !imageInput.files.length) {
+            alert("Please upload an image.");
+            return;
+        }
+    
+        formData.append("image", imageInput.files[0]);
+    
         try {
             const response = await fetch('/api/v1/events/postEvent', {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: jsonData
+                body: formData
             });
-
+    
             if (response.ok) {
-                const createdEvent = await response.json();
-                console.log("Created Event:", createdEvent);
+                const result = await response.json();
                 alert("Event created successfully!");
                 window.location.href = "admin-events.html";
             } else {
-                const errorData = await response.json();
-                alert("Failed to create event: " + (errorData.message || "Unknown error"));
+                const errorText = await response.text();
+                alert("Failed to create event: " + errorText);
             }
         } catch (error) {
             console.error("Error:", error);
             alert("An error occurred while creating the event.");
         }
-    });
+    });    
 });
