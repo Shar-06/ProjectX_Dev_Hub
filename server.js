@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //file to open at start
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/html', 'facilityStaffPage.html'));
+    res.sendFile(path.join(__dirname, 'public/html', 'admin.html'));
   });
 
 //Configure port and database connection

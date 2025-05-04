@@ -6,7 +6,7 @@
 }
 
 :root {
-    --primary: #1f2937;
+    --primary: #0b2143;
     --background: #cfd2d7;
     --text: #333;
     --danger: #e74c3c;
@@ -24,8 +24,8 @@ body {
 
 aside {
     width: 200px;
-    background-color: var(--primary);
-    color: var(--light);
+    background-color: #0b2143;
+    color: #fff;
     padding: 1rem;
     position: fixed;
     height: 100%;
@@ -35,15 +35,25 @@ aside nav ul {
     list-style: none;
 }
 
-aside nav ul li {
+aside li {
     margin-top: 1rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 4px;
 }
 
-aside nav ul li:hover {
-    background-color: #374151;
+aside nav button {
+    width: 100%;
+    background-color: #E64525;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    text-align: left;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+aside nav button:hover {
+    background-color: #cc3d1f; /* Darker orange on hover */
 }
 
 header {
@@ -52,17 +62,15 @@ header {
     left: 200px;
     right: 0;
     height: 60px;
-    background-color: var(--primary);
-    color: var(--light);
+    background-color: #0b2143;
+    color: white;
     display: flex;
     align-items: center;
     padding-left: 2rem;
-    border-bottom: 1px solid var(--border);
-    z-index: 1;
-}
-
-header h1 {
     font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 1;
+    border-bottom: 4px solid #0054A6;
 }
 
 main {
@@ -110,7 +118,7 @@ button[type="submit"]:hover {
 section > h2 {
     margin-bottom: 1rem;
     margin-top: 2rem;
-    color: var(--text);
+    color: 000000;
 }
 
 article {

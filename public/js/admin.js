@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const roles = ["Resident", "Facility Staff"];
     const tableBody = document.querySelector("table tbody");
 
-    fetch('/api/v1/users/', {
+    fetch('https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
         tableBody.innerHTML = "";
 
         users.forEach(user => {
+
+            const userName = user.name;
+            const userEmail = user.email;
+
             const row = document.createElement("tr");
 
             const idCell = document.createElement("td");
@@ -29,12 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const actionsCell = document.createElement("td");
 
-            // Role Button: Assign Role or Edit Role
             const roleButton = document.createElement("button");
             roleButton.className = "role-button";
-            roleButton.textContent = normalizedRole === "" ? "Assign Role" : "Edit Role";
+            if (normalizedRole === "") {
+                roleButton.textContent = "Assign Role";
+            } else {
+                roleButton.textContent = "Edit Role";
+            }
 
-            // Revoke Access Button
             const revokeButton = document.createElement("button");
             revokeButton.className = "access-button danger";
 
@@ -46,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 revokeButton.disabled = false;
             }
 
-            // Role Assignment Logic
             roleButton.addEventListener("click", () => {
                 const select = document.createElement("select");
                 roles.forEach(role => {
@@ -70,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const selectedRole = select.value;
                     const selectedID = user.id;
 
-                    fetch(`/api/v1/users/update-role/${selectedID}/${selectedRole}`, {
+                    fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/update-role/${selectedID}/${selectedRole}`, {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
@@ -89,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         roleCell.textContent = selectedRole;
                         user.role = selectedRole;
 
-                        // Update button text/content after assigning role
                         roleButton.textContent = "Edit Role";
                         roleButton.style.display = "inline-block";
                         revokeButton.textContent = "Revoke Access";
@@ -98,6 +102,25 @@ document.addEventListener("DOMContentLoaded", () => {
                         select.remove();
                         confirmBtn.remove();
                     })
+
+                    fetch('/api/v1/send-welcome-email', { //Link for email api
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: userEmail,
+                            name: userName
+                        }),
+                    })
+                    .then(emailResponse => emailResponse.json())
+                    .then(emailData => {
+                        console.log('Welcome email sent:', emailData);
+                    })
+                    .catch(emailError => {
+                        console.error('Failed to send welcome email:', emailError);
+                    });
+                })
                     .catch(error => {
                         alert(`Failed to update role: ${error.message}`);
                         select.remove();
@@ -107,13 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
 
-            // Revoke Access Logic
             revokeButton.addEventListener("click", () => {
                 if (user.role === "") return;
 
                 const selectedID = user.id;
 
-                fetch(`/api/v1/users/update-role/${selectedID}/""`, {
+                fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/update-role/${selectedID}/""`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -131,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     roleCell.textContent = "";
                     user.role = "";
 
-                    // Update button text/content after revoking access
                     roleButton.textContent = "Assign Role";
                     revokeButton.textContent = "Access Denied";
                     revokeButton.disabled = true;
@@ -156,7 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error('Error fetching users:', error);
     });
 
-    // Search functionality
     const searchForm = document.getElementById("search-form");
     const searchInput = document.getElementById("user-search");
 

@@ -74,6 +74,7 @@ class eventController {
             });
 
             imageUrl = blockBlobClient.url;
+            console.log(imageUrl);
         }
 
         const event = await eventService.postNewEvent(id,title,description,timeslot,facility_id,date,host,imageUrl);

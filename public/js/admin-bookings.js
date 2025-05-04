@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         'section[aria-labelledby="user-bookings-heading"] tbody'
     );
 
-    fetch("/api/v1/bookings/")
+    fetch('/api/v1/bookings/')
         .then((response) => response.json())
         .then((data) => {
             if (!Array.isArray(data.data)) {
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.innerHTML = `
                     <td>${booking.id}</td>
                     <td>${booking.resident_id}</td>
-                    <td>${booking.facility_id}</td>
+                    <td>${getFacilityName(booking.facility_id)}</td>
                     <td>${booking.time || "N/A"}</td>
                     <td>${new Date(booking.date).toLocaleDateString()}</td>
                     <td class="status">${booking.status}</td>
@@ -63,6 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((error) => {
             console.error("Error fetching booking data:", error);
         });
+
+    function getFacilityName(facilityId) {
+        const facilities = {
+            1: 'Gymnasium',
+            2: 'Swimming Pool',
+            3: 'Soccer Field',
+            4: 'Basketball Court'
+        };
+        return facilities[facilityId] || 'Unknown Facility';
+    }
 
     function updateBookingStatus(id, newStatus, row) {
         fetch(`/api/v1/bookings/update-status/${id}/${newStatus}`, {
