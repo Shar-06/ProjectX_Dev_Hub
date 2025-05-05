@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1746446776813" clover="3.2.0">
-  <project timestamp="1746446776813" name="All files">
-    <metrics statements="317" coveredstatements="181" conditionals="54" coveredconditionals="23" methods="45" coveredmethods="28" elements="416" coveredelements="232" complexity="0" loc="317" ncloc="317" packages="4" files="18" classes="18"/>
+<coverage generated="1746448729138" clover="3.2.0">
+  <project timestamp="1746448729138" name="All files">
+    <metrics statements="317" coveredstatements="174" conditionals="54" coveredconditionals="22" methods="45" coveredmethods="27" elements="416" coveredelements="223" complexity="0" loc="317" ncloc="317" packages="4" files="18" classes="18"/>
     <package name="api.controllers">
       <metrics statements="147" coveredstatements="99" conditionals="26" coveredconditionals="12" methods="23" coveredmethods="19"/>
       <file name="bookingController.js" path="C:\Users\pc\Desktop\SD Project\deployment\ProjectX_Dev_Hub\src\api\controllers\bookingController.js">
@@ -360,7 +360,7 @@
       </file>
     </package>
     <package name="config">
-      <metrics statements="17" coveredstatements="15" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <metrics statements="17" coveredstatements="8" conditionals="4" coveredconditionals="1" methods="1" coveredmethods="0"/>
       <file name="azureStorage.js" path="C:\Users\pc\Desktop\SD Project\deployment\ProjectX_Dev_Hub\src\config\azureStorage.js">
         <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -374,15 +374,15 @@
         <line num="15" count="1" type="stmt"/>
       </file>
       <file name="database.js" path="C:\Users\pc\Desktop\SD Project\deployment\ProjectX_Dev_Hub\src\config\database.js">
-        <metrics statements="8" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="cond" truecount="1" falsecount="1"/>
+        <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
       </file>
     </package>
   </project>
