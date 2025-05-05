@@ -1,3 +1,36 @@
+function doNotification() {
+    const currentDate = new Date();
+    let currentTime = currentDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+    const notification = {
+       date: currentDate,
+       timeslot: currentTime,
+       status:'unread',
+       message: "Swimming pool has been booked for the local women's competition",
+       userid: "admin",
+       type: "event",
+       username: "admin"
+    };
+
+    fetch('/api/v1/notifications/post-notification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            
+        },
+        body: JSON.stringify(notification)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success in creating notification:', data);
+       // window.location.href = 'dashboard.html';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        //window.location.href = 'dashboard.html';
+    });
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("eventForm");
     
@@ -33,6 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     
             if (response.ok) {
+
+                //doNotification();
+
                 const result = await response.json();
                 alert("Event created successfully!");
                 window.location.href = "admin-events.html";

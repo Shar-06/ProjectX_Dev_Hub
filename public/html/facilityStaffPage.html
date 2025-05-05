@@ -16,6 +16,7 @@
         <header>
             <button class="nav-btn active" id="maintenanceBtn">Home</button>
             <button class="nav-btn" id="trendsBtn">Analytics</button>
+            <button class="nav-btn" id="trendsBtn" onclick="window.location.href='../html/staff-notification.html'">Notifications</button>
         </header>
         
         <section class="content-section active" id="maintenanceSection">
@@ -43,5 +44,6 @@
     <aside class="notification" id="notification">Status updated successfully!</aside>
 
     <script src="../js/facilityStaffPage.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

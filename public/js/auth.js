@@ -13,6 +13,12 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const googleSignUpBtn = document.getElementById('googleSignUp');
 
+const socket = io();
+
+  socket.on('connect', function (){
+  console.log(`Connected to server from Registration page`);
+      });
+
 // Google Sign Up
 googleSignUpBtn.addEventListener('click', () => {
   auth.signInWithPopup(googleProvider)
@@ -41,6 +47,16 @@ googleSignUpBtn.addEventListener('click', () => {
       };
 
       console.log('User signed up successfully:', userData);
+
+      socket.emit('createNewUser', {
+            from: user.displayName,
+            text: user.email,
+            createdAt: new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })
+      });
       
       // You can now:
       // 1. Log the complete user object to console
@@ -48,7 +64,7 @@ googleSignUpBtn.addEventListener('click', () => {
       
       // 2. Send to your backend ( using fetch)
 
-      fetch('/api/v1/users/post-user', {
+      fetch('/api/v1/users/post-notifications', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',

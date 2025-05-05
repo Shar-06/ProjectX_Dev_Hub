@@ -15,4 +15,5 @@ const containerClient = blobServiceClient.getContainerClient('report-images');
 module.exports = {
     blobServiceClient,
     containerClient,
+    
 };

@@ -61,7 +61,11 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('newUserCreated', {
       from: message.from,
       text: message.text,
-      createdAt: new Date().getTime()
+      createdAt: new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
     })
   });
 });
