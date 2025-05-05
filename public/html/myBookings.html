@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your sports facility bookings">
+    <title>View Your Bookings</title>
+    <link rel="stylesheet" href="../styles/bookingPage.css">
+</head>
+<body>
+    <aside class="site-nav">
+        <h1>Sports Facility</h1>
+        <nav aria-label="Primary navigation">
+            <ul>
+                <li><a href="../html/home.html">Home</a></li>
+                <li><a href="../html/bookingPage.html">Our Facilities</a></li>
+                <li><a href="#" aria-current="page">My Bookings</a></li>
+                <li><a href="../html/reports.html">Maintenance Reports</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <header class="page-header">
+        Community Sports Facility
+        
+        <section id="user-profile" hidden aria-label="User profile">
+            <figure>
+                <img id="user-avatar" hidden alt="User profile picture">
+                <figcaption>
+                    <p id="user-name"></p>
+                </figcaption>
+            </figure>
+            <button id="sign-out-button" class="auth-button">Sign out</button>
+        </section>
+    </header>
+
+    <main id="main-content">
+        <section id="bookings-section" aria-labelledby="bookings-heading">
+            <h2 id="bookings-heading">Your Bookings</h2>
+            
+            <section id="login-prompt" hidden>
+                <p>Please sign in to view your bookings.</p>
+                <button id="sign-in-button" class="auth-button">Sign In</button>
+            </section>
+            
+            <section id="bookings-filter">
+                <form id="filter-form">
+                    <fieldset>
+                        <legend>Filter Bookings</legend>
+                        <p>
+                            <label for="filter-status">Status:</label>
+                            <select id="filter-status" name="status">
+                                <option value="all">All Statuses</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Denied</option>
+                                <option value="Completed">In-Progress</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="filter-facility">Facility:</label>
+                            <select id="filter-facility" name="facility">
+                                <option value="all">All Facilities</option>
+                                <option value="soccer-field">Soccer Field</option>
+                                <option value="swimming-pool">Swimming Pool</option>
+                                <option value="basketball-court">Basketball Court</option>
+                                <option value="gymnasium">Gymnasium</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="filter-date">From Date:</label>
+                            <input type="date" id="filter-date" name="date">
+                        </p>
+                        <button type="submit" class="filter-button">Apply Filters</button>
+                        <button type="reset" class="filter-button">Reset</button>
+                    </fieldset>
+                </form>
+            </section>
+            
+            <section id="bookings-container">
+                <p id="loading-message">Loading your bookings...</p>
+                <p id="no-bookings-message" hidden>You don't have any bookings yet.</p>
+                
+                <table id="bookings-table" hidden>
+                    <caption>Your facility bookings</caption>
+                    <thead>
+                        <tr>
+                            <th>Facility</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-table-body">
+                        <!-- Booking rows will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </section>
+            
+            <section id="booking-details" hidden aria-labelledby="booking-details-heading">
+                <h3 id="booking-details-heading">Booking Details</h3>
+                <article class="booking-details-container">
+                    <p id="detail-id"></p>
+                    <p id="detail-facility"></p>
+                    <p id="detail-date"></p>
+                    <p id="detail-time"></p>
+                    <p id="detail-status"></p>
+                </article>
+                <button id="close-details-button" class="action-button">Close Details</button>
+                <button id="cancel-booking-button" class="action-button">Cancel Booking</button>
+            </section>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <address>
+            Contact our facility manager at <a href="mailto:bookings@community.org">bookings@community.org</a>
+        </address>
+        <p><small>&copy; 2025 Community Sports Association</small></p>
+    </footer>
+
+    <script src="../js/viewBookings.js" type="module"></script>
+</body>
+</html>

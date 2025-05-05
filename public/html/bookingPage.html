@@ -6,16 +6,22 @@
     <meta name="description" content="Community sports facility booking system">
     <title>Community Sports Facility Booking</title>
     <link rel="stylesheet" href="../styles/bookingPage.css">
-   
 </head>
 <body>
-    <header class="site-header">
-        <h1>Community Sports Facility Management</h1>
+    <aside class="site-nav">
+        <h1>Sports Facility</h1>
         <nav aria-label="Primary navigation">
             <ul>
-                <li><a href="#facilities" aria-current="page">Our Facilities</a></li>
+                <li><a href="../html/home.html">Home</a></li>
+                <li><a href="../html/bookingPage.html">Our Facilities</a></li>
+                <li><a href="#" aria-current="page">My Bookings</a></li>
+                <li><a href="../html/reports.html">Maintenance Reports</a></li>
             </ul>
         </nav>
+    </aside>
+
+    <header class="page-header">
+        Community Sports Facility
         
         <section id="user-profile" hidden aria-label="User profile">
             <figure>
@@ -29,6 +35,7 @@
     </header>
 
     <main id="main-content">
+        <!-- Facilities Section -->
         <section id="facilities" aria-labelledby="facilities-heading">
             <h2 id="facilities-heading">Our Sports Facilities</h2>
             
@@ -67,6 +74,7 @@
             </section>
         </section>
 
+        <!-- Booking Form Section -->
         <section id="booking-section" hidden aria-labelledby="booking-heading">
             <h2 id="booking-heading">Book Your Session</h2>
             <form id="booking-form" class="booking-form">
@@ -105,6 +113,7 @@
             </form>
         </section>
 
+        <!-- Confirmation Section -->
         <section id="confirmation-section" hidden aria-labelledby="confirmation-heading">
             <h2 id="confirmation-heading">Booking Confirmed!</h2>
             <article class="booking-receipt">

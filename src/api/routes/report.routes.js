@@ -7,5 +7,6 @@ router.get('/', reportController.getAllReports);
 router.get('/id/:id', reportController.getReportByID);
 //router.patch('/report/:id/:status',reportController.getReportByFacility);
 router.patch('/updateStatus/:id/:status',reportController.patchNewStatus);
+router.post('/postReport',reportController.postNewReport);
 
 module.exports = router; 

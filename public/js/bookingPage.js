@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const facilityIdInput = document.createElement('input');
     facilityIdInput.type = 'hidden';
     facilityIdInput.id = 'facility-id';
+    const loggedInID = auth.currentUser ? auth.currentUser.uid : null;
     facilityIdInput.name = 'facility-id';
     bookingForm.appendChild(facilityIdInput);
 
@@ -157,63 +158,87 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'bk-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 4);
     }
 
-    // Handle form submission
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form values
-        const facilityName = facilityNameOutput.value;
-        const facilityId = facilityIdInput.value;
-        const date = bookingDateInput.value;
-        const time = timeSlotSelect.value;
-        const [startTime, endTime] = time.split('-');
-        
-        // Get participants
-        let participants = null;
-        let participantsText = '';
-        
-        for (const [id, req] of Object.entries(facilityRequirements)) {
-            if (!req.field.hidden) {
-                participants = document.getElementById(req.inputId).value;
-                participantsText = `${req.confirmationText}: ${participants}`;
-                break;
-            }
+   // Handle form submission
+// Handle form submission
+bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Get form values
+    const facilityName = facilityNameOutput.value;
+    const facilityId = facilityIdInput.value;
+    const date = bookingDateInput.value;
+    const time = timeSlotSelect.value;
+    const [startTime, endTime] = time.split('-');
+    
+    // Get participants
+    let participants = null;
+    let participantsText = '';
+    
+    for (const [id, req] of Object.entries(facilityRequirements)) {
+        if (!req.field.hidden) {
+            participants = document.getElementById(req.inputId).value;
+            participantsText = `${req.confirmationText}: ${participants}`;
+            break;
         }
-        
-        // Create booking JSON object
-        const bookingData = {
-            id: generateBookingId(),
-            start_time: startTime.trim(),
-            end_time: endTime.trim(),
-            status: "In-Progress",
-            date: date,
-            facility_id: facilityId,  
-            resident_id: loggedInID
-        };
+    }
+    
+    // Create booking JSON object
+    const bookingData = {
+        id: generateBookingId(),
+        start_time: startTime.trim(),
+        end_time: endTime.trim(),
+        status: "Pending",
+        date: date,
+        facility_id: facilityId,  
+        resident_id: auth.currentUser ? auth.currentUser.uid : "guest-user"
+    };
 
-        console.log('Booking created:', bookingData);
+    console.log('Booking created:', bookingData);
+    
+    try {
+        // Send booking data to backend API
+        const response = await fetch('/api/v1/bookings/post-booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bookingData)
+        });
         
-        // Update confirmation section
-        confirmedFacility.textContent = `Facility: ${facilityName}`;
-        confirmedDate.textContent = `Date: ${formatDateForDisplay(date)}`;
-        confirmedTime.textContent = `Time: ${formatTimeSlotForDisplay(time)}`;
+        const result = await response.json();
         
-        if (participantsText) {
-            confirmedParticipants.textContent = participantsText;
-            confirmedParticipants.hidden = false;
+        if (result.success) {
+            console.log('Booking saved to database:', result.data);
+            
+            // Update confirmation section
+            confirmedFacility.textContent = `Facility: ${facilityName}`;
+            confirmedDate.textContent = `Date: ${formatDateForDisplay(date)}`;
+            confirmedTime.textContent = `Time: ${formatTimeSlotForDisplay(time)}`;
+            
+            if (participantsText) {
+                confirmedParticipants.textContent = participantsText;
+                confirmedParticipants.hidden = false;
+            } else {
+                confirmedParticipants.hidden = true;
+            }
+            
+            // Show confirmation and hide form
+            bookingSection.hidden = true;
+            confirmationSection.hidden = false;
+            confirmationSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Reset form for next booking
+            bookingForm.reset();
+            facilityNameOutput.value = 'Not selected';
         } else {
-            confirmedParticipants.hidden = true;
+            alert('Failed to create booking. Please try again.');
+            console.error('Error saving booking:', result);
         }
-        
-        // Show confirmation and hide form
-        bookingSection.hidden = true;
-        confirmationSection.hidden = false;
-        confirmationSection.scrollIntoView({ behavior: 'smooth' });
-        
-        // Reset form for next booking
-        bookingForm.reset();
-        facilityNameOutput.value = 'Not selected';
-    });
+    } catch (error) {
+        console.error('Error sending booking data:', error);
+        alert('Failed to create booking. Please try again.');
+    }
+});
 
     // Make Another Booking Button Functionality
     if (newBookingButton) {

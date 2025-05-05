@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Community sports facility maintenance reporting">
+    <title>Maintenance Reports | Community Sports Facility</title>
+    <link rel="stylesheet" href="../styles/bookingPage.css">
+</head>
+<body>
+    <aside class="site-nav">
+        <h1>Sports Facility</h1>
+        <nav aria-label="Primary navigation">
+            <ul>
+                <li><a href="../html/home.html">Home</a></li>
+                <li><a href="../html/bookingPage.html">Our Facilities</a></li>
+                <li><a href="#" aria-current="page">My Bookings</a></li>
+                <li><a href="../html/reports.html">Maintenance Reports</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <header class="page-header">
+        Community Sports Facility
+        
+        <section id="user-profile" aria-label="User profile">
+            <figure>
+                <img id="user-avatar" hidden alt="User profile picture">
+                <figcaption>
+                    <p id="user-name"></p>
+                </figcaption>
+            </figure>
+            <button id="sign-out-button" class="auth-button">Sign out</button>
+        </section>
+    </header>
+
+    <main id="main-content">
+        <!-- New Report Section -->
+        <section id="new-report" aria-labelledby="new-report-heading">
+            <h2 id="new-report-heading">Report Maintenance Issue</h2>
+            
+            <form id="report-form" class="report-form">
+                <fieldset>
+                    <legend>Issue Details</legend>
+                    
+                    <p>
+                        <label for="facility">Facility:</label>
+                        <select id="facility" name="facility" required>
+                            <option value="">-- Select Facility --</option>
+                            <option value="soccer-field">Soccer Field</option>
+                            <option value="swimming-pool">Swimming Pool</option>
+                            <option value="basketball-court">Basketball Court</option>
+                            <option value="gymnasium">Gymnasium</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" rows="4" required placeholder="Describe the issue in detail..."></textarea>
+                    </p>
+
+                    <input type="hidden" id="resident-id" name="resident_id">
+                </fieldset>
+
+                <button type="submit" class="submit-button">Submit Report</button>
+            </form>
+        </section>
+
+        <!-- Reports List Section -->
+        <section id="reports-list" aria-labelledby="reports-heading">
+            <h2 id="reports-heading">Maintenance Reports</h2>
+            
+            <section id="status-filters" aria-label="Report status filters">
+                <form id="filter-form" class="filter-form">
+                    <fieldset>
+                        <legend>Filter Reports</legend>
+                        <p>
+                            <label for="status">Status:</label>
+                            <select id="status" name="status">
+                                <option value="">All Statuses</option>
+                                <option value="reported">Reported</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="resolved">Resolved</option>
+                            </select>
+                        </p>
+                        <button type="submit" class="filter-button">Apply Filters</button>
+                    </fieldset>
+                </form>
+            </section>
+
+            <section id="reports-container" aria-label="List of maintenance reports">
+                <p id="no-reports-message">Loading maintenance reports...</p>
+                <!-- Reports will be inserted here by JavaScript -->
+            </section>
+        </section>
+
+        <!-- Staff Feedback Section (only visible to staff/admin) -->
+        <section id="staff-feedback" hidden aria-labelledby="feedback-heading">
+            <h2 id="feedback-heading">Update Report Status</h2>
+            
+            <form id="feedback-form" class="feedback-form">
+                <fieldset>
+                    <legend>Status Update</legend>
+                    
+                    <p>
+                        <label for="report-status">Status:</label>
+                        <select id="report-status" name="status" required>
+                            <option value="reported">Reported</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="staff-feedback">Feedback:</label>
+                        <textarea id="staff-feedback" name="feedback" rows="4" placeholder="Add any updates or notes..."></textarea>
+                    </p>
+
+                    <input type="hidden" id="report-id" name="report_id">
+                    <input type="hidden" id="staff-id" name="staff_id">
+                </fieldset>
+
+                <button type="submit" class="submit-button">Update Report</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <address>
+            Contact our facility manager at <a href="mailto:bookings@community.org">bookings@community.org</a>
+        </address>
+        <p><small>&copy; 2025 Community Sports Association</small></p>
+    </footer>
+
+    <script src="../js/reports.js" type="module"></script>
+</body>
+</html>
