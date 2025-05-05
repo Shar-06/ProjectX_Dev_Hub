@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+    ///Socket stuff
+    const socket = io();
+    socket.on(`connect`, function(){
+        console.log(`Connected to server from admin page`);
+
+        socket.on('newUserCreated', function(message) {
+            console.log("new user has just entered the chat")
+            alert(`new user just registered!!\nUsername: ${message.from} at ${message.createdAt}`);
+        })
+    });
+    socket.on('disconnect', function(){
+        console.log('user just disconnected');
+    })
+
     const roles = ["Resident", "Facility Staff"];
     const tableBody = document.querySelector("table tbody");
 
