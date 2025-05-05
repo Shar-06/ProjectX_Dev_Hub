@@ -25,8 +25,10 @@ class reportService {
 
     async getReportByFacility(name) {
         const query = {
-            text: 'SELECT * FROM "MaintenanceReport","Facility" WHERE (MaintenanceReport.id = Facility.id) and (name = $1)',
-            values: [facility_id]
+            text: `SELECT * FROM "MaintenanceReport", "Facility" 
+                   WHERE (MaintenanceReport.facility_id = Facility.id) 
+                   AND (Facility.name = $1)`,
+            values: [name]
         };
 
         const result = await data.query(query);
@@ -38,43 +40,37 @@ class reportService {
         return result.rows[0];
     }
 
-    async postNewReport(id,status,feedback,facility_id,resident_id,equipment,description,problem_group) {
-
+    async postNewReport(status, feedback, facility_id, resident_id, equipment, description, problem_group) {
         const query = {
-            text: 'INSERT INTO "MaintenanceReport" (status,feedback,facility_id,resident_id,equipment,description,problem_group) VALUES ($1,$2,$3,$4,$5,$6,$7)'
-            +'Returning *',
-            values: [status,feedback,facility_id,resident_id,equipment,description,problem_group]
+            text: `INSERT INTO "MaintenanceReport" 
+                   (status, feedback, facility_id, resident_id, equipment, description, problem_group) 
+                   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            values: [status, feedback, facility_id, resident_id, equipment, description, problem_group]
         };
 
         try {
             const result = await data.query(query);
-            return result.rows;
+            return result.rows[0];  // Return the inserted row
         } catch (error) {
-
-        console.error("Error insterting report");
+            console.error("Error inserting report:", error);
+            throw error; // Rethrow the error after logging
+        }
     }
-}
 
+    async patchReportStatus(id, status) {
+        const query = {
+            text: `UPDATE "MaintenanceReport" SET status = $2 WHERE id = $1 RETURNING *`,
+            values: [id, status]
+        };
 
-async patchReportStatus(id,status) {
-
-    const query = {
-        text: 'Update "MaintenanceReport" set status = $2 where id = $1',
-        values: [id,status]
-    };
-
-    try {
-        const result = await data.query(query);
-
-        return result.rows;
-    } catch (error) {
-
-    return result.rows;
-}
-}
-
-
-    
+        try {
+            const result = await data.query(query);
+            return result.rows[0];  // Return the updated row
+        } catch (error) {
+            console.error("Error updating report status:", error);
+            throw error; // Rethrow the error after logging
+        }
+    }
 }
 
 module.exports = new reportService();
