@@ -8,10 +8,10 @@ class eventService {
         return result.rows;
     }
 
-    async postNewEvent(id,title,description,timeslot,facility_id,date,host,imageURL) {
+    async postNewEvent(title,description,timeslot,facility_id,date,host,imageURL) {
 
         const query = {
-            text: 'INSERT INTO "Event" (title,description,timeslot,facility_id,date,host,imageURL) VALUES ($2,$3,$4,$5,$6,$7,$8)',
+            text: 'INSERT INTO "Event" (title,description,timeslot,facility_id,date,host,imageURL) VALUES ($1,$2,$3,$4,$5,$6,$7)',
             values: [title,description,timeslot,facility_id,date,host,imageURL]
         };
 

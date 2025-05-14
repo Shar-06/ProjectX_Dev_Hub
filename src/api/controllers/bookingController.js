@@ -56,11 +56,11 @@ class bookingController {
         }
     }
 
-    async postNewBooking(req, res, next) {
+    /*async postNewBooking(req, res, next) {
         try {
-            const { id, start_time, end_time, status, date, facility_id, resident_id } = req.body;
+            const {start_time, end_time, status, date, facility_id, resident_id } = req.body;
             
-            if (!id || !start_time || !end_time || !date || !facility_id || !resident_id) {
+            if (!start_time || !end_time || !date || !facility_id || !resident_id) {
                 return res.status(400).json({
                     success: false,
                     message: 'Missing required booking fields'
@@ -68,8 +68,36 @@ class bookingController {
             }
     
             const booking = await bookingService.postNewBooking(
-                id, start_time, end_time, status, 
+                start_time, end_time, status, 
                 date, facility_id, resident_id
+            );
+    
+            res.json({
+                success: true,
+                data: booking
+            });
+        } catch (error) {
+            console.error('Booking creation error:', error);
+            res.status(500).json({
+                success: false,
+                message: error.message || 'Failed to create booking'
+            });
+        }
+    }*/
+
+    async postNewBooking(req, res, next) {
+        try {
+            const {date,facility_id,resident_id,timeslot } = req.body;
+            
+            if (!date || !facility_id || !resident_id || !timeslot) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Missing required booking fields'
+                });
+            }
+    
+            const booking = await bookingService.postNewBooking(
+                date,facility_id,resident_id,timeslot
             );
     
             res.json({

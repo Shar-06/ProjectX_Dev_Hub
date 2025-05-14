@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const selectedRole = select.value;
                     const selectedID = user.id;
 
-                    fetch(`https://communitysportsx-a0byh7gsa5fhf7gf.centralus-01.azurewebsites.net/api/v1/users/update-role/${selectedID}/${selectedRole}`, {
+                    fetch(`/api/v1/users/update-role/${selectedID}/${selectedRole}`, {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',

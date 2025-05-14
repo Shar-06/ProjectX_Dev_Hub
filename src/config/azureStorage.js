@@ -10,8 +10,7 @@ if (!AZURE_STORAGE_CONNECTION_STRING) {
 else console.log("Blob Storage connected succesfully");
 
 const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
-const containerClient = blobServiceClient.getContainerClient('report-images');
-
+const containerClient = blobServiceClient.getContainerClient('event-images');
 module.exports = {
     blobServiceClient,
     containerClient,

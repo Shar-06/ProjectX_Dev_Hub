@@ -64,7 +64,7 @@ googleSignUpBtn.addEventListener('click', () => {
       
       // 2. Send to your backend ( using fetch)
 
-      fetch('/api/v1/users/post-notifications', {
+      fetch('/api/v1/users/post-user', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',

@@ -165,7 +165,17 @@ bookingForm.addEventListener('submit', async (e) => {
     
     // Get form values
     const facilityName = facilityNameOutput.value;
-    const facilityId = facilityIdInput.value;
+    //const facilityId = facilityIdInput.value;
+
+    const facilities = {
+        "gymnasium": 1,
+        "swimming-pool": 2,
+        "soccer-field": 3,
+        "basketball-court": 4
+    }
+
+    const facilityId = facilities[facilityIdInput.value];
+    
     const date = bookingDateInput.value;
     const time = timeSlotSelect.value;
     const [startTime, endTime] = time.split('-');
@@ -184,10 +194,7 @@ bookingForm.addEventListener('submit', async (e) => {
     
     // Create booking JSON object
     const bookingData = {
-        id: generateBookingId(),
-        start_time: startTime.trim(),
-        end_time: endTime.trim(),
-        status: "Pending",
+        timeslot: time,
         date: date,
         facility_id: facilityId,  
         resident_id: auth.currentUser ? auth.currentUser.uid : "guest-user"

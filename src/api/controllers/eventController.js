@@ -61,7 +61,7 @@ class eventController {
 
    async postNewEvent(req, res, next) {
     try {
-        const { id, title, description, timeslot, facility_id, date, host } = req.body;
+        const { title, description, timeslot, facility_id, date, host } = req.body;
 
         let imageUrl = null;
 
@@ -77,7 +77,7 @@ class eventController {
             console.log(imageUrl);
         }
 
-        const event = await eventService.postNewEvent(id,title,description,timeslot,facility_id,date,host,imageUrl);
+        const event = await eventService.postNewEvent(title,description,timeslot,facility_id,date,host,imageUrl);
 
         res.json({
             success: true,

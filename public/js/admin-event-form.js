@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
     
         const formData = new FormData();
-        formData.append("id", "11");
+        //formData.append("id", "11");
         formData.append("title", document.getElementById("eventTitle")?.value || "");
         formData.append("description", document.getElementById("description")?.value || "");
         formData.append("timeslot", document.getElementById("timeslot")?.value || "");

@@ -55,7 +55,7 @@ function showModal(event) {
 
     modal.innerHTML = `
         <h2>${event.title}</h2>
-        <img src="/images/placeholder-event.jpg" alt="Event Image" class="modal-image">
+        <img src="${event.imageurl}" alt="Event Image" class="modal-image">
         <div class="modal-details">
             <p><strong>Facility:</strong> ${getFacilityName(event.facility_id)}</p>
             <p><strong>Date:</strong> ${formattedDate}</p>
