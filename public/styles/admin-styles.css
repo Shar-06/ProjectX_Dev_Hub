@@ -1,207 +1,153 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-:root {
-    --primary: #0b2143;
-    --background: #cfd2d7;
-    --text: #333;
-    --danger: #e74c3c;
-    --light: #ffffff;
-    --border: #ccc;
-    --approve: #4caf50;
-    --approve-hover: #45a049;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-    background-color: var(--background);
-    flex-direction: column;
-}
-
-aside {
-    width: 200px;
-    background-color: var(--primary);
-    color: #fff;
-    padding: 1rem;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
-}
-
-aside nav ul {
-    list-style: none;
-}
-
-aside li {
-    margin-top: 1rem;
-}
-
-aside nav button {
-    width: 100%;
-    background-color: #E64525;
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    text-align: left;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-aside nav button:hover {
-    background-color: #cc3d1f;
-}
-
-.search-section button {
-    background-color: var(--primary);
-    color: white;
-}
-
-.search-section button:hover {
-    background-color: #0E2A55;
-}
-
-main {
-    margin-left: 200px;
-    padding: 2rem;
-    width: calc(100% - 200px);
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: #cfd2d7;
+color: #333;
+line-height: 1.6;
 }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 200px;
-    right: 0;
-    height: 60px;
-    background-color: var(--primary);
-    color: white;
-    display: flex;
-    align-items: center;
-    padding-left: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    z-index: 1;
-    border-bottom: 4px solid #0054A6;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #0E2A55;
+color: white;
+padding: 40px 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-section h2 {
-    margin-bottom: 1rem;
-    margin-top: 2rem;
-    color: #000000;
+header h1 {
+font-size: 2rem;
+font-weight: 500;
+color: #e6ecf2;
 }
 
-section table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow-x: auto;
-    display: block;
-    max-height: 400px;
+header nav ul {
+list-style: none;
+display: flex;
+gap: 1rem;
 }
 
-article.user-table {
-    flex: 1;
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+header nav ul li button {
+background-color: transparent;
+border: 1px solid #7CB342;
+color: white;
+padding: 0.5rem 1rem;
+border-radius: 4px;
+cursor: pointer;
+transition: background 0.3s ease;
 }
 
-table thead th {
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 0.75rem;
-    text-align: left;
-    position: sticky;
-    top: 0;
+header nav ul li button:hover {
+background-color: #4a6d24;
+color: white;
 }
 
-table tbody td {
-    padding: 0.75rem;
-    border-bottom: 1px solid #ddd;
-}
-
-button {
-    padding: 0.5rem 1rem;
-    margin-right: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--approve);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-button:hover {
-    background-color: var(--approve-hover);
-}
-
-button.danger {
-    background-color: var(--danger);
-}
-
-button.danger:hover {
-    background-color: #c0392b;
+main {
+padding: 2rem;
 }
 
 .search-section {
-    margin-bottom: 1.5rem;
-    background-color: #f9f9f9;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+margin-bottom: 2rem;
 }
 
-.search-section form {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
+#search-form {
+display: flex;
+gap: 1rem;
 }
 
-.search-section input[type="search"] {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    min-width: 200px;
+#search-form input[type="search"] {
+padding: 0.75rem;
+width: 100%;
+border: 1px solid #ccc;
+border-radius: 4px;
 }
 
-.search-section button {
-    padding: 0.5rem 1rem;
+#search-form button {
+padding: 0.5rem 1rem;
+background-color: #F57C00;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-    aside {
-        position: relative;
-        width: 100%;
-        height: auto;
-    }
+#search-form button:hover {
+background-color: #e65100;
+}
 
-    header {
-        left: 0;
-        width: 100%;
-        margin-left: 0;
-    }
+#user-details-heading {
+color: #0E2A55;
+font-size: 1.8rem;
+margin-bottom: 1.2rem;
+font-weight: bold;
+}
 
-    main {
-        margin-left: 0;
-        width: 100%;
-        margin-top: 80px;
-    }
+.user-table table {
+width: 100%;
+border-collapse: collapse;
+background-color: white;
+border-radius: 6px;
+overflow: hidden;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
 
-    section table {
-        font-size: 0.875rem;
-    }
+.user-table th {
+background-color: #0B1E3C;
+color: white;
+font-weight: 600;
+padding: 1rem;
+text-align: left;
+}
+
+.user-table td {
+padding: 1rem;
+text-align: left;
+color: #0E2A55;
+border-bottom: 1px solid #e0e0e0;
+}
+
+.user-table tbody tr:nth-child(even) {
+background-color: #e4e7eb;
+}
+
+.user-table tbody tr:nth-child(odd) {
+background-color: white;
+}
+
+.role-button, .access-button {
+padding: 0.4rem 0.8rem;
+margin-right: 0.5rem;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 0.9rem;
+}
+
+.role-button {
+background-color: #7CB342;
+color: white;
+}
+
+.role-button:hover {
+background-color: #4a6d24;
+}
+
+.access-button {
+background-color: #E53935;
+color: white;
+}
+
+.access-button:hover {
+background-color: #C62828;
+}
+
+.access-button:disabled {
+background-color: #BDBDBD;
+cursor: not-allowed;
 }
