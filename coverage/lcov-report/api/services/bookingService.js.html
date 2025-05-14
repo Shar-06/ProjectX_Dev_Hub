@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>0/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>0/26</span>
             </div>
         
             
@@ -133,7 +133,26 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,7 +202,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -199,6 +217,26 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,14 +245,14 @@
 &nbsp;
 class bookingService {
 <span class="fstat-no" title="function not covered" >    as</span>ync getAllBookings() {
-        const query = <span class="cstat-no" title="statement not covered" >'SELECT * FROM "Booking" ORDER BY date, time ASC';</span>
+        const query = <span class="cstat-no" title="statement not covered" >'SELECT * FROM "Booking" ORDER BY date, timeslot ASC';</span>
         const result = <span class="cstat-no" title="statement not covered" >await data.query(query);</span>
 <span class="cstat-no" title="statement not covered" >        return result.rows;</span>
     }
 &nbsp;
 <span class="fstat-no" title="function not covered" >    as</span>ync getBookingsByResidentId(residentId) {
         const query = <span class="cstat-no" title="statement not covered" >{</span>
-            text: 'SELECT * FROM "Booking" WHERE resident_id = $1 ORDER BY date, time',
+            text: 'SELECT * FROM "Booking" WHERE resident_id = $1 ORDER BY date, timeslot',
             values: [residentId]
         };
 &nbsp;
@@ -252,12 +290,11 @@ class bookingService {
 <span class="cstat-no" title="statement not covered" >        return result.rows[0];</span>
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    as</span>ync postNewBooking(id, start_time, end_time, status, date, facility_id, resident_id) {
-        const time = <span class="cstat-no" title="statement not covered" >`${start_time}-${end_time}`;</span>
+<span class="fstat-no" title="function not covered" >as</span>ync postNewBooking(date, facility_id, resident_id, timeslot) {
         
         const query = <span class="cstat-no" title="statement not covered" >{</span>
-            text: 'INSERT INTO "Booking" (id, date, facility_id, resident_id, status, time) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            values: [id, date, facility_id, resident_id, status || 'Pending', time]
+            text: 'INSERT INTO "Booking" (date, facility_id, resident_id, status, timeslot) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            values: [ date, facility_id, resident_id,'Pending', timeslot]
         };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        try {</span>
@@ -271,6 +308,26 @@ class bookingService {
 <span class="cstat-no" title="statement not covered" >            throw new Error('Failed to create booking');</span>
         }
     }
+&nbsp;
+    /*async postNewBooking(start_time, end_time, status, date, facility_id, resident_id) {
+        const time = `${start_time}-${end_time}`;
+        
+        const query = {
+            text: 'INSERT INTO "Booking" (date, facility_id, resident_id, status, timeslot) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            values: [ date, facility_id, resident_id, status || 'Pending', time]
+        };
+&nbsp;
+        try {
+            const result = await data.query(query);
+            return result.rows[0];
+        } catch (error) {
+            console.error('Database error:', error);
+            if (error.code === '23505') {
+                throw new Error('Booking ID already exists');
+            }
+            throw new Error('Failed to create booking');
+        }
+    }*/
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >module.exports = new bookingService();</span></pre></td></tr></table></pre>
@@ -280,7 +337,7 @@ class bookingService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-06T18:34:43.583Z
+                at 2025-05-14T19:11:56.749Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
