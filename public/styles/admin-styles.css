@@ -48,106 +48,131 @@ background-color: #4a6d24;
 color: white;
 }
 
+.search-section button {
+    background-color: var(--primary);
+    color: white;
+}
+
+.search-section button:hover {
+    background-color: #0E2A55;
+}
+
 main {
-padding: 2rem;
+    margin-left: 200px;
+    padding: 2rem;
+    width: 100%;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+section h2 {
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    color: #000000;
+}
+
+section table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+    max-height: 400px;
+}
+
+article.user-table {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+table thead th {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 0.75rem;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+table tbody td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--approve);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--approve-hover);
+}
+
+button.danger {
+    background-color: var(--danger);
+}
+
+button.danger:hover {
+    background-color: #c0392b;
 }
 
 .search-section {
-margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-#search-form {
-display: flex;
-gap: 1rem;
+.search-section form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-#search-form input[type="search"] {
-padding: 0.75rem;
-width: 100%;
-border: 1px solid #ccc;
-border-radius: 4px;
+.search-section input[type="search"] {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 200px;
 }
 
-#search-form button {
-padding: 0.5rem 1rem;
-background-color: #F57C00;
-color: white;
-border: none;
-border-radius: 4px;
-cursor: pointer;
+.search-section button {
+    padding: 0.5rem 1rem;
 }
 
-#search-form button:hover {
-background-color: #e65100;
-}
+@media screen and (max-width: 768px) {
+    aside {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
 
-#user-details-heading {
-color: #0E2A55;
-font-size: 1.8rem;
-margin-bottom: 1.2rem;
-font-weight: bold;
-}
+    header {
+        left: 0;
+        width: 100%;
+        margin-left: 0;
+    }
 
-.user-table table {
-width: 100%;
-border-collapse: collapse;
-background-color: white;
-border-radius: 6px;
-overflow: hidden;
-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
+    main {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 80px;
+    }
 
-.user-table th {
-background-color: #0B1E3C;
-color: white;
-font-weight: 600;
-padding: 1rem;
-text-align: left;
-}
-
-.user-table td {
-padding: 1rem;
-text-align: left;
-color: #0E2A55;
-border-bottom: 1px solid #e0e0e0;
-}
-
-.user-table tbody tr:nth-child(even) {
-background-color: #e4e7eb;
-}
-
-.user-table tbody tr:nth-child(odd) {
-background-color: white;
-}
-
-.role-button, .access-button {
-padding: 0.4rem 0.8rem;
-margin-right: 0.5rem;
-border: none;
-border-radius: 4px;
-cursor: pointer;
-font-size: 0.9rem;
-}
-
-.role-button {
-background-color: #7CB342;
-color: white;
-}
-
-.role-button:hover {
-background-color: #4a6d24;
-}
-
-.access-button {
-background-color: #E53935;
-color: white;
-}
-
-.access-button:hover {
-background-color: #C62828;
-}
-
-.access-button:disabled {
-background-color: #BDBDBD;
-cursor: not-allowed;
+    section table {
+        font-size: 0.875rem;
+    }
 }
