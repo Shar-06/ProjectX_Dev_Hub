@@ -61,6 +61,31 @@ function showTotalBookings(startDate, endDate){
         })
         .catch(error => console.error('Error fetching total bookings:', error));
 }
+function renderUsageTable(labels, datasets, facilities) {
+    let tableHTML = '<table border="1" cellpadding="5" cellspacing="0">';
+    tableHTML += '<thead><tr><th>Date</th>';
+
+    // Add facility names as headers
+    facilities.forEach(facility => {
+        tableHTML += `<th>${facility}</th>`;
+    });
+    tableHTML += '</tr></thead><tbody>';
+
+    // Add rows for each date
+    labels.forEach((date, index) => {
+        tableHTML += `<tr><td>${date}</td>`;
+        datasets.forEach(dataset => {
+            tableHTML += `<td>${dataset.data[index]}</td>`;
+        });
+        tableHTML += '</tr>';
+    });
+
+    tableHTML += '</tbody></table>';
+
+    // Inject the table HTML into the page
+    document.getElementById('tableContainer').innerHTML = tableHTML;
+}
+
 function showUsageByFacility(startDate, endDate, facilityId){
     fetch(`/api/v1/usagetrends/usage/${startDate}/${endDate}/${facilityId}`,{
             method: 'GET',
@@ -126,6 +151,7 @@ function showUsageByFacility(startDate, endDate, facilityId){
             });
         })
         .catch(error => console.error('Error fetching usage trends:', error));
+         renderUsageTable(labels, datasets, facilities);
 }
 function showUsageComparison(startDate, endDate){
     fetch(`/api/v1/usagetrends/usage-comparison/${startDate}/${endDate}`,{
@@ -188,8 +214,9 @@ function showUsageComparison(startDate, endDate){
                         title: { display: true, text: 'Usage Count' },
                     }
                 }
-                }
+            }
             });
+            renderUsageTable(labels, datasets, facilities);
         })
         .catch(error => console.error('Error fetching usage trends:', error));
 }
