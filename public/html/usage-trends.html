@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Events</title>
+        <link rel="stylesheet" href="usage-trends-styles.css">
+        <script src="usage-trends.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <!-- Section 1: Report Filters and Export -->
+            <section aria-label="Report Controls" class="report-controls">
+                <form class="filter-form">
+                    <select id="report-range" name="report-range">
+                    <option value="7">Past 7 Days</option>
+                    <option value="30" selected>Past 30 Days</option>
+                    <option value="90">Past 90 Days</option>
+                    </select>
+
+                    <label><input type="date" value="2025-04-05" /></label>
+                    <label><input type="date" value="2025-05-05" /></label>
+                </form>
+            </section>
+
+            <!-- Summary Cards -->
+            <section aria-label="Summary Metrics" class="stat-summary-row">
+                <article class="stat-card">
+                    <h3>Total Bookings</h3>
+                    <p class="stat-value"></p>
+                </article>
+                <article class="stat-card">
+                    <h3>Total Hours Reserved</h3>
+                    <p class="stat-value"></p>
+                </article>
+                <article class="stat-card">
+                    <h3>Most Popular Facility</h3>
+                    <p class="stat-value"></p>
+                </article>
+            </section>
+
+            <!-- Facility Filter -->
+            <section aria-label="Facility Filter Options" class="chart-filter-bar">
+                <nav aria-label="Facility Buttons">
+                    <ul class="facility-options">
+                        <li><button data-facility="all" class="active">All Facilities</button></li>
+                        <li><button data-facility="basketball">Basketball Courts</button></li>
+                        <li><button data-facility="soccer">Soccer Fields</button></li>
+                        <li><button data-facility="swimming">Swimming Pool</button></li>
+                        <li><button data-facility="gym">Gymnasium</button></li>
+                    </ul>
+                </nav>
+            </section>
+
+            <!-- Chart -->
+            <section aria-label="Facility Usage Chart Display" class="chart-display-area">
+                <figure>
+                    <canvas id="facilityUsageChart" width="800" height="400"></canvas>
+                    <figcaption>Monthly Usage Comparisons across facilities</figcaption>
+                </figure>
+            </section>
+        </main>
+    </body>
+</html>
