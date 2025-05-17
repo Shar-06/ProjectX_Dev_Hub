@@ -13,6 +13,7 @@ const bookingRouter = require('./src/api/routes/booking.routes.js');
 const reportRouter = require('./src/api/routes/report.routes.js');
 const eventRouter = require('./src/api/routes/event.routes.js');
 const notificationRouter = require('./src/api/routes/notification.routes.js');
+const usageTrendsRouter = require('./src/api/routes/usagetrend.routes.js');
 
 //Instantiate a new express app
 const app = express();
@@ -27,6 +28,7 @@ app.use('/api/v1/bookings', bookingRouter);
 app.use('/api/v1/reports',reportRouter);
 app.use('/api/v1/events',eventRouter);
 app.use('/api/v1/notifications',notificationRouter);
+app.use('/api/v1/usagetrends',usageTrendsRouter);
 
 
 //file to start in
