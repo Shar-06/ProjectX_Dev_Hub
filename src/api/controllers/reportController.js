@@ -38,24 +38,32 @@ class reportController {
         }
     }
 
-    async getReportByFacility(req, res, next) {
-        try {
-            
-            //retrieve id from request parameters
-            const name = req.params.name;
+  async getReportByFacility(req, res, next) {
+    try {
+        //retrieve name from request parameters
+        const name = req.params.name;
 
-            //use retrieved id to find user using the service method
-            const facility = await reportServiceService.getReportByFacility(name);
+        //use retrieved name to find reports using the service method
+        const facility = await reportService.getReportByFacility(name);  // Fixed typo here
 
+        // Check if the facility data exists
+        if (facility) {
             res.json({
                 success: true,
                 data: facility
             });
-                
-        } catch (error) {
-            next(error);
+        } else {
+            res.status(404).json({
+                success: false,
+                message: 'Facility not found'
+            });
         }
+                
+    } catch (error) {
+        next(error);
     }
+}
+
 
     async patchNewStatus(req, res, next) {
         try {
@@ -81,10 +89,9 @@ class reportController {
     async postNewReport(req, res, next) {
         try {
             
-            const {id,status,feedback,facility_id,resident_id,equipment,description,problem_group} = req.body;
-
-            //use retrieved id to find user using the service method
-            const report = await reportService.postNewReport(id,status,feedback,facility_id,resident_id,equipment,description,problem_group);
+            const {facility_id,resident_id,description,date} = req.body;
+            
+            const report = await reportService.postNewReport(facility_id,resident_id,description,date);
 
             res.json({
                 success: true,

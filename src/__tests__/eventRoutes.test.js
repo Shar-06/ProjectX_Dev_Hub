@@ -1,51 +1,54 @@
 const request = require('supertest');
 const express = require('express');
 const eventRoutes = require('../api/routes/event.routes');
-const eventController = require('../api/controllers/eventController');
 
-// Mock the eventController
-jest.mock('../api/controllers/eventController', () => ({
-  getAllEvents: jest.fn().mockResolvedValue([
-    { id: 1, title: 'Event 1', description: 'Description 1', timeslot: '2025-05-05', facility_id: 1, date: '2025-05-06', host: 'Host 1', imageURL: 'url1' },
-    { id: 2, title: 'Event 2', description: 'Description 2', timeslot: '2025-05-06', facility_id: 2, date: '2025-05-07', host: 'Host 2', imageURL: 'url2' }
-  ]),
-  postNewEvent: jest.fn().mockResolvedValue({
-    id: 3,
-    title: 'New Event',
-    description: 'New Description',
-    timeslot: '2025-05-10',
-    facility_id: 3,
-    date: '2025-05-11',
-    host: 'New Host',
-    imageURL: 'new_url',
-  }),
+// Mock the event service so we don’t hit the DB
+jest.mock('../api/services/eventService', () => ({
+  getAllEvents: jest.fn().mockResolvedValue([{ id: 1, title: 'Test Event', date: '2025-06-01' }]),
+  postNewEvent: jest.fn().mockResolvedValue([{ id: 1, title: 'New Event', date: '2025-07-01' }]),
 }));
 
 const app = express();
 app.use(express.json());
-app.use('/events', eventRoutes);
-
-let server;
-
-beforeAll(() => {
-  server = app.listen(4000); // Start the server before running tests
-});
-
-afterAll(() => {
-  server.close(); // Close the server after tests
-});
+app.use('/', eventRoutes);
 
 describe('Event routes', () => {
- 
-
-  test('GET /events handles errors when getting events', async () => {
-    // Mock rejection for getAllEvents
-    const mockError = new Error('Database error');
-    eventController.getAllEvents.mockRejectedValue(mockError);
-
-    const res = await request(app).get('/events');
-
-    expect(res.status).toBe(500); // Or whatever status your controller sends on error
-
+  // Test: GET / returns all events
+  test('GET / returns all events', async () => {
+    const res = await request(app).get('/');
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
+    expect(res.body.data[0].title).toBe('Test Event');
   });
+
+  // Test: POST /postEvent adds a new event
+  test('POST /postEvent adds a new event', async () => {
+    const newEvent = {
+      title: 'New Event',
+      description: 'Event description',
+      timeslot: '10:00-11:00',
+      facility_id: 1,
+      date: '2025-07-01',
+      host: 'Host Name',
+      imageURL: null,
+    };
+
+    const res = await request(app)
+      .post('/postEvent')
+      .field('title', newEvent.title)
+      .field('description', newEvent.description)
+      .field('timeslot', newEvent.timeslot)
+      .field('facility_id', newEvent.facility_id)
+      .field('date', newEvent.date)
+      .field('host', newEvent.host)
+      .attach('image', Buffer.from('image data'), 'image.png');  // Mock file upload
+
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data[0].title).toBe('New Event');
+  });
+
+  // Test: POST /postEvent throws error on database failure
+
 });

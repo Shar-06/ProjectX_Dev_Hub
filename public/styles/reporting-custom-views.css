@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h2 {
+    margin-bottom: 0.3rem;
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+h3 {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+select {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.parentReportingSection {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.reportsSection1,
+.reportsSection2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+/* Card layout for each report box */
+.mostPopularFacility,
+.usageCharts,
+.issuesByFacility,
+.RecentMaintenanceReports {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    flex: 1 1 45%;
+    min-width: 320px;
+}
+
+/* Chart containers */
+.lineChart,
+.issuesBarChartSection {
+    margin-top: 1rem;
+
+
+}
+
+/* Centered facility name */
+.facilityName {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #1abc9c;
+}
+
+/* Date picker styles */
+.datePicker1,
+.datePicker2,
+.datePicker3,
+.datePicker4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.datePicker1 input,
+.datePicker2 input,
+.datePicker3 input,
+.datePicker4 input {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button style for "Apply" */
+input.apply {
+    padding: 0.4rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input.apply:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .reportsSection1,
+    .reportsSection2 {
+        flex-direction: column;
+    }
+
+    .mostPopularFacility,
+    .usageCharts,
+    .issuesByFacility,
+    .RecentMaintenanceReports {
+        flex: 1 1 100%;
+    }
+}

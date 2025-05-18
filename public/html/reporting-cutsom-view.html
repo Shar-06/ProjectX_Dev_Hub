@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom View</title>
+    <link rel="stylesheet" href="../styles/reporting-custom-views.css">
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<article class = "parentReportingSection">
+    
+<article class ="reportsSection1">
+    <!--Most Popular Facility-->
+    <article class="mostPopularFacility">
+    <h2>Most Popular Facility</h2>
+    <p>See which facility has the most booking in the selected time range</p>
+    <h3>Time Range</h3>
+    <select name="facilities" class="facilities">
+        <option value=1>This Week</option>
+        <option value=2>Last Month</option>
+        <option value=3>Custom Range</option>
+    </select>
+
+        <section class="datePicker1"> </section>
+
+        <section class="facilityName">
+            <h2></h2>
+            <img src="#" class="trophyImage" width="200" height="200"> 
+            <p class="bookingsCount"></p>
+        </section>
+    </article>
+    <!--Usage Charts-->
+    <section class= "usageCharts">
+    <h2>Usage Chart</h2>
+    <p>View booking trends for selected time range and facility</p>
+    <h3>Time Range</h3>
+
+<section class="timeRangeSec">
+
+    <select name="timeRange" class="timeRange">
+        <option value=1>This Week</option>
+        <option value=2>Last Month</option>
+        <option value=3>Custom Range</option>
+    </select>
+
+    <section class="datePicker2"></section>
+
+</section>
+    
+     <h3>Facility</h3>
+    <select name="facilitySelector" class="facilitySelector">
+        <option value=1>All</option>
+        <option value=2>Gymnasium</option>
+        <option value=3>Swimming Pool</option>
+        <option value=4>Soccer Field</option>
+        <option value=5>Basketball Court</option>
+    </select>
+
+    <section class="lineChart">
+        <canvas id = "usageChart" width="200" height="200"> </canvas>
+    </section>
+    </section>
+
+    </article>
+
+    <article class="reportsSection2">
+    <section class = "issuesByFacility">
+        <h2>Issues by Facility</h2>
+        <p>Number of issues reported per facility in the selected time range</p>
+        
+        <h3>Time Range</h3>
+        
+        <select class = issuesTimeSelector>
+            <option value=1>This Week</option>
+            <option value=2>Last Month</option>
+            <option value=3>Custom Range</option>
+        </select>
+        <section class="datePicker3"> </section>        
+        <section class="issuesBarChartSection"></section>
+    </section>
+
+
+    <section class="RecentMaintenanceReports">
+    <h2>Recent Maintenance Reports</h2>
+    <p>List of recent maintenance issues with details</p>
+    <h3>Time Range</h3>
+    <select class = recentTimeSelector>
+            <option value=1>This Week</option>
+            <option value=2>Last Month</option>
+            <option value=3>Custom Range</option>
+        </select>
+        <section class="datePicker4"> </section>
+
+        <h3>Facility</h3>
+        
+        <select name="recentSelector" class="recentSelector">
+        <option value=1>All</option>
+        <option value=2>Gymnasium</option>
+        <option value=3>Swimming Pool</option>
+        <option value=4>Soccer Field</option>
+        <option value=5>Basketball Court</option>
+        
+        </select>
+
+        <table class ="recentIssuesTables">
+            <thead>
+                <tr>
+                    <th>Facility Name</th>
+                    <th>Description</th>
+                    <th>Reported On</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody class="recentIssuesBody">
+
+            </tbody>
+        </table>
+    </section>
+   </article>
+</article>
+
+
+<script src="../js/reporting-custom-view.js"></script> 
+</body>
+</html>

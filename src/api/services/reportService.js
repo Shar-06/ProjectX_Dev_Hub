@@ -40,20 +40,20 @@ class reportService {
         return result.rows[0];
     }
 
-    async postNewReport(status, feedback, facility_id, resident_id, equipment, description, problem_group) {
+    async postNewReport(facility_id,resident_id,description,date) {
         const query = {
             text: `INSERT INTO "MaintenanceReport" 
-                   (status, feedback, facility_id, resident_id, equipment, description, problem_group) 
-                   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-            values: [status, feedback, facility_id, resident_id, equipment, description, problem_group]
+                   (status,facility_id,resident_id,description,date) 
+                   VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+            values: ["Pending",facility_id,resident_id,description,date]
         };
 
         try {
             const result = await data.query(query);
-            return result.rows[0];  // Return the inserted row
+            return result.rows[0];
         } catch (error) {
             console.error("Error inserting report:", error);
-            throw error; // Rethrow the error after logging
+            throw error; 
         }
     }
 

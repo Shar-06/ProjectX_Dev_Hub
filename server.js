@@ -13,6 +13,8 @@ const bookingRouter = require('./src/api/routes/booking.routes.js');
 const reportRouter = require('./src/api/routes/report.routes.js');
 const eventRouter = require('./src/api/routes/event.routes.js');
 const notificationRouter = require('./src/api/routes/notification.routes.js');
+const reportingRouter = require('./src/api/routes/reporting.routes.js');
+
 
 //Instantiate a new express app
 const app = express();
@@ -27,6 +29,7 @@ app.use('/api/v1/bookings', bookingRouter);
 app.use('/api/v1/reports',reportRouter);
 app.use('/api/v1/events',eventRouter);
 app.use('/api/v1/notifications',notificationRouter);
+app.use('/api/v1/reporting',reportingRouter);
 
 
 //file to start in
@@ -34,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //file to open at start
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/html', 'LoginPage.html'));
+    res.sendFile(path.join(__dirname, 'public/html', 'reporting-cutsom-view.html'));
   });
 
 //Configure port and database connection

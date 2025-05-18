@@ -4,107 +4,96 @@ jest.mock('../api/services/reportService', () => ({
     getReportByFacility: jest.fn(),
     patchReportStatus: jest.fn(),
     postNewReport: jest.fn(),
-  }));
-  
-  const reportController = require('../api/controllers/reportController');
-  const reportService = require('../api/services/reportService');
-  const httpMocks = require('node-mocks-http');
-  
-  test('getAllReports returns report list with success', async () => {
+}));
+
+const reportController = require('../api/controllers/reportController');
+const reportService = require('../api/services/reportService');
+const httpMocks = require('node-mocks-http');
+
+test('getAllReports returns a list of reports with 200 status', async () => {
     const req = httpMocks.createRequest();
     const res = httpMocks.createResponse();
     const next = jest.fn();
-  
-    const mockReports = [{ id: 1, description: 'Leak in pipe' }];
+
+    const mockReports = [{ id: 1, facility_id: 101, description: 'Leak' }];
     reportService.getAllReports.mockResolvedValueOnce(mockReports);
-  
+
     await reportController.getAllReports(req, res, next);
-  
+
     expect(res._getJSONData()).toEqual({
-      success: true,
-      data: mockReports,
+        success: true,
+        data: mockReports,
     });
+    expect(res.statusCode).toBe(200);
     expect(reportService.getAllReports).toHaveBeenCalled();
-  });
-  
-  test('getReportByID returns a report', async () => {
+});
+
+test('getReportByID returns a single report with 200 status', async () => {
     const req = httpMocks.createRequest({ params: { id: '1' } });
     const res = httpMocks.createResponse();
     const next = jest.fn();
-  
-    const mockReport = { id: 1, description: 'Water leak' };
+
+    const mockReport = { id: 1, facility_id: 101, description: 'Leak' };
     reportService.getReportByID.mockResolvedValueOnce(mockReport);
-  
+
     await reportController.getReportByID(req, res, next);
-  
+
     expect(res._getJSONData()).toEqual({
-      success: true,
-      data: mockReport,
+        success: true,
+        data: mockReport,
     });
     expect(reportService.getReportByID).toHaveBeenCalledWith('1');
-  });
-  
- /* test('getReportByFacility returns reports for a facility', async () => {
-    const req = httpMocks.createRequest({ params: { name: 'Community Hall' } });
+});
+
+test('getReportByFacility returns a list of reports for a specific facility', async () => {
+    const req = httpMocks.createRequest({ params: { name: 'Facility A' } });
     const res = httpMocks.createResponse();
     const next = jest.fn();
-  
-    const mockFacilityReports = [{ id: 1, facility: 'Community Hall' }];
-    reportService.getReportByFacility.mockResolvedValueOnce(mockFacilityReports);
-  
+
+    const mockReports = [{ id: 1, facility_id: 101, description: 'Leak' }];
+    reportService.getReportByFacility.mockResolvedValueOnce(mockReports);
+
     await reportController.getReportByFacility(req, res, next);
-  
+
     expect(res._getJSONData()).toEqual({
-      success: true,
-      data: mockFacilityReports,
+        success: true,
+        data: mockReports,
     });
-    expect(reportService.getReportByFacility).toHaveBeenCalledWith('Community Hall');
-  });*/
-  
-  test('patchNewStatus updates report status', async () => {
-    const req = httpMocks.createRequest({ params: { id: '1', status: 'resolved' } });
+    expect(reportService.getReportByFacility).toHaveBeenCalledWith('Facility A');
+});
+
+test('patchNewStatus updates the status of a report', async () => {
+    const req = httpMocks.createRequest({ params: { id: '1', status: 'closed' } });
     const res = httpMocks.createResponse();
     const next = jest.fn();
-  
-    const mockUpdatedReport = { id: 1, status: 'resolved' };
+
+    const mockUpdatedReport = { id: 1, status: 'closed' };
     reportService.patchReportStatus.mockResolvedValueOnce(mockUpdatedReport);
-  
+
     await reportController.patchNewStatus(req, res, next);
-  
+
     expect(res._getJSONData()).toEqual({
-      success: true,
-      data: mockUpdatedReport,
+        success: true,
+        data: mockUpdatedReport,
     });
-    expect(reportService.patchReportStatus).toHaveBeenCalledWith('1', 'resolved');
-  });
-  
-  test('postNewReport inserts report and returns response', async () => {
+    expect(reportService.patchReportStatus).toHaveBeenCalledWith('1', 'closed');
+});
+
+test('postNewReport inserts a new report and returns 200 status', async () => {
     const req = httpMocks.createRequest({
-      body: {
-        id: 'r1',
-        status: 'new',
-        feedback: '',
-        facility_id: 'f1',
-        resident_id: 'u1',
-        equipment: 'Sink',
-        description: 'Broken faucet',
-        problem_group: 'Plumbing'
-      }
+        body: { facility_id: 101, resident_id: 202, description: 'Leak', date: '2025-05-18' },
     });
     const res = httpMocks.createResponse();
     const next = jest.fn();
-  
-    const mockReport = { id: 'r1', description: 'Broken faucet' };
+
+    const mockReport = { facility_id: 101, resident_id: 202, description: 'Leak', date: '2025-05-18' };
     reportService.postNewReport.mockResolvedValueOnce(mockReport);
-  
+
     await reportController.postNewReport(req, res, next);
-  
+
     expect(res._getJSONData()).toEqual({
-      success: true,
-      data: mockReport,
+        success: true,
+        data: mockReport,
     });
-    expect(reportService.postNewReport).toHaveBeenCalledWith(
-      'r1', 'new', '', 'f1', 'u1', 'Sink', 'Broken faucet', 'Plumbing'
-    );
-  });
-  
+    expect(reportService.postNewReport).toHaveBeenCalledWith(101, 202, 'Leak', '2025-05-18');
+});
