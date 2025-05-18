@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
             
-            const response = await fetch('/api/v1/reports/updateStatus', { 
+            const response = await fetch('/api/v1/reports/postReport', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
