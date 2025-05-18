@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Sports Facility Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/report-usage_trends.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="../js/report-usage_trends.js"></script>
+</head>
+<body>
+    <section class="container" id="reportContainer">
+
+        <section class="filters">
+            <fieldset class="filter-group">
+                <input type="date" id="startDate"  aria-label="Start date">
+                <input type="date" id="endDate"  aria-label="End date">
+            </fieldset>
+            <button class="btn btn-primary" id="applyBtn">Apply</button>
+        </section>
+
+        <section class="stats-container">
+           <article class="stat-card">
+                <h3 class="stat-title">Total Bookings</h3>
+                <p class="stat-value" id="numOfBookings">0</p>
+                <meter class="stat-progress" id="bookingsProgressBar" max="100">
+                    <section class="progress-bar"></section>
+                </meter>
+                <footer class="stat-details">
+                    <p>+0% from last period</p>
+                    <p id="bookingCapacity">% of capacity</p>
+                </footer>
+            </article>
+            <article class="stat-card">
+                <h3 class="stat-title">Total Hours Reserved</h3>
+                <p class="stat-value" id="numOfHours">0</p>
+                <meter class="stat-progress" id="hoursProgressBar" max="100">
+                    <section class="progress-bar" style="width: 65%;"></section>
+                </meter>
+                <footer class="stat-details">
+                    <p>+0% from last period</p>
+                    <p id="hoursCapacity">% of capacity</p>
+                </footer>
+            </article>
+            <article class="stat-card">
+                <h3 class="stat-title">Most Popular Facility</h3>
+                <p class="stat-value" id="facilityName"></p>
+                <meter class="stat-progress" id="stat-bar"  max="100">
+                    <section class="progress-bar"  id="progress-indicator"></section>
+                </meter>
+                <footer class="stat-details">
+                    <p>Usage rate :</p>
+                    <p id="usage-perc">92%</p>
+                </footer>
+            </article>
+        </section>
+
+        <nav class="facility-filters">
+            <button class="facility-filter" id="allFacilityBtn">All Facilities</button>
+            <button class="facility-filter" id="basketballBtn">Basketball Courts</button>
+            <button class="facility-filter" id="soccerBtn">Soccer Fields</button>
+            <button class="facility-filter" id="swimmingBtn">Swimming Pool</button>
+            <button class="facility-filter" id="gymnasiumBtn">Gymnasium</button>
+        </nav>
+
+        <section class="chart-container">
+            <h2 class="chart-title">Facility Usage Comparison</h2>
+            <figure>
+                <canvas id="usageChart"></canvas>
+                <figcaption class="visually-hidden">Graph showing monthly usage comparison across facilities</figcaption>
+            </figure>
+        </section>
+        <section class="chart container" id="tableContainer"></section>
+    </section>
+</body>
+</html>

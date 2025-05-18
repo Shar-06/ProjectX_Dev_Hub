@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Events</title>
+        <link rel="stylesheet" href="../styles/admin-analytics-styles.css">
+        <script src="../js/admin-analytics.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>Admin Management Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><button onclick="window.location.href='../html/admin.html'">Home</button></li>
+                    <li><button onclick="window.location.href='../html/admin-bookings.html'">Bookings</button></li>
+                    <li><button onclick="window.location.href='../html/admin-events.html'">Events</button></li>
+                    <li><button onclick="window.location.href='../html/admin-analytics.html'">Analytics</button></li>
+                    <li><button onclick="window.location.href='../html/admin-notifications.html'">Notifications</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Section 1: Report Export -->
+            <section aria-label="Report Controls" class="report-controls">
+                <fieldset>
+                <legend class="visually-hidden">Export Options</legend>
+                <button type="button" id="export-pdf">Export PDF</button>
+                <button type="button" id="export-csv">Export CSV</button>
+                </fieldset>
+            </section>
+
+            <!-- Section 2: Tab Navigation -->
+            <nav class="tab-navigation" aria-label="Report Navigation Tabs">
+                <ul class="tab-list">
+                <li><button class="tab-button active" data-tab="usage-trends">Usage Trends by Facility</button></li>
+                <li><button class="tab-button" data-tab="maintenance">Maintenance Reports</button></li>
+                <li><button class="tab-button" data-tab="custom">Custom View</button></li>
+                </ul>
+            </nav>
+
+            <!-- Section 3: Report Page Content -->
+            <section id="tab-summary" class="tab-page" aria-labelledby="summary-tab">
+                <iframe id="iframe-usage-trends" class="tab-iframe" src="../html/usage-trends.html" title="Usage Trends by Facility"></iframe>
+                <iframe id="iframe-maintenance" class="tab-iframe hidden" src="../html/maintenance.html" title="Maintenance Reports"></iframe>
+                <iframe id="iframe-custom" class="tab-iframe hidden" src="../html/custom-view.html" title="Custom View"></iframe>
+            </section>
+        </main>
+
+    </body>
+</html>

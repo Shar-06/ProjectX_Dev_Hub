@@ -1,0 +1,167 @@
+/* GLOBAL RESET */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* BODY */
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: #cfd2d7;
+color: #0E2A55;
+line-height: 1.6;
+overflow-x: hidden;
+}
+
+/* MAIN LAYOUT */
+main {
+padding: 2rem;
+font-family: sans-serif;
+background-color: #cfd2d7;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+
+/* REPORT CONTROLS */
+.report-controls {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
+flex-wrap: wrap;
+gap: 1rem;
+}
+
+.report-controls form {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.report-controls fieldset {
+display: flex;
+gap: 0.5rem;
+border: none;
+padding: 0;
+margin: 0;
+}
+
+.report-controls .filter-form {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+flex-wrap: wrap;
+}
+
+.visually-hidden {
+position: absolute;
+left: -9999px;
+top: auto;
+width: 1px;
+height: 1px;
+overflow: hidden;
+}
+
+.report-controls button {
+padding: 0.5rem 1rem;
+border: none;
+background-color: #F57C00;
+color: white;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.2s ease;
+}
+
+.report-controls button:hover {
+background-color: #e65100;
+}
+
+/* --- STAT CARDS --- */
+.stat-summary-row {
+display: flex;
+justify-content: space-between;
+gap: 1.5rem;
+margin-bottom: 2rem;
+}
+
+.stat-card {
+background: #ffffff;
+padding: 1.25rem 1.5rem;
+border-radius: 10px;
+flex: 1;
+box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+border: 1px solid #e3e3e3;
+transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+transform: translateY(-2px);
+}
+
+.stat-card h3 {
+font-size: 2rem;
+font-weight: 600;
+color: #0E2A55;
+margin-bottom: 0.2rem;
+}
+
+.stat-value {
+font-size: 1.4rem;
+font-weight: 600;
+color: #0a3d62;
+margin-bottom: 0.25rem;
+}
+
+.stat-subtext {
+font-size: 0.8rem;
+color: #888;
+}
+
+/* --- FACILITY FILTER BUTTONS --- */
+.chart-filter-bar {
+margin-bottom: 1.5rem;
+}
+
+.facility-options {
+display: flex;
+flex-wrap: wrap;
+list-style: none;
+padding: 0;
+gap: 0.75rem;
+}
+
+.facility-options li button {
+background-color: #f0f4f8;
+color: #333;
+border: 1px solid #ccc;
+padding: 0.5rem 1rem;
+border-radius: 20px;
+cursor: pointer;
+font-size: 0.9rem;
+transition: all 0.2s ease;
+}
+
+.facility-options li button.active,
+.facility-options li button:hover {
+background-color: #0057d8;
+color: #fff;
+border-color: #0057d8;
+}
+
+/* --- CHART AREA --- */
+.chart-display-area {
+background: #ffffff;
+padding: 2rem;
+border-radius: 14px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+border: 1px solid #e2e2e2;
+}
+
+.chart-display-area figcaption {
+margin-top: 1rem;
+font-size: 0.9rem;
+color: #666;
+text-align: center;
+}
