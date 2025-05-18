@@ -13,19 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // CSV/PDF export
-    const csvBtn = document.getElementById("export-csv");
-    const pdfBtn = document.getElementById("export-pdf");
-    if (csvBtn && pdfBtn) {
-        csvBtn.addEventListener("click", () => {
-            const data = getCSVData();
-            downloadCSV(data.chartData, `${data.facility}-report.csv`);
-        });
+    document.getElementById("export-csv").addEventListener("click", () => {
+        const facility = getSelectedFacility();
+        const { chartData } = getMockData(facility);
+        downloadCSV(chartData, `${facility}-report.csv`);
+    });
 
-        pdfBtn.addEventListener("click", async () => {
-            const data = getCSVData();
-            await downloadPDF(data.chartData, `${data.facility}-report.pdf`);
-        });
-    }
+    document.getElementById("export-pdf").addEventListener("click", async () => {
+        const facility = getSelectedFacility();
+        const { chartData } = getMockData(facility);
+        await downloadPDF(chartData, `${facility}-report.pdf`);
+    });
 });
 
 function getSelectedFacility() {
@@ -233,18 +231,3 @@ async function downloadPDF(data, filename) {
 
     pdf.save(filename);
 }
-
-// Exposed Functions for Parent Access
-window.getCSVData = function () {
-    const facility = getSelectedFacility();
-    const { chartData } = getMockData(facility);
-    return { facility, chartData };
-};
-
-window.getTableData = function () {
-    const rows = Array.from(document.querySelectorAll("#data-table tbody tr"));
-    const data = rows.map(row => Array.from(row.children).map(cell => cell.textContent));
-    const headers = Array.from(document.querySelectorAll("#data-table thead th"))
-        .map(th => th.textContent);
-    return [headers, ...data];
-};
