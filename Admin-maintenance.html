@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Events</title>
+        <link rel="stylesheet" href="../styles/Admin-maintenance.css">
+        <script src="../js/Admin-maintenancee.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    </head>
+    
+    <body>
+        <header>
+            <h1>Admin Management Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><button onclick="window.location.href='../html/admin.html'">Home</button></li>
+                    <li><button onclick="window.location.href='../html/admin-bookings.html'">Bookings</button></li>
+                    <li><button onclick="window.location.href='../html/admin-events.html'">Events</button></li>
+                    <li><button onclick="window.location.href='../html/admin-analytics.html'">Analytics</button></li>
+                    <li><button onclick="window.location.href='../html/admin-notifications.html'">Notifications</button></li>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <main>
+            <nav class="tab-navigation" aria-label="Report Navigation Tabs">
+                <ul class="tab-list">
+                <li><button class="tab-button " data-tab="summary">Usage Trends by Facility</button></li>
+                <li><button class="tab-button active" data-tab="facility">Maintenance Reports</button></li>
+                <li><button class="tab-button" data-tab="users">Custom View</button></li>
+                </ul>
+            </nav>
+            
+            <section aria-labelledby="analytics-heading" class="chart-filter-bar">
+    <h2 id="analytics-heading" class="visually-hidden">Analytics</h2>
+    <nav aria-label="Analytics view options">
+       <!-- <ul class="facility-options" role="tablist">
+            <li role="presentation">
+                <button id="maintenanceBtn" 
+                        role="tab" 
+                        aria-selected="true" 
+                        data-view="maintenance" 
+                        class="active">Maintenance Issues</button>
+            </li>
+            <li role="presentation">
+                <button id="trendsBtn" 
+                        role="tab" 
+                        aria-selected="false" 
+                        data-view="facility">Issues by Facility</button>
+            </li>
+            <li role="presentation">
+                <button id="statusBtn" 
+                        role="tab" 
+                        aria-selected="false" 
+                        data-view="status">Status Overview</button>
+            </li>
+        </ul>-->
+        <button class="nav-btn active" id="maintenanceBtn">Maintenance Issues</button>
+        <button class="nav-btn" id="trendsBtn">Issues by Facility</button>
+        <button class="nav-btn" id="statusBtn">Status Overview</button>
+    </nav>
+</section>
+            <section class="content-section active" id="maintenanceSection">
+            <table id="issuesTableBody">
+                <thead>
+                </thead>
+                <tbody >
+                    
+                </tbody>
+            </table>
+        </section>
+        <section class="content-section" id="trendsSection">
+            <h2>Issues by Facility</h2>
+             <figure class="chart-container">
+                <canvas id="usageChart" width="350" height="350"></canvas>
+             </figure>
+            <ul class="legend" id="chartLegend">
+            </ul>
+        </section>
+
+        <section class="content-section" id="statusSection">
+            <h2>Status Overview</h2>
+            <figure class="chart-container">
+                <canvas id="statusChart" width="350" height="350"></canvas>
+             </figure>
+             <ul class="legend" id="chartLegend2">
+            </ul>
+        </section>
+        </main>
+        
+        <aside class="notification" id="notification">Status updated successfully!</aside>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/Admin-maintance.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    </body>
+</html>
