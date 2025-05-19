@@ -27,7 +27,7 @@ button.addEventListener('click', () => {
 });
 
 // CSV Export Logic
-document.getElementById('export-csv').addEventListener('click', function () {
+/*document.getElementById('export-csv').addEventListener('click', function () {
     try {
         const iframe = document.querySelector('.tab-iframe:not(.hidden)');
         if (!iframe) throw new Error('No visible iframe found.');
@@ -86,7 +86,7 @@ document.getElementById('export-csv').addEventListener('click', function () {
         alert('CSV export failed while reading iframe table.');
         console.error(error);
     }
-});
+});*/
 
 
 

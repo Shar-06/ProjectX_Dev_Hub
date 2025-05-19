@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Dashboard</title>
+    <link rel="stylesheet" href="../styles/report-maintenance.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <section class="dashboard">
+        <header class="dashboard-header">
+        </header>
+
+        <section class="dashboard-content">
+            <!-- Top row with charts -->
+            <section class="stats-container">
+                <!-- Issue Status Overview -->
+                <section class="stat-card">
+                        <canvas id="issueStatusChart"></canvas>
+                </section>
+
+                <!-- Issues by Facility -->
+                <section class="stat-card">
+                        <canvas id="facilityIssuesChart"></canvas>
+                </section>
+
+                <!-- Average Resolution Time -->
+                
+            </section>
+           
+
+            <!-- Bottom row with tables -->
+            <section class="tables-container">
+                <!-- Recent Issues Table -->
+                <section class="table-card">
+                    <section class="card-header">
+                        <h3>Recent Maintenance Issues</h3>
+                        <!--<button class="view-all-btn">View All</button>-->
+                    </section>
+                    <section class="table-container">
+                        <table class="data-table" id="recentIssuesTable">
+                            <thead>
+                                <tr>
+                                    <!--<th>ID</th>-->
+                                    <th>Facility</th>
+                                    <th>Issue Type</th>
+                                    <th>Status</th>
+                                    <th>Reported</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </section>
+                </section>
+
+                <!-- Staff Performance Table -->
+                <section class="table-card">
+                    <section class="card-header">
+                        <h3>Maintenance Staff Performance</h3>
+                    </section>
+                    <section class="table-container">
+                        <table class="data-table" id="staffPerformanceTable">
+                            <thead>
+                                <tr>
+                                    <th>Staff Member</th>
+                                    <th>Issues Resolved</th>
+                                    <th>Avg. Resolution Time</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </section>
+                     <section class="stat-card-2">
+                    <section class="card-header">
+                        <h3>Average Resolution Time</h3>
+                    </section>
+                    <section class="avg-time-display" id="avg-time-display"></section>
+                </section>
+                </section>
+            </section>
+        </section>
+    </section>
+
+    <script src="../js/report-maintenance.js"></script>
+</body>
+</html>

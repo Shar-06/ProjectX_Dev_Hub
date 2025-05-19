@@ -1,0 +1,346 @@
+/* Global Styles */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #0E2A55;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-color: #e0e0e0;
+    --dark-color: #0E2A55;
+    --text-color: #333;
+    --border-color: #d9d9d9;
+    --card-bg: #fff;
+    --open-color: #e74c3c;
+    --progress-color: #f39c12;
+    --closed-color: #2ecc71;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #cfd2d7;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.dashboard {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    color: var(--secondary-color);
+    font-size: 28px;
+}
+
+.period-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.period-selector button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.period-selector button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Dashboard Content */
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Stats Container (Charts) */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    align-items: end;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    height: auto; /* let content define height */
+    align-self: end;
+}
+.stat-card-2 {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    height: auto; /* let content define height */
+}
+
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header h3 {
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+.chart-container {
+    height: 200px;
+    position: relative;
+}
+
+/* Legend for charts */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.color-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.color-box.open {
+    background-color: var(--open-color);
+}
+
+.color-box.progress {
+    background-color: var(--progress-color);
+}
+
+.color-box.closed {
+    background-color: var(--closed-color);
+}
+
+/* Average Time Display */
+.avg-time-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.avg-time-value h4 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.avg-time-value p {
+    font-size: 14px;
+    color: #777;
+}
+
+.trend {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 14px;
+}
+
+.trend.up {
+    color: var(--success-color);
+}
+
+.trend.down {
+    color: var(--danger-color);
+}
+
+/* Tables Container */
+.tables-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.table-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    height: auto;
+    align-self: start;
+}
+
+.view-all-btn {
+    padding: 6px 12px;
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.view-all-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Data Tables */
+.table-container {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th {
+    background-color: #f8f9fa;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+/* Status Pills */
+.status-pill {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status-open {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--open-color);
+}
+
+.status-inProgress {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--progress-color);
+}
+
+.status-completed {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--closed-color);
+}
+
+/* Priority indicators */
+.priority {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.priority-high {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger-color);
+}
+
+.priority-medium {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--warning-color);
+}
+
+.priority-low {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success-color);
+}
+
+/* Performance Indicator */
+.performance-indicator {
+    width: 100%;
+    height: 6px;
+    background-color: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.performance-bar {
+    height: 100%;
+    border-radius: 3px;
+}
+
+.excellent {
+    background-color: var(--success-color);
+    width: 90%;
+}
+
+.good {
+    background-color: #27ae60;
+    width: 75%;
+}
+
+.average {
+    background-color: var(--warning-color);
+    width: 60%;
+}
+
+.poor {
+    background-color: var(--danger-color);
+    width: 40%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .tables-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}

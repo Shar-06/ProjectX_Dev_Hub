@@ -23,7 +23,7 @@ class reportingService {
    async issues_by_facility(start_date,end_date){
 
       const query = {
-            text: ' select count(*), name,created_date FROM "MaintenanceReport" as m, "Facility" as f where m.facility_id = f.id and created_date between $1 and $2 group by name,created_date order by count(*) desc',
+            text: ' select count(*), name FROM "MaintenanceReport" as m, "Facility" as f where m.facility_id = f.id and created_date between $1 and $2 group by name order by count(*) desc',
             values: [start_date,end_date]
         };
 

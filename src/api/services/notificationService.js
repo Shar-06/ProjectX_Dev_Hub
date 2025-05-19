@@ -2,14 +2,14 @@ const data = require('../../config/database');
 
 class notificationService {
     async getAllNotifications() {
-        const query = 'SELECT * FROM notification ORDER BY id ASC';
+        const query = 'SELECT * FROM "Notification" ORDER BY id ASC';
         const result = await data.query(query);
         return result.rows;
     };
 
     async getNotificationsByType(type) {
         const query = {
-            text: 'SELECT * FROM notification WHERE type = $1',
+            text: 'SELECT * FROM "Notification" WHERE type = $1',
             values: [type]
         };
         const result = await data.query(query);
@@ -23,7 +23,7 @@ class notificationService {
 
     async getNotificationsById(userid, type) {
         const query = {
-            text: 'SELECT * FROM notification WHERE userid = $1 AND type = $2',
+            text: 'SELECT * FROM "Notification" WHERE userid = $1 AND type = $2',
             values: [userid, type]
         };
         const result = await data.query(query);
@@ -37,7 +37,7 @@ class notificationService {
 
     async postNewNotification( date, timeslot, status, message, userid, type, username) {
         const query = {
-            text: 'INSERT INTO notification (date, timeslot, status, message, userid, type, username) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+            text: 'INSERT INTO "Notification" (date, timeslot, status, message, userid, type, username) VALUES ($1,$2,$3,$4,$5,$6,$7)',
             values: [date, timeslot, status, message, userid, type, username]
         };
 

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -76,32 +76,32 @@
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L14'></a><a href='#L14'>14</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
-const reportingController = <span class="cstat-no" title="statement not covered" >require('../controllers/reportingController');</span>
-const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
+const reportingController = require('../controllers/reportingController');
+const router = express.Router();
 &nbsp;
 // Public routes
-<span class="cstat-no" title="statement not covered" >router.get('/most-popular-facility/:start_date/:end_date', reportingController.most_popular_facility);</span>
-<span class="cstat-no" title="statement not covered" >router.get('/usage-chart/:start_date/:end_date', reportingController.usage_charts);</span>
-<span class="cstat-no" title="statement not covered" >router.get('/usage-chart-byFacility/:start_date/:end_date/:facility_id', reportingController.usage_charts_byfacility); </span>
-<span class="cstat-no" title="statement not covered" >router.get('/issues-by-facility/:start_date/:end_date', reportingController.issues_by_facility);</span>
-<span class="cstat-no" title="statement not covered" >router.get('/recent-issues/:start_date/:end_date', reportingController.recent_maintenance_reports);</span>
-<span class="cstat-no" title="statement not covered" >router.get('/recent-issues-by-facility/:start_date/:end_date/:facility_name', reportingController.recent_maintenance_reports_byFacility);</span>
+router.get('/most-popular-facility/:start_date/:end_date', reportingController.most_popular_facility);
+router.get('/usage-chart/:start_date/:end_date', reportingController.usage_charts);
+router.get('/usage-chart-byFacility/:start_date/:end_date/:facility_id', reportingController.usage_charts_byfacility); 
+router.get('/issues-by-facility/:start_date/:end_date', reportingController.issues_by_facility);
+router.get('/recent-issues/:start_date/:end_date', reportingController.recent_maintenance_reports);
+router.get('/recent-issues-by-facility/:start_date/:end_date/:facility_name', reportingController.recent_maintenance_reports_byFacility);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports = router; </span>
+module.exports = router; 
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -109,7 +109,7 @@ const router = <span class="cstat-no" title="statement not covered" >express.Rou
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-18T16:24:49.727Z
+                at 2025-05-19T09:57:54.803Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -66,25 +66,6 @@ async postNewBooking(date, facility_id, resident_id, timeslot) {
         }
     }
 
-    /*async postNewBooking(start_time, end_time, status, date, facility_id, resident_id) {
-        const time = `${start_time}-${end_time}`;
-        
-        const query = {
-            text: 'INSERT INTO "Booking" (date, facility_id, resident_id, status, timeslot) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            values: [ date, facility_id, resident_id, status || 'Pending', time]
-        };
-
-        try {
-            const result = await data.query(query);
-            return result.rows[0];
-        } catch (error) {
-            console.error('Database error:', error);
-            if (error.code === '23505') {
-                throw new Error('Booking ID already exists');
-            }
-            throw new Error('Failed to create booking');
-        }
-    }*/
 }
 
 module.exports = new bookingService();

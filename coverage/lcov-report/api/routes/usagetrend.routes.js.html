@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for api/routes/booking.routes.js</title>
+    <title>Code coverage report for api/routes/usagetrend.routes.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">api/routes</a> booking.routes.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">api/routes</a> usagetrend.routes.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -73,11 +73,9 @@
 <a name='L8'></a><a href='#L8'>8</a>
 <a name='L9'></a><a href='#L9'>9</a>
 <a name='L10'></a><a href='#L10'>10</a>
-<a name='L11'></a><a href='#L11'>11</a>
-<a name='L12'></a><a href='#L12'>12</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L11'></a><a href='#L11'>11</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -86,15 +84,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
-const bookingController = require('../controllers/bookingController');
+const usageTrendsController = require('../controllers/usagetrendsController');
 const router = express.Router();
 &nbsp;
-// Public routes
-router.get('/', bookingController.getAllBookings);
-router.get('/resident/:residentId', bookingController.getBookingsByResidentId);
-router.get('/id/:id', bookingController.getBookingByID);
-router.patch('/update-status/:id/:status', bookingController.patchBookingStatus);
-router.post('/post-booking', bookingController.postNewBooking);
+router.get('/usage/:startDate/:endDate/:facilityId', usageTrendsController.getUsageByFacility);
+router.get('/usage-comparison/:startDate/:endDate', usageTrendsController.getUsageComparison);
+router.get('/total-bookings/:startDate/:endDate', usageTrendsController.getTotalBookings);
+router.get('/popular-facility', usageTrendsController.getPopularFacility);
+router.get('/total-hours/:startDate/:endDate', usageTrendsController.getTotalHours);
 &nbsp;
 module.exports = router;</pre></td></tr></table></pre>
 
