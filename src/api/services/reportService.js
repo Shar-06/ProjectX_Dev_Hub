@@ -3,7 +3,7 @@ const data = require('../../config/database');
 class reportService {
 
     async getAllReports() {
-        const query = 'SELECT * FROM "MaintenanceReport" ORDER BY id ASC';
+        const query = 'SELECT m.id,description,status,u.name as user,f.name as facility FROM "MaintenanceReport" as m, "User" as u, "Facility" as f WHERE m.resident_id = u.id AND facility_id = f.id ORDER BY created_date ASC;';
         const result = await data.query(query);
         return result.rows;
     }
@@ -60,13 +60,13 @@ class reportService {
         }
     }
 
-    async patchReportStatus(id, status) {
+    async patchReportStatus(id, status, facilitystaff_id) {
     const query = {
         text: `UPDATE "MaintenanceReport" 
-               SET status = $2 
+               SET status = $2 , completed_date = NOW(), facilitystaff_id = $3
                WHERE id = $1 
                RETURNING *`,
-        values: [id, status]
+        values: [id, status, facilitystaff_id]
     };
 
     try {

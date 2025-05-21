@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
         const notifications = data.data || data;
-        const notificationBookingsList = document.getElementById("notification-events-list");
+        if(notifications.length != 0){
+                    const notificationBookingsList = document.getElementById("notification-events-list");
         console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
@@ -34,6 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             notificationBookingsList.appendChild(li);
         });
+        }
+        else{
+            const notificationBookingsList = document.getElementById("notification-events-list");
+            console.log(notificationBookingsList);
+            const li = document.createElement("li");
+            li.className = "notification";
+            li.innerHTML = `
+                <p>No notifications available</p>
+            `;
+            notificationBookingsList.appendChild(li);
+        }
     })
     .catch(error => {
        console.log("error while fetching notifications: "+ error)
@@ -48,7 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
         const notifications = data.data || data;
-        const notificationBookingsList = document.getElementById("notification-reports-list");
+        if(notifications.length != 0){
+                    const notificationBookingsList = document.getElementById("notification-reports-list");
         console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
@@ -76,6 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             notificationBookingsList.appendChild(li);
         });
+        }
+        else{
+            const notificationBookingsList = document.getElementById("notification-reports-list");
+            console.log(notificationBookingsList);
+            const li = document.createElement("li");
+            li.className = "notification";
+            li.innerHTML = `
+                <p>No notifications available</p>
+            `;
+            notificationBookingsList.appendChild(li);
+        }
     })
     .catch(error => {
        console.log("error while fetching notifications: "+ error)

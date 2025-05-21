@@ -69,11 +69,12 @@ class reportController {
         try {
             
             //retrieve id from request parameters
-            const id = req.params.id;
-            const status = req.params.status;
+           
+
+            const {id, status, facilitystaff_id} = req.params;
 
             //use retrieved id to find user using the service method
-            const report = await reportService.patchReportStatus(id,status);
+            const report = await reportService.patchReportStatus(id,status,facilitystaff_id);
 
             res.json({
                 success: true,

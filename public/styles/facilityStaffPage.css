@@ -94,7 +94,7 @@ tr:hover {
     width: 100%;
 }
 
-.not-started {
+.not_started {
     background-color: #f8d7da;
     color: #721c24;
 }

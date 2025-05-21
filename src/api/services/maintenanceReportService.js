@@ -8,7 +8,7 @@ class MaintenanceReportService {
     }
 
     async getRecentMaintenance() {
-        const query = `select name,description,status,created_date from "MaintenanceReport", "Facility"as f where facility_id = f.id order by case status WHEN 'open' THEN 1 WHEN 'inProgress' THEN 2 WHEN 'completed' THEN 3 ELSE 4 END`
+        const query = `select name,description,status,created_date from "MaintenanceReport", "Facility"as f where facility_id = f.id order by case status WHEN 'not_started' THEN 1 WHEN 'ongoing' THEN 2 WHEN 'completed' THEN 3 ELSE 4 END`
         const result = await data.query(query);
         return result.rows;
     }

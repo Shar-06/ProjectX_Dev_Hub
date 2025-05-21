@@ -15,7 +15,7 @@ class notificationService {
         const result = await data.query(query);
 
         if (result.rows.length === 0) {
-            throw new Error('Notification records not found');
+            return [];
         }
 
         return result.rows;
@@ -29,7 +29,7 @@ class notificationService {
         const result = await data.query(query);
 
         if (result.rows.length === 0) {
-            throw new Error('Notification records not found');
+            return [];
         }
 
         return result.rows;
