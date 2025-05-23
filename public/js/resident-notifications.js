@@ -86,10 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             li.innerHTML = `
                 <p>${notification.message} by user 
-                <strong>${notification.username}</strong> 
-                with user ID 
-                <strong >${notification.userid}</strong>.
-                </p>
+                <strong>${notification.username}</strong>
+                <p>
                 <time>${displayTime}</time>
             `;
             notificationBookingsList.appendChild(li);
@@ -138,10 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const displayTime = `${formattedDate} ${notification.timeslot}`;
 
             li.innerHTML = `
-                <p>${notification.message} that was issued by user 
+                <p>${notification.message} by user 
                 <strong>${notification.username}</strong> 
-                with user ID 
-                <strong >${notification.userid}</strong>.
                 </p>
                 <time>${displayTime}</time>
             `;

@@ -13,6 +13,29 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const googleSignUpBtn = document.getElementById('googleSignUp');
 
+function createNewUserNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "user-created";
+    const notificationMessage = "new user has registered";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+             if (!response.ok) throw new Error("Failed to create a register new user notification");
+                return response.json();
+        })
+        .then(() => {
+            alert("NEW USER: notification has been created")
+        })
+}
+
 const socket = io();
 
   socket.on('connect', function (){
@@ -29,6 +52,7 @@ googleSignUpBtn.addEventListener('click', () => {
       
       // The signed-in user info
       const user = result.user;
+      createNewUserNotification(user.uid,user.displayName);
       
       // Create a JSON object with the user details
       const userData = {
@@ -75,6 +99,7 @@ googleSignUpBtn.addEventListener('click', () => {
       .then(response => response.json())
       .then(data => {
           console.log('Success:', data);
+          
          // window.location.href = 'dashboard.html';
       })
       .catch((error) => {

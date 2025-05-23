@@ -48,7 +48,7 @@ class notificationController{
             const notification = await notificationService.postNewNotification(date, timeslot, status, message, userid, type, username);
             res.json({
                 success: true,
-                data: notification || []
+                data: notification
             });
         } catch (error) {
             next(error);

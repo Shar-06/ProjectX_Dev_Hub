@@ -65,21 +65,41 @@ aside.site-nav nav a[aria-current="page"] {
 }
 
 /* Header */
-header.page-header {
-    position: fixed;
-    top: 0;
-    left: 200px;
-    right: 0;
-    height: 60px;
-    background-color: #0b2143;
-    color: white;
-    display: flex;
-    align-items: center;
-    padding-left: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    z-index: 1;
-    border-bottom: 4px solid #0054A6;
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #0E2A55;
+color: white;
+padding: 40px 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+font-size: 2rem;
+font-weight: 500;
+color: #e6ecf2;
+}
+
+header nav ul {
+list-style: none;
+display: flex;
+gap: 1rem;
+}
+
+header nav ul li button {
+background-color: transparent;
+border: 1px solid #7CB342;
+color: white;
+padding: 0.5rem 1rem;
+border-radius: 4px;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+header nav ul li button:hover {
+background-color: #4a6d24;
+color: white;
 }
 
 /* User Profile */
@@ -96,7 +116,7 @@ section#user-profile figure {
     align-items: center;
     gap: 10px;
 }
-
+/*
 button.auth-button {
     background-color: #E64525;
     color: white;
@@ -109,11 +129,10 @@ button.auth-button {
 
 button.auth-button:hover {
     background-color: #cc3d1f;
-}
+}*/
 
 /* Main Content */
 main {
-    margin-left: 200px;
     padding: 2rem;
     padding-top: 80px;
     width: calc(100% - 200px);
@@ -122,8 +141,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    text-align: center;
 }
-
 main section {
     background-color: white;
     padding: 20px;
@@ -281,10 +300,10 @@ article.report-item {
         position: relative;
     }
 
-    header.page-header {
+    /*header.page-header {
         left: 0;
         width: 100%;
-    }
+    }*/
 
     main {
         margin-left: 0;

@@ -82,8 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
             li.innerHTML = `
                 <p>${notification.message} by user 
                 <strong>${notification.username}</strong> 
-                with user ID 
-                <strong >${notification.userid}</strong>.
                 </p>
                 <time>${displayTime}</time>
             `;

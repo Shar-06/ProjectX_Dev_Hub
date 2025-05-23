@@ -14,8 +14,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+function createUpdateReportNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "report-updated";
+    const notificationMessage = "maintenance report status has been updated";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+             if (!response.ok) throw new Error("Failed to create a maintenance report updated notification");
+                return response.json();
+        })
+        .then(() => {
+            alert("MAINTENANCE REPORT UPDATED: notification has been created")
+        })
+}
 
-async function loadIntoTable(url, table, currentStaffId) {
+async function loadIntoTable(url, table, currentStaffId, currentStaffUsername) {
     const tableHead = table.querySelector("thead");
     const tableBody = table.querySelector("tbody");
     tableHead.innerHTML = '';
@@ -140,6 +162,7 @@ async function loadIntoTable(url, table, currentStaffId) {
                     
                     // Show success notification
                     showNotification("Status updated successfully!", "success");
+                    createUpdateReportNotification(currentStaffId,currentStaffUsername);
                     
                 } catch (error) {
                     console.error("Error updating status:", error);
@@ -193,7 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const currentStaffUsername = displayName;
             const currentStaffId = uid;
-            loadIntoTable("/api/v1/reports/", document.getElementById("issuesTableBody"), currentStaffId);
+            loadIntoTable("/api/v1/reports/", document.getElementById("issuesTableBody"), currentStaffId,currentStaffUsername);
+            
             
             
             // ...
