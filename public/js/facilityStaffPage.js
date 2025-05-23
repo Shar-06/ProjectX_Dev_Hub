@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
@@ -217,9 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentStaffUsername = displayName;
             const currentStaffId = uid;
             loadIntoTable("/api/v1/reports/", document.getElementById("issuesTableBody"), currentStaffId,currentStaffUsername);
-            
-            
-            
             // ...
         } else {
             // User is signed out
@@ -227,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         });
 
-    
+    /*
     // Tab navigation functionality
     const maintenanceBtn = document.getElementById("maintenanceBtn");
     const trendsBtn = document.getElementById("trendsBtn");
@@ -246,5 +243,16 @@ document.addEventListener('DOMContentLoaded', () => {
         maintenanceBtn.classList.remove('active');
         trendsSection.classList.add('active');
         maintenanceSection.classList.remove('active');
+    });*/
+    const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                // Sign-out successful
+                window.location.href = '../html/LoginPage.html'; // Redirect to home page
+            }).catch((error) => {
+                // An error happened
+                console.error('Sign out error:', error);
+                alert('Failed to sign out. Please try again.');
+            });
     });
 });

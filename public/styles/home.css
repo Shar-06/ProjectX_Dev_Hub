@@ -11,46 +11,44 @@ body {
     background-color: #cfd2d7;
     flex-direction: column;
 }
-
-aside {
-    width: 200px;
-    background-color: #0b2143;
-    color: #fff;
-    padding: 1rem;
-    position: fixed;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-    z-index: 2;
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #0E2A55;
+color: white;
+padding: 40px 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-aside nav ul {
-    list-style: none;
-    padding-left: 0;
+header h1 {
+font-size: 2rem;
+font-weight: 500;
+color: #e6ecf2;
 }
 
-aside li {
-    margin-top: 1rem;
+header nav ul {
+list-style: none;
+display: flex;
+gap: 1rem;
 }
 
-aside nav button {
-    width: 100%;
-    background-color: #E64525;
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    text-align: left;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+header nav ul li button {
+background-color: transparent;
+border: 1px solid #7CB342;
+color: white;
+padding: 0.5rem 1rem;
+border-radius: 4px;
+cursor: pointer;
+transition: background 0.3s ease;
 }
 
-aside nav button:hover {
-    background-color: #cc3d1f;
+header nav ul li button:hover {
+background-color: #4a6d24;
+color: white;
 }
 
+/*
 header {
     position: fixed;
     top: 0;
@@ -66,7 +64,7 @@ header {
     font-weight: bold;
     z-index: 1;
     border-bottom: 4px solid #0054A6;
-}
+}*/
 
 main {
     margin-left: 200px;

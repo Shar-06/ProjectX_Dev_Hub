@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         signOutButton.addEventListener('click', () => {
             signOut(auth).then(() => {
                 // Sign-out successful
-                window.location.href = '../html/index.html'; // Redirect to home page
+                window.location.href = '../html/LoginPage.html'; // Redirect to home page
             }).catch((error) => {
                 // An error happened
                 console.error('Sign out error:', error);
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sign in redirect
     if (signInButton) {
         signInButton.addEventListener('click', () => {
-            window.location.href = '../html/index.html'; // Redirect to home/login page
+            window.location.href = '../html/LoginPage.html'; // Redirect to home/login page
         });
     }
 
