@@ -1,6 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
     authDomain: "login-c94f8.firebaseapp.com",
@@ -115,6 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Submit new maintenance report
     async function submitMaintenanceReport(reportData) {
         try {
+            const errorContatiner = document.getElementById("main-content");
+
             // Show loading state
             //const submitButton = maintenanceForm.querySelector('button[type="submit"]');
             //const originalButtonText = submitButton.textContent;
@@ -143,29 +147,34 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (result.success) {
                 // Show success message
-                const successMessage = document.createElement('div');
+                /*const successMessage = document.createElement('div');
                 successMessage.className = 'success-message';
                 successMessage.textContent = 'Maintenance report submitted successfully!';
-                maintenanceForm.appendChild(successMessage);
+                errorContatiner.appendChild(successMessage);*/
                 
+                showToast('Maintenance report submitted successfully!', 'success');
+
                 // Remove success message after a few seconds
                 setTimeout(() => {
                     successMessage.remove();
                 }, 5000);
                 
-                maintenanceForm.reset();
+                //maintenanceForm.reset();
                 loadMaintenanceReports(); // Refresh the reports list
             } else {
                 throw new Error(result.message || 'Failed to submit report');
             }
         } catch (error) {
             console.error('Error submitting maintenance report:', error);
-            
+        
             // Show error message
-            const errorMessage = document.createElement('div');
+            /*const errorMessage = document.createElement('div');
             errorMessage.className = 'error-message';
             errorMessage.textContent = `Failed to submit maintenance report: ${error.message}`;
-            maintenanceForm.appendChild(errorMessage);
+            errorContatiner.appendChild(errorMessage);*/
+            
+            showToast(`Failed to submit maintenance report: ${error.message}`, 'error');
+
             
             // Remove error message after a few seconds
             setTimeout(() => {
@@ -260,3 +269,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type} show`;
+    toast.textContent = message;
+
+    container.appendChild(toast);
+
+    // Remove the toast after 5 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 5000);
+}
