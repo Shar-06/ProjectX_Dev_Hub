@@ -158,4 +158,21 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(error => {
        console.log("error while fetching notifications: "+ error)
     })
+    const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            //clear session data
+            localStorage.clear();
+            sessionStorage.clear();
+            document.cookie.split(";").forEach(cookie => {
+                document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+            // Sign-out successful
+            window.location.href = '../html/LoginPage.html'; // Redirect to home page
+            }).catch((error) => {
+                // An error happened
+                console.error('Sign out error:', error);
+                alert('Failed to sign out. Please try again.');
+            });
+        });
 });

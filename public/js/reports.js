@@ -294,6 +294,12 @@ document.addEventListener('DOMContentLoaded', () => {
         signOutButton.addEventListener('click', async () => {
             try {
                 await signOut(auth);
+                 //clear session data
+                localStorage.clear();
+                sessionStorage.clear();
+                document.cookie.split(";").forEach(cookie => {
+                    document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                });
                 window.location.href = '../html/LoginPage.html';
             } catch (error) {
                 console.error('Sign out error:', error);

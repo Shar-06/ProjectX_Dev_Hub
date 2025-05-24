@@ -1,6 +1,6 @@
 // script.js - Sports Facility Booking System
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
@@ -302,6 +302,12 @@ bookingForm.addEventListener('submit', async (e) => {
      const signOutButton = document.getElementById('sign-out-button');
     signOutButton.addEventListener('click', () => {
         signOut(auth).then(() => {
+             //clear session data
+            localStorage.clear();
+            sessionStorage.clear();
+            document.cookie.split(";").forEach(cookie => {
+                document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
             // Sign-out successful
             window.location.href = '../html/LoginPage.html'; // Redirect to home page
         }).catch((error) => {
