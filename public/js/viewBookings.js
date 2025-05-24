@@ -43,10 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Facility name mapping
     const facilityNames = {
-        'soccer-field': 'Soccer Field',
-        'swimming-pool': 'Swimming Pool',
-        'basketball-court': 'Basketball Court',
-        'gymnasium': 'Gymnasium'
+        1: 'Gymnasium',
+        2: 'Swimming Pool',
+        3: 'Soccer Field',
+        4: 'Basketball Court'
     };
 
     // Set minimum date to today for filter
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Create time cell
             const timeCell = document.createElement('td');
-            timeCell.textContent = formatTimeForDisplay(booking.time);
+            timeCell.textContent = formatTimeForDisplay(booking.timeslot);
             row.appendChild(timeCell);
             
             // Create status cell
