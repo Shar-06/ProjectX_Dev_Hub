@@ -36,11 +36,6 @@ function createNewUserNotification(currentUserid, currentUsername){
         })
 }
 
-const socket = io();
-
-  socket.on('connect', function (){
-  console.log(`Connected to server from Registration page`);
-      });
 
 // Google Sign Up
 googleSignUpBtn.addEventListener('click', () => {
@@ -71,16 +66,6 @@ googleSignUpBtn.addEventListener('click', () => {
       };
 
       console.log('User signed up successfully:', userData);
-
-      socket.emit('createNewUser', {
-            from: user.displayName,
-            text: user.email,
-            createdAt: new Date().toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              })
-      });
       
       // You can now:
       // 1. Log the complete user object to console

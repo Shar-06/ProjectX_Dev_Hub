@@ -4,8 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const { containerClient } = require('./src/config/azureStorage.js');
 require('dotenv').config();
-const http = require("http");
-const socketIO = require("socket.io");
+
 
 
 const userRouter = require('./src/api/routes/user.routes.js');
