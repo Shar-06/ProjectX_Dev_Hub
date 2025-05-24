@@ -15,6 +15,7 @@ const auth = getAuth(app);
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
+    const submitBtn = document.querySelector(".submit-button");
     const maintenanceForm = document.getElementById('maintenance-form');
     const filterForm = document.getElementById('filter-form');
     const reportsList = document.getElementById('reports-list');
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Convert filters to query string
             const queryString = new URLSearchParams(filters).toString();
-            const response = await fetch(`/api/v1/maintenance?${queryString}`);
+            const response = await fetch(`/api/v1/reports`);
             
             if (!response.ok) {
                 throw new Error('Failed to fetch maintenance reports');
@@ -115,11 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
     async function submitMaintenanceReport(reportData) {
         try {
             // Show loading state
-            const submitButton = maintenanceForm.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
+            //const submitButton = maintenanceForm.querySelector('button[type="submit"]');
+            //const originalButtonText = submitButton.textContent;
+            //submitButton.disabled = true;
+            //submitButton.textContent = 'Submitting...';
             
+            console.log(reportData);
             const response = await fetch('/api/v1/reports/postReport', { 
                 method: 'POST',
                 headers: {
@@ -129,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             // Reset button state
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
+            //submitButton.disabled = false;
+            //submitButton.textContent = originalButtonText;
             
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
@@ -201,32 +203,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    
     // Handle form submission
-    if (maintenanceForm) {
-        maintenanceForm.addEventListener('submit', async (e) => {
+    //if (maintenanceForm) {
+        submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             
             // Get current user from Firebase Auth
             const user = auth.currentUser;
-            
-            if (!user) {
-                alert('You must be logged in to submit a report');
-                return;
-            }
-            
             const facility = document.getElementById('facility').value;
             const description = document.getElementById('description').value.trim();
             
             const reportData = {
-                facility: facility,
+                facility_id: facility,
                 description: description,
-                resident: user.uid,
-                status: 'not-started'
+                resident_id: user.uid
             };
             
             await submitMaintenanceReport(reportData);
         });
-    }
+    //}
 
     // Handle filter form submission
     if (filterForm) {

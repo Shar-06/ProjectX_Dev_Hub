@@ -24,13 +24,15 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "node-mocks-http": "^1.16.2",
     "supertest": "^7.1.0"
   },
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.{js,ts}"
+      "src/**/*.{js,ts}",
+      "public/js/*.{js,ts}"
     ],
     "coverageDirectory": "coverage",
     "testEnvironment": "node"

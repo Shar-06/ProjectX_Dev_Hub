@@ -26,69 +26,6 @@ button.addEventListener('click', () => {
 });
 });
 
-// CSV Export Logic
-/*document.getElementById('export-csv').addEventListener('click', function () {
-    try {
-        const iframe = document.querySelector('.tab-iframe:not(.hidden)');
-        if (!iframe) throw new Error('No visible iframe found.');
-
-        // Access iframe's document
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        if (!iframeDoc) throw new Error('Cannot access iframe document.');
-
-        // Select the table inside iframe by ID (adjust if different)
-        const table = iframeDoc.querySelector('#data-table');
-        if (!table) throw new Error('Table with ID "data-table" not found in iframe.');
-
-        // Extract headers
-        const headers = Array.from(table.querySelectorAll('thead th'))
-            .map(th => th.textContent.trim());
-
-        // Extract rows
-        const rows = Array.from(table.querySelectorAll('tbody tr'))
-            .map(tr => Array.from(tr.querySelectorAll('td'))
-                .map(td => td.textContent.trim())
-            );
-
-        // Combine headers + rows
-        const allRows = [headers, ...rows];
-
-        // Convert to CSV string with proper escaping
-        const csvContent = allRows.map(row => 
-            row.map(cell => {
-                if (cell == null) return '';
-                const cellStr = String(cell);
-                if (cellStr.includes('"')) {
-                    return `"${cellStr.replace(/"/g, '""')}"`;
-                } else if (cellStr.includes(',') || cellStr.includes('\n') || cellStr.includes('\r')) {
-                    return `"${cellStr}"`;
-                } else {
-                    return cellStr;
-                }
-            }).join(',')
-        ).join('\n');
-
-        // Create blob and trigger download
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'report.csv';
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        URL.revokeObjectURL(url);
-
-    } catch (error) {
-        alert('CSV export failed while reading iframe table.');
-        console.error(error);
-    }
-});*/
-
-
 
 // PDF Export Logic
 document.getElementById('export-pdf').addEventListener('click', async function () {

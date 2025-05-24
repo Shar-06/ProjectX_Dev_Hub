@@ -25,7 +25,7 @@ class reportController {
             //retrieve id from request parameters
             const id = req.params.id;
 
-            //use retrieved id to find brand using the service method
+            //use retrieved id to find brand 
             const report = await reportService.getReportByID(id);
 
             res.json({
@@ -89,9 +89,9 @@ class reportController {
     async postNewReport(req, res, next) {
         try {
             
-            const {facility_id,resident_id,description,date} = req.body;
+            const {facility_id,resident_id,description} = req.body;
             
-            const report = await reportService.postNewReport(facility_id,resident_id,description,date);
+            const report = await reportService.postNewReport(facility_id,resident_id,description);
 
             res.json({
                 success: true,

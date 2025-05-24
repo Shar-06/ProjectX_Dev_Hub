@@ -40,15 +40,11 @@ class reportService {
         return result.rows;
     }
 
-    async postNewReport(facility_id, resident_id, description, date) {
-        const created_date = new Date();  // Use the current timestamp for created_date
-        const completed_date = null;  // You can set this to null by default
-
+    async postNewReport(facility_id, resident_id, description) {
+        const created_date = moment().format('YYYY-MM-DD');
         const query = {
-            text: `INSERT INTO "MaintenanceReport" 
-                   (status, facility_id, resident_id, description, created_date, completed_date) 
-                   VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-            values: ["Pending", facility_id, resident_id, description, created_date, completed_date]
+            text: `Insert into "MaintenanceReport" (status,facility_id,resident_id,description,created_date) values ($1,$2,$3,$4,$5) returning *`,
+            values: ['Pending', facility_id, resident_id, description, created_date]
         };
 
         try {
