@@ -49,6 +49,7 @@ button {
     transition: var(--transition);
 }
 
+
 /* Header styles 
 .site-header {
     background-color: var(--primary-color);
@@ -409,6 +410,9 @@ button[type="reset"]:hover {
     .site-header nav ul {
         flex-direction: column;
         gap: 0.5rem;
+    }
+    .upcoming-events-section .events {
+        justify-content: center;
     }
     
     #user-profile {

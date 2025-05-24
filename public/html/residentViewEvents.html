@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Events</title>
+        <link rel="stylesheet" href="../styles/residentViewEvents.css">
+        <script src="../js/residentViewEvents.js" type="module"></script>
+    </head>
+
+    <body>
+        <header>
+        <h1>Resident Management Dashboard</h1>
+        <nav >
+            <ul>
+                <li><button onclick="window.location.href='../html/bookingPage.html'">Home</button></li>
+                <li><button onclick="window.location.href='../html/residentViewEvents.html'">Events</button></li>
+                <li><button onclick="window.location.href='../html/myBookings.html'" aria-current="page">My Bookings</button></li>
+                <li><button onclick="window.location.href='../html/reports.html'">Maintenance Reports</button></li>
+                <li><button onclick="window.location.href='../html/resident-notification.html'">Notifications</button></li>
+                <li><button id="sign-out-button" class="auth-button">Sign out</button></il>
+            </ul>
+        </nav>
+    </header>
+
+        <main>
+            <section aria-label="upcoming-events" class="upcoming-events-section">
+                <h2>Upcoming Events</h2>
+                <article class="events">
+
+                </article>
+            </section>
+        </main>
+    </body>
+</html>

@@ -13,15 +13,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
-    const submitBtn = document.querySelector(".submit-button");
-    const maintenanceForm = document.getElementById('maintenance-form');
+    // DOM Elements - Updated to match HTML structure
+    const reportForm = document.getElementById('report-form');
     const filterForm = document.getElementById('filter-form');
-    const reportsList = document.getElementById('reports-list');
-    const noReportsMessage = document.getElementById('no-reports-message');
+    const reportsTableBody = document.getElementById('reports-tbody');
     const signOutButton = document.getElementById('sign-out-button');
-    const userNameElement = document.getElementById('user-name');
+    
+    // Store all reports and filtered reports
+    let allReports = [];
+    let filteredReports = [];
     
     // Format date for display
     function formatDateForDisplay(dateString) {
@@ -32,54 +35,66 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get facility name by ID
     function getFacilityNameById(id) {
         const facilities = {
-            'soccer-field': 'Soccer Field',
-            'swimming-pool': 'Swimming Pool',
-            'basketball-court': 'Basketball Court',
-            'gymnasium': 'Gymnasium'
+            '1': 'Gymnasium',
+            '2': 'Swimming Pool', 
+            '3': 'Soccer Field',
+            '4': 'Basketball Court'
         };
         return facilities[id] || 'Unknown Facility';
     }
 
-    // Create a report card element
-    function createReportCard(report) {
-        const article = document.createElement('article');
-        article.className = 'report-card';
-        article.dataset.reportId = report.id;
-        
-        const statusClass = report.status.toLowerCase().replace(' ', '-');
-        const urgencyClass = report.urgency || 'unknown';
-        
-        article.innerHTML = `
-            <header>
-                <h3>${getFacilityNameById(report.facility_id)}</h3>
-                <p class="report-status ${statusClass}">${report.status}</p>
-                <p class="report-urgency ${urgencyClass}">${urgencyClass} priority</p>
-            </header>
-            <section class="report-details">
-                <p><strong>Reported:</strong> ${formatDateForDisplay(report.reported_at)}</p>
-                <p><strong>Issue:</strong> ${report.issue_type}</p>
-                <p><strong>Description:</strong> ${report.description}</p>
-                ${report.status_update ? `<p><strong>Update:</strong> ${report.status_update}</p>` : ''}
-            </section>
-            ${report.status !== 'resolved' ? `
-            <footer>
-                <button class="update-button" data-action="in-progress">Mark In Progress</button>
-                <button class="update-button" data-action="resolved">Mark Resolved</button>
-            </footer>
-            ` : ''}
-        `;
-        
-        return article;
+    // Function to create status badge HTML
+    function createStatusBadge(status) {
+        const statusText = status.replace('_', ' ');
+        return `<span class="status-badge status-${status}">${statusText}</span>`;
     }
 
-    // Load maintenance reports
+    // Function to render reports table
+    function renderReportsTable(reports) {
+        const tbody = document.getElementById('reports-tbody');
+        
+        if (reports.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="loading">No reports found matching the selected criteria.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = reports.map(report => `
+            <tr>
+                <td>${report.id}</td>
+                <td>${report.description}</td>
+                <td>${report.facility}</td>
+                <td>${createStatusBadge(report.status)}</td>
+                <td>${ report.user || 'Unknown'}</td>
+            </tr>
+        `).join('');
+    }
+
+    // Function to apply filters
+    function applyFilters() {
+        const statusFilter = document.getElementById('status').value;
+        
+        filteredReports = allReports.filter(report => {
+            if (statusFilter && report.status !== statusFilter) {
+                return false;
+            }
+            return true;
+        });
+        
+        renderReportsTable(filteredReports);
+    }
+
+    // Load maintenance reports from API
     async function loadMaintenanceReports(filters = {}) {
         try {
-            noReportsMessage.textContent = 'Loading maintenance reports...';
+            // Show loading state
+            const tbody = document.getElementById('reports-tbody');
+            tbody.innerHTML = '<tr><td colspan="5" class="loading">Loading maintenance reports...</td></tr>';
             
-            // Convert filters to query string
+            // Convert filters to query string if needed
             const queryString = new URLSearchParams(filters).toString();
-            const response = await fetch(`/api/v1/reports`);
+            const url = queryString ? `/api/v1/reports?${queryString}` : '/api/v1/reports';
+            
+            const response = await fetch(url);
             
             if (!response.ok) {
                 throw new Error('Failed to fetch maintenance reports');
@@ -88,40 +103,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
             
             if (result.success && result.data && result.data.length > 0) {
-                noReportsMessage.hidden = true;
-                reportsList.innerHTML = '';
-                
-                result.data.forEach(report => {
-                    const card = createReportCard(report);
-                    reportsList.appendChild(card);
-                    
-                    // Add event listeners to update buttons
-                    const updateButtons = card.querySelectorAll('.update-button');
-                    updateButtons.forEach(button => {
-                        button.addEventListener('click', () => updateReportStatus(report.id, button.dataset.action, card));
-                    });
-                });
+                allReports = result.data;
+                filteredReports = [...allReports];
+                renderReportsTable(filteredReports);
             } else {
-                noReportsMessage.textContent = 'No maintenance reports found.';
-                noReportsMessage.hidden = false;
+                allReports = [];
+                filteredReports = [];
+                tbody.innerHTML = '<tr><td colspan="5" class="loading">No maintenance reports found.</td></tr>';
             }
         } catch (error) {
             console.error('Error loading maintenance reports:', error);
-            noReportsMessage.textContent = 'Failed to load maintenance reports. Please try again later.';
-            noReportsMessage.hidden = false;
+            const tbody = document.getElementById('reports-tbody');
+            tbody.innerHTML = '<tr><td colspan="5" class="loading">Failed to load maintenance reports. Please try again later.</td></tr>';
         }
     }
 
     // Submit new maintenance report
     async function submitMaintenanceReport(reportData) {
         try {
-            // Show loading state
-            //const submitButton = maintenanceForm.querySelector('button[type="submit"]');
-            //const originalButtonText = submitButton.textContent;
-            //submitButton.disabled = true;
-            //submitButton.textContent = 'Submitting...';
+            // Show loading state on button
+            const submitButton = reportForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
             
-            console.log(reportData);
+            console.log('Submitting report data:', reportData);
+            
             const response = await fetch('/api/v1/reports/postReport', { 
                 method: 'POST',
                 headers: {
@@ -131,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             // Reset button state
-            //submitButton.disabled = false;
-            //submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
             
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
@@ -143,39 +150,24 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (result.success) {
                 // Show success message
-                const successMessage = document.createElement('div');
-                successMessage.className = 'success-message';
-                successMessage.textContent = 'Maintenance report submitted successfully!';
-                maintenanceForm.appendChild(successMessage);
+                alert(`Report submitted successfully! Report ID: #${result.data?.id || 'N/A'}`);
                 
-                // Remove success message after a few seconds
-                setTimeout(() => {
-                    successMessage.remove();
-                }, 5000);
+                // Reset form
+                reportForm.reset();
                 
-                maintenanceForm.reset();
-                loadMaintenanceReports(); // Refresh the reports list
+                // Refresh the reports list
+                await loadMaintenanceReports();
             } else {
                 throw new Error(result.message || 'Failed to submit report');
             }
         } catch (error) {
             console.error('Error submitting maintenance report:', error);
-            
-            // Show error message
-            const errorMessage = document.createElement('div');
-            errorMessage.className = 'error-message';
-            errorMessage.textContent = `Failed to submit maintenance report: ${error.message}`;
-            maintenanceForm.appendChild(errorMessage);
-            
-            // Remove error message after a few seconds
-            setTimeout(() => {
-                errorMessage.remove();
-            }, 5000);
+            alert(`Failed to submit maintenance report: ${error.message}`);
         }
     }
 
-    // Update report status
-    async function updateReportStatus(reportId, action, cardElement) {
+    // Update report status (for staff/admin functionality)
+    async function updateReportStatus(reportId, action) {
         try {
             const response = await fetch(`/api/v1/maintenance/${reportId}`, {
                 method: 'PATCH',
@@ -193,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (result.success) {
                 alert('Report status updated successfully!');
-                loadMaintenanceReports(); // Refresh the reports list
+                await loadMaintenanceReports(); // Refresh the reports list
             } else {
                 throw new Error(result.message || 'Failed to update report');
             }
@@ -203,16 +195,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
-    // Handle form submission
-    //if (maintenanceForm) {
-        submitBtn.addEventListener('click', async (e) => {
+    // Handle report form submission
+    if (reportForm) {
+        reportForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             // Get current user from Firebase Auth
             const user = auth.currentUser;
-            const facility = document.getElementById('facility').value;
-            const description = document.getElementById('description').value.trim();
+            if (!user) {
+                alert('You must be logged in to submit a report.');
+                return;
+            }
+            
+            // Get form data
+            const formData = new FormData(reportForm);
+            const facility = formData.get('facility');
+            const description = formData.get('description')?.trim();
+            
+            // Validate required fields
+            if (!facility || !description) {
+                alert('Please fill in all required fields.');
+                return;
+            }
             
             const reportData = {
                 facility_id: facility,
@@ -222,41 +226,71 @@ document.addEventListener('DOMContentLoaded', () => {
             
             await submitMaintenanceReport(reportData);
         });
-    //}
+    }
 
     // Handle filter form submission
     if (filterForm) {
         filterForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const formData = new FormData(filterForm);
-            const filters = {
-                status: formData.get('status'),
-                facility: formData.get('facility')
-            };
-            loadMaintenanceReports(filters);
+            applyFilters();
+        });
+    }
+
+    // Handle staff feedback form submission (if present)
+    const feedbackForm = document.getElementById('feedback-form');
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(feedbackForm);
+            const reportId = formData.get('report_id');
+            const status = formData.get('status');
+            
+            if (reportId && status) {
+                await updateReportStatus(reportId, status);
+                feedbackForm.reset();
+            } else {
+                alert('Please select a report and status.');
+            }
         });
     }
 
     // Handle sign out
     if (signOutButton) {
-        signOutButton.addEventListener('click', () => {
-            signOut(auth).then(() => {
-                window.location.href = '../index.html';
-            }).catch((error) => {
+        signOutButton.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                window.location.href = '../html/LoginPage.html';
+            } catch (error) {
                 console.error('Sign out error:', error);
-            });
+                alert('Failed to sign out. Please try again.');
+            }
         });
     }
 
-    // Check auth state and load reports
+    // Check auth state and initialize
     onAuthStateChanged(auth, (user) => {
         if (user) {
+            // Set user info if elements exist
+            const userNameElement = document.getElementById('user-name');
             if (userNameElement) {
                 userNameElement.textContent = user.displayName || user.email;
             }
+            
+            // Set resident ID in hidden field
+            const residentIdField = document.getElementById('resident-id');
+            if (residentIdField) {
+                residentIdField.value = user.uid;
+            }
+            
+            // Load maintenance reports
             loadMaintenanceReports();
         } else {
+            // Redirect to login if not authenticated
             window.location.href = '../index.html';
         }
     });
+
+    // Initialize filters on page load
+    document.getElementById('status').addEventListener('change', applyFilters);
 });

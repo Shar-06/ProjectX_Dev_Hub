@@ -8,38 +8,14 @@
     <link rel="stylesheet" href="../styles/bookingPage.css">
 </head>
 <body>
-    <!--<aside class="site-nav">
-        <h1>Sports Facility</h1>
-        <nav aria-label="Primary navigation">
-            <ul>
-                <li><a href="../html/home.html">Home</a></li>
-                <li><a href="../html/bookingPage.html">Our Facilities</a></li>
-                <li><a href="#" aria-current="page">My Bookings</a></li>
-                <li><a href="../html/reports.html">Maintenance Reports</a></li>
-            </ul>
-        </nav>
-    </aside>
-
-    <header class="page-header">
-        Community Sports Facility
-        
-        <section id="user-profile" hidden aria-label="User profile">
-            <figure>
-                <img id="user-avatar" hidden alt="User profile picture">
-                <figcaption>
-                    <p id="user-name"></p>
-                </figcaption>
-            </figure>
-            <button id="sign-out-button" class="auth-button">Sign out</button>
-        </section>
-    </header>-->
+   
     <header class="site-nav">
         <h1>Resident Management Dashboard</h1>
         <nav >
             <ul>
-                <li><button onclick="window.location.href='../html/home.html'">Home</button></li>
-                <li><button onclick="window.location.href='../html/bookingPage.html'">Our Facilities</button></li>
-                <li><button onclick="window.location.href='../html/myBookings.html'" aria-current="page">My Bookings</button></li>
+                <li><button onclick="window.location.href='../html/bookingPage.html'">Home</button></li>
+                <li><button onclick="window.location.href='../html/residentViewEvents.html'">Events</button></li>
+                <li><button onclick="window.location.href='../html/myBookings.html'">My Bookings</button></li>
                 <li><button onclick="window.location.href='../html/reports.html'">Maintenance Reports</button></li>
                 <li><button onclick="window.location.href='../html/resident-notification.html'">Notifications</button></li>
                 <li><button id="sign-out-button" class="auth-button">Sign out</button></il>
@@ -48,6 +24,7 @@
     </header>
 
     <main id="main-content">
+
         <section id="bookings-section" aria-labelledby="bookings-heading">
             <h2 id="bookings-heading">Your Bookings</h2>
             
@@ -134,5 +111,6 @@
     </footer>
 
     <script src="../js/viewBookings.js" type="module"></script>
+   
 </body>
 </html>
