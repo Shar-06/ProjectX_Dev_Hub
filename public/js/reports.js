@@ -15,7 +15,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+function createReportNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "report-created";
+    const notificationMessage = "new maintenance report has been created";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+            
+             if (!response.ok) throw new Error("Failed to create a facility issue report created notification");
+                return response.json();
 
+        })
+        .then(() => {
+            alert("FACILITY ISSUE REPORTED: notification has been created")
+        })
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements - Updated to match HTML structure
@@ -142,7 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reset button state
             submitButton.disabled = false;
             submitButton.textContent = originalButtonText;
-            
+             if(response.ok){
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        createReportNotification(user.uid,user.displayName);
+                    } else {
+                        // Redirect to login if not authenticated
+                        window.location.href = '../html/LoginPage.html';
+                    }
+                });
+             }
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
                 throw new Error(errorData.message || `Server error: ${response.status}`);
@@ -273,23 +305,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check auth state and initialize
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // Set user info if elements exist
-            const userNameElement = document.getElementById('user-name');
-            if (userNameElement) {
-                userNameElement.textContent = user.displayName || user.email;
-            }
-            
-            // Set resident ID in hidden field
-            const residentIdField = document.getElementById('resident-id');
-            if (residentIdField) {
-                residentIdField.value = user.uid;
-            }
-            
-            // Load maintenance reports
+    
             loadMaintenanceReports();
         } else {
             // Redirect to login if not authenticated
-            window.location.href = '../index.html';
+            window.location.href = '../html/LoginPage.html';
         }
     });
 
