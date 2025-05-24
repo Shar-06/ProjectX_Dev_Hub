@@ -3,7 +3,7 @@ const data = require('../../config/database');
 class reportService {
 
     async getAllReports() {
-        const query = 'SELECT m.id,description,status,u.name as user,f.name as facility FROM "MaintenanceReport" as m, "User" as u, "Facility" as f WHERE m.resident_id = u.id AND facility_id = f.id ORDER BY created_date ASC;';
+        const query = `SELECT m.id,description,status,u.name as user,f.name as facility FROM "MaintenanceReport" as m, "User" as u, "Facility" as f WHERE m.resident_id = u.id AND facility_id = f.id ORDER BY case status WHEN 'not_started' THEN 1 WHEN 'ongoing' THEN 2 WHEN 'completed' THEN 3 ELSE 4 END`;
         const result = await data.query(query);
         return result.rows;
     }

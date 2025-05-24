@@ -1,3 +1,18 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
+    authDomain: "login-c94f8.firebaseapp.com",
+    projectId: "login-c94f8",
+    storageBucket: "login-c94f8.firebasestorage.app",
+    messagingSenderId: "277803117358",
+    appId: "1:277803117358:web:6d2f387bff41859bf3e8bf"
+  };
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 document.addEventListener('DOMContentLoaded', async () => {
     const eventsContainer = document.querySelector('.events');
@@ -37,6 +52,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching events:', error);
         eventsContainer.textContent = 'An error occurred loading events.';
     }
+
+    const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = '../html/LoginPage.html'; // Redirect to home page
+        }).catch((error) => {
+            // An error happened
+            console.error('Sign out error:', error);
+            alert('Failed to sign out. Please try again.');
+        });
+    });
 });
 
 function showModal(event) {

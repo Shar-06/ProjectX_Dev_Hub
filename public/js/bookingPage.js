@@ -299,7 +299,16 @@ bookingForm.addEventListener('submit', async (e) => {
         });
     }
 
-    // Logged-in user data
+     const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = '../html/LoginPage.html'; // Redirect to home page
+        }).catch((error) => {
+            // An error happened
+            console.error('Sign out error:', error);
+            alert('Failed to sign out. Please try again.');
+        });
+    });
     
-
 });

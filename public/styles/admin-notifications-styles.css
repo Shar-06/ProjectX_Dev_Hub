@@ -1,116 +1,252 @@
+/* Global Styles */
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background-color: #cfd2d7;
-color: #0E2A55;
-line-height: 1.6;
-overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #cfd2d7;
+    color: #0E2A55;
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
+/* Header */
 header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-background-color: #0E2A55;
-color: white;
-padding: 40px 20px;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0E2A55;
+    color: white;
+    padding: 40px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-font-size: 2rem;
-font-weight: 500;
-color: #e6ecf2;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #e6ecf2;
 }
 
 header nav ul {
-list-style: none;
-display: flex;
-gap: 1rem;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin: 0;
 }
 
 header nav ul li button {
-background-color: transparent;
-border: 1px solid #7CB342;
-color: white;
-padding: 0.5rem 1rem;
-border-radius: 4px;
-cursor: pointer;
-transition: background 0.3s ease;
+    background-color: transparent;
+    border: 1px solid #7CB342;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
 }
 
 header nav ul li button:hover {
-background-color: #4a6d24;
-color: white;
+    background-color: #4a6d24;
+    color: white;
 }
 
+/* Main Content */
 main {
-padding: 2rem;
-padding-top: 80px;
-width: 100%;
-overflow-y: auto;
-flex-grow: 1;
-display: flex;
-flex-direction: column;
-gap: 20px;
+    padding: 2rem;
+    width: 100%;
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
+/* Notification Sections */
 .assign-role-notification-section,
 .new-booking-notification-section {
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-gap: 20px;
-background-color: white;
-padding: 20px;
-border-radius: 8px;
-width: 100%;
-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .assign-role-notification-section h2,
 .new-booking-notification-section h2 {
-font-size: 1.3rem;
-color: #0E2A55;
-margin-bottom: 1rem;
-border-bottom: 2px solid #ccc;
-padding-bottom: 5px;
+    font-size: 1.5rem;
+    color: #0E2A55;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #7CB342;
+    padding-bottom: 8px;
+    font-weight: 600;
 }
 
+/* Notification List */
 .notification-list {
-list-style: none;
-padding-left: 0;
-display: flex;
-flex-direction: column;
-gap: 16px;
-width: 100%;
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
 }
 
 .notification {
-background-color: #f4f6f9;
-padding: 15px 20px;
-border-left: 4px solid #E64525;
-border-radius: 6px;
-transition: background-color 0.3s ease;
-width: 100%;
+    background-color: #f8f9fa;
+    padding: 18px 20px;
+    border-left: 4px solid #E64525;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .notification:hover {
-background-color: #eef0f3;
+    background-color: #e9ecef;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .notification p {
-font-size: 1rem;
-color: #333;
-margin-bottom: 8px;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
 .notification time {
-font-size: 0.85rem;
-color: #666;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Empty State */
+.notification-list:empty::after {
+    content: "No notifications at this time.";
+    display: block;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px dashed #ccc;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    header nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    header nav ul li button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+
+    .assign-role-notification-section,
+    .new-booking-notification-section {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .assign-role-notification-section h2,
+    .new-booking-notification-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .notification {
+        padding: 15px;
+    }
+
+    .notification p {
+        font-size: 0.95rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    header nav ul li button {
+        width: 100%;
+        text-align: center;
+        padding: 0.6rem 1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .assign-role-notification-section,
+    .new-booking-notification-section {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .assign-role-notification-section h2,
+    .new-booking-notification-section h2 {
+        font-size: 1.2rem;
+        padding-bottom: 6px;
+    }
+
+    .notification {
+        padding: 12px 15px;
+    }
+
+    .notification p {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+
+    .notification time {
+        font-size: 0.8rem;
+    }
+
+    .notification:hover {
+        transform: translateX(2px);
+    }
 }

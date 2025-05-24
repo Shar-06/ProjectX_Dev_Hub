@@ -5,6 +5,10 @@
     --accent: #0E2A55;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -18,75 +22,46 @@ main {
     margin: 0 auto;
     padding: 20px;
 }
-/*
-header {
-    background-color: var(--accent);
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
 
-nav {
+/* Header - keeping exact original design */
+header {
     display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.nav-btn {
-    background-color: var(--accent);
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0E2A55;
     color: white;
-    border: none;
-    padding: 12px 24px;
-    margin: 0 10px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-.nav-btn:hover {
-    background-color: var(--secondary);
-}
-
-.nav-btn.active {
-    background-color: var(--secondary);
-}*/
-
-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-background-color: #0E2A55;
-color: white;
-padding: 40px 20px;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-font-size: 2rem;
-font-weight: 500;
-color: #e6ecf2;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #e6ecf2;
+    margin: 0;
 }
 
 header nav ul {
-list-style: none;
-display: flex;
-gap: 1rem;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
 }
 
 header nav ul li button {
-background-color: transparent;
-border: 1px solid #7CB342;
-color: white;
-padding: 0.5rem 1rem;
-border-radius: 4px;
-cursor: pointer;
-transition: background 0.3s ease;
+    background-color: transparent;
+    border: 1px solid #7CB342;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 header nav ul li button:hover {
-background-color: #4a6d24;
-color: white;
+    background-color: #4a6d24;
+    color: white;
 }
 
 .content-section {
@@ -203,7 +178,7 @@ tr:hover {
     display: inline-block;
 }
 
-/* New styles for filter controls */
+/* Filter controls */
 .filter-controls, .dashboard-controls {
     display: flex;
     justify-content: space-between;
@@ -228,7 +203,7 @@ tr:hover {
     font-family: inherit;
 }
 
-/* Style for update button */
+/* Update button */
 .update-btn {
     padding: 8px 12px;
     background-color: var(--accent);
@@ -250,18 +225,288 @@ tr:hover {
     cursor: not-allowed;
 }
 
-/* Responsive styles */
+/* Responsive Design */
+@media (max-width: 1200px) {
+    main {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 20px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    header nav ul {
+        justify-content: center;
+    }
+    
+    main {
+        padding: 15px;
+    }
+    
+    .filter-controls, .dashboard-controls {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .filter-select {
+        min-width: 120px;
+    }
+}
+
 @media (max-width: 768px) {
+    header {
+        padding: 25px 15px;
+    }
+    
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    header nav ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    header nav ul li button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    main {
+        padding: 10px;
+    }
+    
+    .content-section {
+        padding: 15px;
+    }
+    
     .filter-controls, .dashboard-controls {
         flex-direction: column;
+        gap: 10px;
     }
     
     .search-input, .filter-select {
         width: 100%;
+        min-width: unset;
+    }
+    
+    table {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+    
+    th, td {
+        padding: 10px 8px;
+        min-width: 100px;
+    }
+    
+    .status-badge {
+        min-width: 80px;
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    
+    .chart-container {
+        height: 300px;
+        margin-top: 15px;
     }
     
     .legend {
         flex-direction: column;
         align-items: center;
+        gap: 10px;
+    }
+    
+    .notification {
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        padding: 20px 10px;
+    }
+    
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    header nav ul li button {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    main {
+        padding: 8px;
+    }
+    
+    .content-section {
+        padding: 12px;
+    }
+    
+    .content-section h2 {
+        font-size: 1.3rem;
+    }
+    
+    table {
+        font-size: 13px;
+    }
+    
+    th, td {
+        padding: 8px 6px;
+        min-width: 90px;
+    }
+    
+    .chart-container {
+        height: 250px;
+        margin-top: 10px;
+    }
+    
+    .status-badge {
+        min-width: 70px;
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+    
+    .update-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .notification {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+    
+    header nav ul li button {
+        padding: 5px 8px;
+        font-size: 12px;
+        min-width: 60px;
+    }
+    
+    .content-section h2 {
+        font-size: 1.2rem;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    th, td {
+        padding: 6px 4px;
+        min-width: 80px;
+    }
+    
+    .chart-container {
+        height: 220px;
+    }
+    
+    .legend-color {
+        width: 15px;
+        height: 15px;
+        margin-right: 6px;
+    }
+    
+    .status-select {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        padding: 15px 8px;
+    }
+    
+    header h1 {
+        font-size: 1.1rem;
+    }
+    
+    main {
+        padding: 5px;
+    }
+    
+    .content-section {
+        padding: 10px;
+    }
+    
+    table {
+        font-size: 11px;
+    }
+    
+    th, td {
+        padding: 5px 3px;
+        min-width: 70px;
+    }
+    
+    .chart-container {
+        height: 200px;
+    }
+    
+    .notification {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    header {
+        flex-direction: row;
+        padding: 15px 20px;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+    
+    header nav ul {
+        justify-content: flex-end;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+}
+
+/* Print styles */
+@media print {
+    header nav {
+        display: none;
+    }
+    
+    .notification {
+        display: none !important;
+    }
+    
+    .update-btn {
+        display: none;
+    }
+    
+    .content-section {
+        box-shadow: none;
+        border: 1px solid #ddd;
     }
 }

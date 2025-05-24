@@ -18,9 +18,6 @@ const auth = getAuth(app);
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
-    const userProfileSection = document.getElementById('user-profile');
-    const userNameElement = document.getElementById('user-name');
-    const userAvatarElement = document.getElementById('user-avatar');
     const signOutButton = document.getElementById('sign-out-button');
     const loginPromptSection = document.getElementById('login-prompt');
     const signInButton = document.getElementById('sign-in-button');
@@ -63,21 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (user) {
             // User is signed in
             currentUser = user;
-            userProfileSection.hidden = false;
             loginPromptSection.hidden = true;
-            userNameElement.textContent = user.displayName || user.email;
-            
-            if (user.photoURL) {
-                userAvatarElement.src = user.photoURL;
-                userAvatarElement.hidden = false;
-            }
-            
             // Fetch user bookings
             fetchUserBookings(user.uid);
         } else {
             // User is signed out
             currentUser = null;
-            userProfileSection.hidden = true;
+            
             loginPromptSection.hidden = false;
             bookingsTable.hidden = true;
             loadingMessage.hidden = true;
