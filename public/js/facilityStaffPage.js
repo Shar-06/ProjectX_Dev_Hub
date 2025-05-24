@@ -1,4 +1,43 @@
-async function loadIntoTable(url, table) {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
+    authDomain: "login-c94f8.firebaseapp.com",
+    projectId: "login-c94f8",
+    storageBucket: "login-c94f8.firebasestorage.app",
+    messagingSenderId: "277803117358",
+    appId: "1:277803117358:web:6d2f387bff41859bf3e8bf"
+  };
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+function createUpdateReportNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "report-updated";
+    const notificationMessage = "maintenance report status has been updated";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+             if (!response.ok) throw new Error("Failed to create a maintenance report updated notification");
+                return response.json();
+        })
+        .then(() => {
+            alert("MAINTENANCE REPORT UPDATED: notification has been created")
+        })
+}
+
+async function loadIntoTable(url, table, currentStaffId, currentStaffUsername) {
     const tableHead = table.querySelector("thead");
     const tableBody = table.querySelector("tbody");
     tableHead.innerHTML = '';
@@ -16,6 +55,7 @@ async function loadIntoTable(url, table) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         
         const data = await response.json();
         const maintenanceReports = data.data || data;
@@ -46,12 +86,12 @@ async function loadIntoTable(url, table) {
             
             // Facility
             const facilityCell = document.createElement("td");
-            facilityCell.textContent = maintenanceReport.facility_id;
+            facilityCell.textContent = maintenanceReport.facility;
             rowElement.appendChild(facilityCell);
             
             // Logged By
             const loggedByCell = document.createElement("td");
-            loggedByCell.textContent = maintenanceReport.resident_id;
+            loggedByCell.textContent = maintenanceReport.user;
             rowElement.appendChild(loggedByCell);
             
             // Current Status (display only)
@@ -71,7 +111,7 @@ async function loadIntoTable(url, table) {
             statusSelect.className = "status-select";
             
             const statusOptions = [
-                { value: 'not-started', label: 'Not Started' },
+                { value: 'not_started', label: 'Not Started' },
                 { value: 'ongoing', label: 'Ongoing' },
                 { value: 'completed', label: 'Completed' }
             ];
@@ -96,20 +136,19 @@ async function loadIntoTable(url, table) {
             statusSelect.addEventListener("change", () => {
                 updateButton.disabled = statusSelect.value === currentStatus;
             });
+            console.log("currentStaffId", currentStaffId);
             
             // Handle status update
             updateButton.addEventListener("click", async () => {
                 const newStatus = statusSelect.value;
                 const maintenanceReportId = maintenanceReport.id;
-                
                 try {
-                    const updateResponse = await fetch(`/api/v1/reports/updateStatus/${maintenanceReportId}/${newStatus}`, {
+                    const updateResponse = await fetch(`/api/v1/reports/updateStatus/${maintenanceReportId}/${newStatus}/${currentStaffId}`, {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
                             // 'Authorization': 'Bearer your-token-here'
-                        },
-                        body: JSON.stringify({ status: newStatus })
+                        }
                     });
                     
                     if (!updateResponse.ok) {
@@ -123,6 +162,7 @@ async function loadIntoTable(url, table) {
                     
                     // Show success notification
                     showNotification("Status updated successfully!", "success");
+                    createUpdateReportNotification(currentStaffId,currentStaffUsername);
                     
                 } catch (error) {
                     console.error("Error updating status:", error);
@@ -166,8 +206,25 @@ function showNotification(message, type = "success") {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadIntoTable("/api/v1/reports/", document.getElementById("issuesTableBody"));
-    
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            const email = user.email;
+            const displayName = user.displayName;
+
+            const currentStaffUsername = displayName;
+            const currentStaffId = uid;
+            loadIntoTable("/api/v1/reports/", document.getElementById("issuesTableBody"), currentStaffId,currentStaffUsername);
+            // ...
+        } else {
+            // User is signed out
+            // ...
+        }
+        });
+
+    /*
     // Tab navigation functionality
     const maintenanceBtn = document.getElementById("maintenanceBtn");
     const trendsBtn = document.getElementById("trendsBtn");
@@ -186,5 +243,16 @@ document.addEventListener('DOMContentLoaded', () => {
         maintenanceBtn.classList.remove('active');
         trendsSection.classList.add('active');
         maintenanceSection.classList.remove('active');
+    });*/
+    const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                // Sign-out successful
+                window.location.href = '../html/LoginPage.html'; // Redirect to home page
+            }).catch((error) => {
+                // An error happened
+                console.error('Sign out error:', error);
+                alert('Failed to sign out. Please try again.');
+            });
     });
 });

@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     //LOGIN USER ID
@@ -12,7 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
         const notifications = data.data || data;
-        const notificationBookingsList = document.getElementById("notification-events-list");
+        if(notifications.length != 0){
+                    const notificationBookingsList = document.getElementById("notification-events-list");
         console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
@@ -37,6 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             notificationBookingsList.appendChild(li);
         });
+        }
+        else{
+            const notificationBookingsList = document.getElementById("notification-events-list");
+            console.log(notificationBookingsList);
+            const li = document.createElement("li");
+            li.className = "notification";
+            li.innerHTML = `
+                <p>No notifications available</p>
+            `;
+            notificationBookingsList.appendChild(li);
+        }
     })
     .catch(error => {
        console.log("error while fetching notifications: "+ error)
@@ -51,7 +65,59 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
         const notifications = data.data || data;
-        const notificationBookingsList = document.getElementById("notification-approved-list");
+        if(notifications.length != 0){
+            const notificationBookingsList = document.getElementById("notification-approved-list");
+        console.log(notificationBookingsList);
+
+        notifications.forEach(notification => {
+            const li = document.createElement("li");
+            li.className = "notification";
+            const dateObj = new Date(notification.date);
+
+            // Format the date part
+            const formattedDate = dateObj.toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+            });
+
+            // Final display string
+            const displayTime = `${formattedDate} ${notification.timeslot}`;
+
+            li.innerHTML = `
+                <p>${notification.message} by user 
+                <strong>${notification.username}</strong>
+                <p>
+                <time>${displayTime}</time>
+            `;
+            notificationBookingsList.appendChild(li);
+        });
+        }
+        else{
+            const notificationBookingsList = document.getElementById("notification-approved-list");
+            console.log(notificationBookingsList);
+            const li = document.createElement("li");
+            li.className = "notification";
+            li.innerHTML = `
+                <p>No notifications available</p>
+            `;
+            notificationBookingsList.appendChild(li);
+        }
+    })
+    .catch(error => {
+       console.log("error while fetching notifications: "+ error)
+    })
+    fetch(`/api/v1/notifications/id/type/${userId}/report-updated`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const notifications = data.data || data;
+        if(notifications.length != 0){
+                    const notificationBookingsList = document.getElementById("notification-reports-list");
         console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
@@ -72,54 +138,22 @@ document.addEventListener("DOMContentLoaded", () => {
             li.innerHTML = `
                 <p>${notification.message} by user 
                 <strong>${notification.username}</strong> 
-                with user ID 
-                <strong >${notification.userid}</strong>.
                 </p>
                 <time>${displayTime}</time>
             `;
             notificationBookingsList.appendChild(li);
         });
-    })
-    .catch(error => {
-       console.log("error while fetching notifications: "+ error)
-    })
-    fetch(`/api/v1/notifications/id/type/${userId}/report-updated`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
         }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const notifications = data.data || data;
-        const notificationBookingsList = document.getElementById("notification-reports-list");
-        console.log(notificationBookingsList);
-
-        notifications.forEach(notification => {
+        else{
+            const notificationBookingsList = document.getElementById("notification-reports-list");
+            console.log(notificationBookingsList);
             const li = document.createElement("li");
             li.className = "notification";
-            const dateObj = new Date(notification.date);
-
-            // Format the date part
-            const formattedDate = dateObj.toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-            });
-
-            // Final display string
-            const displayTime = `${formattedDate} ${notification.timeslot}`;
-
             li.innerHTML = `
-                <p>${notification.message} that was issued by user 
-                <strong>${notification.username}</strong> 
-                with user ID 
-                <strong >${notification.userid}</strong>.
-                </p>
-                <time>${displayTime}</time>
+                <p>No notifications available</p>
             `;
             notificationBookingsList.appendChild(li);
-        });
+        }
     })
     .catch(error => {
        console.log("error while fetching notifications: "+ error)

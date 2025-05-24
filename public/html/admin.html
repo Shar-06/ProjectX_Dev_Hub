@@ -3,8 +3,8 @@
     <head>
         <title>Admin Home</title>
         <link rel="stylesheet" href="/styles/admin-styles.css">
-        <script src="/js/admin.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/admin.js" type="module"></script>
+        
     </head>
 
     <body>
@@ -17,6 +17,7 @@
                     <li><button onclick="window.location.href='../html/admin-events.html'">Events</button></li>
                     <li><button onclick="window.location.href='../html/admin-analytics.html'">Analytics</button></li>
                     <li><button onclick="window.location.href='../html/admin-notifications.html'">Notifications</button></li>
+                    <li><button id="sign-out-button" class="auth-button">Sign out</button></il>
                 </ul>
             </nav>
         </header>

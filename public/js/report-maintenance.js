@@ -195,14 +195,14 @@ function showRecentMaintenance() {
 
     // maps for display text
     const statusMap = {
-      open: 'Open',
-      inProgress: 'In Progress',
+      not_started: 'Not Started',
+      ongoing: 'Ongoing',
       completed: 'Completed'
     };
     // map each status to a priority level
     const priorityMap = {
-      open: 'high',
-      inProgress: 'medium',
+      not_started: 'high',
+      ongoing: 'medium',
       completed: 'low'
     };
     const priorityText = {

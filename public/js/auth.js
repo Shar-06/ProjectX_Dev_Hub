@@ -13,11 +13,29 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const googleSignUpBtn = document.getElementById('googleSignUp');
 
-const socket = io();
+function createNewUserNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "user-created";
+    const notificationMessage = "new user has registered";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+             if (!response.ok) throw new Error("Failed to create a register new user notification");
+                return response.json();
+        })
+        .then(() => {
+            alert("NEW USER: notification has been created")
+        })
+}
 
-  socket.on('connect', function (){
-  console.log(`Connected to server from Registration page`);
-      });
 
 // Google Sign Up
 googleSignUpBtn.addEventListener('click', () => {
@@ -29,6 +47,7 @@ googleSignUpBtn.addEventListener('click', () => {
       
       // The signed-in user info
       const user = result.user;
+      createNewUserNotification(user.uid,user.displayName);
       
       // Create a JSON object with the user details
       const userData = {
@@ -47,16 +66,6 @@ googleSignUpBtn.addEventListener('click', () => {
       };
 
       console.log('User signed up successfully:', userData);
-
-      socket.emit('createNewUser', {
-            from: user.displayName,
-            text: user.email,
-            createdAt: new Date().toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              })
-      });
       
       // You can now:
       // 1. Log the complete user object to console
@@ -75,6 +84,7 @@ googleSignUpBtn.addEventListener('click', () => {
       .then(response => response.json())
       .then(data => {
           console.log('Success:', data);
+          
          // window.location.href = 'dashboard.html';
       })
       .catch((error) => {

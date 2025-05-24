@@ -14,6 +14,29 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+function createBookingNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "booking-created";
+    const notificationMessage = "new booking has been created";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+             if (!response.ok) throw new Error("Failed to create a booking created notification");
+                return response.json();
+        })
+        .then(() => {
+            alert("BOOKING CREATED: notification has been created")
+        })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const facilitiesSection = document.getElementById('facilities');
@@ -178,6 +201,7 @@ bookingForm.addEventListener('submit', async (e) => {
     
     const date = bookingDateInput.value;
     const time = timeSlotSelect.value;
+    console.log("timeslot: ",time);
     const [startTime, endTime] = time.split('-');
     
     // Get participants
@@ -202,6 +226,7 @@ bookingForm.addEventListener('submit', async (e) => {
 
     console.log('Booking created:', bookingData);
     
+    
     try {
         // Send booking data to backend API
         const response = await fetch('/api/v1/bookings/post-booking', {
@@ -216,6 +241,20 @@ bookingForm.addEventListener('submit', async (e) => {
         
         if (result.success) {
             console.log('Booking saved to database:', result.data);
+            onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            const email = user.email;
+            const displayName = user.displayName;
+            createBookingNotification(uid,displayName);
+            // ...
+        } else {
+            // User is signed out
+            // ...
+        }
+        });
             
             // Update confirmation section
             confirmedFacility.textContent = `Facility: ${facilityName}`;
@@ -260,23 +299,16 @@ bookingForm.addEventListener('submit', async (e) => {
         });
     }
 
-    // Logged-in user data
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/auth.user
-            const uid = user.uid;
-            const email = user.email;
-            const displayName = user.displayName;
-
-            console.log("User ID: " + uid);
-            console.log("User Email: " + email);
-            console.log("User Display Name: " + displayName);
-            // ...
-        } else {
-            // User is signed out
-            // ...
-        }
+     const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = '../html/LoginPage.html'; // Redirect to home page
+        }).catch((error) => {
+            // An error happened
+            console.error('Sign out error:', error);
+            alert('Failed to sign out. Please try again.');
         });
-
+    });
+    
 });

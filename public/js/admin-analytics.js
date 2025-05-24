@@ -1,3 +1,19 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
+    authDomain: "login-c94f8.firebaseapp.com",
+    projectId: "login-c94f8",
+    storageBucket: "login-c94f8.firebasestorage.app",
+    messagingSenderId: "277803117358",
+    appId: "1:277803117358:web:6d2f387bff41859bf3e8bf"
+  };
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 document.addEventListener('DOMContentLoaded', function () {
 // Tab Switching Logic
 const tabButtons = document.querySelectorAll('.tab-button');
@@ -55,5 +71,16 @@ document.getElementById('export-pdf').addEventListener('click', async function (
     alert('PDF export failed. Ensure the iframe exposes getTableData().');
     }
 });
+ const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = '../html/LoginPage.html'; // Redirect to home page
+        }).catch((error) => {
+            // An error happened
+            console.error('Sign out error:', error);
+            alert('Failed to sign out. Please try again.');
+        });
+    });
 
 });

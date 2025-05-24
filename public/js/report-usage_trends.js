@@ -32,7 +32,7 @@ function showTotalHours(startDate, endDate){
             const totalHours = data.data[0];
             const numOfHours = parseFloat(totalHours.total_hours);
             const totalNumberOfHours = parseFloat(totalHours.overall_hours);
-            const percentageValue = (numOfHours / totalNumberOfHours) * 100
+            const percentageValue = ((numOfHours / totalNumberOfHours) * 100).toFixed(2);
 
             document.getElementById('numOfHours').innerHTML = numOfHours;
             document.getElementById('hoursProgressBar').setAttribute('value', percentageValue);
@@ -53,7 +53,7 @@ function showTotalBookings(startDate, endDate){
             const totalBookings = data.data[0];
             const numOfBookings = parseFloat(totalBookings.total_bookings);
             const totalNumberOfBookings = parseFloat(totalBookings.overall_bookings);
-            const percentageValue = (numOfBookings / totalNumberOfBookings) * 100
+            const percentageValue = parseFloat(((numOfBookings / totalNumberOfBookings) * 100).toFixed(2));
 
             document.getElementById('numOfBookings').innerHTML = numOfBookings;
             document.getElementById('bookingsProgressBar').setAttribute('value', percentageValue);

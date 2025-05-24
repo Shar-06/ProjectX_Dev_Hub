@@ -1,3 +1,43 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
+    authDomain: "login-c94f8.firebaseapp.com",
+    projectId: "login-c94f8",
+    storageBucket: "login-c94f8.firebasestorage.app",
+    messagingSenderId: "277803117358",
+    appId: "1:277803117358:web:6d2f387bff41859bf3e8bf"
+  };
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+function createBookingNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "booking-updated";
+    const notificationMessage = "booking has been approved";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+             if (!response.ok) throw new Error("Failed to create an updated booking notification");
+                return response.json();
+        })
+        .then(() => {
+            alert("BOOKING UPDATED: notification has been created")
+        })
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const bookingRequestsTable = document.querySelector(
         'section[aria-labelledby="booking-requests-heading"] tbody'
@@ -87,6 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.json();
             })
             .then(() => {
+                onAuthStateChanged(auth, (user) => {
+                        if (user) {
+                            console.log(user.uid," and ",user.displayName);
+                            createBookingNotification(user.uid,user.displayName);
+                        }
+                        else{}
+                });
+                
                 const statusCell = row.querySelector(".status");
                 statusCell.textContent = newStatus;
 
@@ -103,4 +151,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Could not update the booking status. Try again.");
             });
     }
+     const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = '../html/LoginPage.html'; // Redirect to home page
+        }).catch((error) => {
+            // An error happened
+            console.error('Sign out error:', error);
+            alert('Failed to sign out. Please try again.');
+        });
+    });
 });

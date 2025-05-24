@@ -1,35 +1,42 @@
-function doNotification() {
-    const currentDate = new Date();
-    let currentTime = currentDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
-    const notification = {
-       date: currentDate,
-       timeslot: currentTime,
-       status:'unread',
-       message: "Swimming pool has been booked for the local women's competition",
-       userid: "admin",
-       type: "event",
-       username: "admin"
-    };
+const firebaseConfig = {
+    apiKey: "AIzaSyDScRQZhidNCpQiPRk0XnQaPF6SM6NPi1U",
+    authDomain: "login-c94f8.firebaseapp.com",
+    projectId: "login-c94f8",
+    storageBucket: "login-c94f8.firebasestorage.app",
+    messagingSenderId: "277803117358",
+    appId: "1:277803117358:web:6d2f387bff41859bf3e8bf"
+  };
 
-    fetch('/api/v1/notifications/post-notification', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            
-        },
-        body: JSON.stringify(notification)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success in creating notification:', data);
-       // window.location.href = 'dashboard.html';
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-        //window.location.href = 'dashboard.html';
-    });
-};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+function createEventNotification(currentUserid, currentUsername){
+    const currentTime = new Date().toTimeString().split(' ')[0];;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const viewStatus = "unread";
+    const notificationType = "event";
+    const notificationMessage = "new event has been created";
+    
+    fetch(`/api/v1/notifications/post-notification`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date:currentDate,timeslot:currentTime,status:viewStatus,message:notificationMessage,userid:currentUserid,type:notificationType,username:currentUsername}),
+        })
+        .then((response) => {
+             if (!response.ok) throw new Error("Failed to create an event created notification");
+                return response.json();
+        })
+        .then(() => {
+            alert("EVENT: notification has been created")
+        })
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("eventForm");
@@ -67,7 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
     
             if (response.ok) {
 
-                //doNotification();
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        console.log(user.uid," and ",user.displayName);
+                        createEventNotification(user.uid,user.displayName);
+                        }
+                     else{}
+                    });
 
                 const result = await response.json();
                 alert("Event created successfully!");
@@ -80,5 +93,16 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error:", error);
             alert("An error occurred while creating the event.");
         }
+    });
+     const signOutButton = document.getElementById('sign-out-button');
+    signOutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = '../html/LoginPage.html'; // Redirect to home page
+        }).catch((error) => {
+            // An error happened
+            console.error('Sign out error:', error);
+            alert('Failed to sign out. Please try again.');
+        });
     });    
 });

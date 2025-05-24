@@ -254,12 +254,12 @@ body {
     display: inline-block;
 }
 
-.status-open {
+.status-not_started {
     background-color: rgba(231, 76, 60, 0.1);
     color: var(--open-color);
 }
 
-.status-inProgress {
+.status-ongoing {
     background-color: rgba(243, 156, 18, 0.1);
     color: var(--progress-color);
 }

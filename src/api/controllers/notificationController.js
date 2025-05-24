@@ -10,7 +10,7 @@ class notificationController{
             if (notifications) {
                 res.json({
                     success: true,
-                    data: notifications
+                    data: notifications || []
                 });
             }
         } catch (error) {
@@ -23,7 +23,7 @@ class notificationController{
             const notifications = await notificationService.getNotificationsByType(type);
             res.json({
                 success: true,
-                data: notifications
+                data: notifications || []
             });
         } catch (error) {
             next(error);
@@ -36,7 +36,7 @@ class notificationController{
             const notifications = await notificationService.getNotificationsById(userid, type);
             res.json({
                 success: true,
-                data: notifications
+                data: notifications || []
             });
         } catch (error) {
             next(error);

@@ -8,16 +8,22 @@
 </head>
 <body>
     <header>
-        <h1>Facility Management Dashboard</h1>
-        <p>Monitor maintenance issues and usage trends</p>
-    </header>
+            <h1>Staff Management Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><button onclick="window.location.href='../html/facilityStaffPage.html'">Home</button></li>
+                    <li><button onclick="window.location.href='../html/staff-notification.html'">Notifications</button></li>
+                    <li><button id="sign-out-button" class="auth-button">Sign out</button></il>
+                </ul>
+            </nav>
+        </header>
     
     <main>
-        <header>
+        <!--<header>
             <button class="nav-btn active" id="maintenanceBtn">Home</button>
             <button class="nav-btn" id="trendsBtn">Analytics</button>
             <button class="nav-btn" id="trendsBtn" onclick="window.location.href='../html/staff-notification.html'">Notifications</button>
-        </header>
+        </header>-->
         
         <section class="content-section active" id="maintenanceSection">
             <h2>Maintenance Issues</h2>
@@ -43,7 +49,6 @@
     
     <aside class="notification" id="notification">Status updated successfully!</aside>
 
-    <script src="../js/facilityStaffPage.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="../js/facilityStaffPage.js" type="module"></script>
 </body>
 </html>
