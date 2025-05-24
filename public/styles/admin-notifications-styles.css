@@ -18,13 +18,13 @@ body {
 
 /* Header */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0E2A55;
-    color: white;
-    padding: 40px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #0E2A55;
+color: white;
+padding: 40px 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -34,15 +34,9 @@ header h1 {
 }
 
 header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-}
-
-header nav ul li {
-    margin: 0;
+list-style: none;
+display: flex;
+gap: 1rem;
 }
 
 header nav ul li button {
@@ -54,7 +48,7 @@ header nav ul li button {
     cursor: pointer;
     transition: background 0.3s ease;
     font-size: 1rem;
-}
+}df
 
 header nav ul li button:hover {
     background-color: #4a6d24;

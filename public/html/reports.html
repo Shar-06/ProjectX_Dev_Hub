@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Community sports facility maintenance reporting">
     <title>Maintenance Reports | Community Sports Facility</title>
-    <link rel="stylesheet" href="../styles/bookingPage.css">
+    <link rel="stylesheet" href="../styles/reports.css">
 </head>
 <body>
     <div id="toast-container" class="toast-container"></div>
     <header class="site-nav">
         <h1>Resident Management Dashboard</h1>
-        <nav >
+        <nav>
             <ul>
-                <li><button onclick="window.location.href='../html/home.html'">Home</button></li>
-                <li><button onclick="window.location.href='../html/bookingPage.html'">Our Facilities</button></li>
-                <li><button onclick="window.location.href='../html/myBookings.html'" aria-current="page">My Bookings</button></li>
-                <li><button onclick="window.location.href='../html/reports.html'">Maintenance Reports</button></li>
+                <li><button onclick="window.location.href='../html/bookingPage.html'">Home</button></li>
+                <li><button onclick="window.location.href='../html/residentViewEvents.html'">Events</button></li>
+                <li><button onclick="window.location.href='../html/myBookings.html'">My Bookings</button></li>
+                <li><button onclick="window.location.href='../html/reports.html'" aria-current="page">Maintenance Reports</button></li>
                 <li><button onclick="window.location.href='../html/resident-notification.html'">Notifications</button></li>
-                <li><button id="sign-out-button" class="auth-button">Sign out</button></il>
+                <li><button id="sign-out-button" class="auth-button">Sign out</button></li>
             </ul>
         </nav>
     </header>
@@ -36,10 +36,10 @@
                         <label for="facility">Facility:</label>
                         <select id="facility" name="facility" required>
                             <option value="">-- Select Facility --</option>
-                            <option value=1>Gymnasium </option>
-                            <option value=2>Swimming Pool</option>
-                            <option value=3>Soccer Field</option>
-                            <option value=4>Basketball Court</option>
+                            <option value="1">Gymnasium</option>
+                            <option value="2">Swimming Pool</option>
+                            <option value="3">Soccer Field</option>
+                            <option value="4">Basketball Court</option>
                         </select>
                     </p>
 
@@ -57,7 +57,7 @@
 
         <!-- Reports List Section -->
         <section id="reports-list" aria-labelledby="reports-heading">
-            <h2 id="reports-heading">Maintenance Reports</h2>
+            <h2 id="reports-heading">View Maintenance Reports</h2>
             
             <section id="status-filters" aria-label="Report status filters">
                 <form id="filter-form" class="filter-form">
@@ -67,19 +67,39 @@
                             <label for="status">Status:</label>
                             <select id="status" name="status">
                                 <option value="">All Statuses</option>
-                                <option value="reported">Reported</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="resolved">Resolved</option>
+                                <option value="not_started">Not Started</option>
+                                <option value="ongoing">Ongoing</option>
+                                <option value="completed">Completed</option>
+                                <option value="pending">Pending</option>
                             </select>
                         </p>
-                        <button type="submit" class="filter-button">Apply Filters</button>
+                        
                     </fieldset>
                 </form>
             </section>
 
+            <section class="reports-table-container">
+                <table class="reports-table" role="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Facility</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Reported By</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reports-tbody">
+                        <tr>
+                            <td colspan="5" class="loading">Loading maintenance reports...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
             <section id="reports-container" aria-label="List of maintenance reports">
                 <p id="no-reports-message">Loading maintenance reports...</p>
-                <!-- Reports will be inserted here by JavaScript -->
+                <!-- Reports will be inserted here by JavaScript for mobile view -->
             </section>
         </section>
 
@@ -101,8 +121,8 @@
                     </p>
 
                     <p>
-                        <label for="staff-feedback">Feedback:</label>
-                        <textarea id="staff-feedback" name="feedback" rows="4" placeholder="Add any updates or notes..."></textarea>
+                        <label for="staff-feedback-text">Feedback:</label>
+                        <textarea id="staff-feedback-text" name="feedback" rows="4" placeholder="Add any updates or notes..."></textarea>
                     </p>
 
                     <input type="hidden" id="report-id" name="report_id">

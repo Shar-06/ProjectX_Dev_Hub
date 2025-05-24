@@ -16,7 +16,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
+
     // DOM Elements
     const signOutButton = document.getElementById('sign-out-button');
     const loginPromptSection = document.getElementById('login-prompt');
