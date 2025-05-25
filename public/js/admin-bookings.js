@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 row.innerHTML = `
                     <td>${booking.id}</td>
-                    <td>${booking.resident_id}</td>
+                    <td>${booking.name}</td>
                     <td>${getFacilityName(booking.facility_id)}</td>
                     <td>${booking.timeslot || "N/A"}</td>
                     <td>${new Date(booking.date).toLocaleDateString()}</td>
