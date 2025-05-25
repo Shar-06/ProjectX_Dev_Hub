@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
+//Update report notification
 function createUpdateReportNotification(currentUserid, currentUsername){
     const currentTime = new Date().toTimeString().split(' ')[0];;
     const currentDate = new Date().toISOString().split('T')[0];
@@ -35,13 +35,14 @@ function createUpdateReportNotification(currentUserid, currentUsername){
         .then(() => {
         })
 }
-
+//Load maintenance reports into the table
 async function loadIntoTable(url, table, currentStaffId, currentStaffUsername) {
     const tableHead = table.querySelector("thead");
     const tableBody = table.querySelector("tbody");
     tableHead.innerHTML = '';
     tableBody.innerHTML = ''; // Clear existing content
     
+    //use the provided URL to fetch data 
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -177,6 +178,7 @@ async function loadIntoTable(url, table, currentStaffId, currentStaffUsername) {
             tableBody.appendChild(rowElement);
         });
         
+        // Show error notification    
     } catch (error) {
         console.error("Error fetching data:", error);
         showNotification("Failed to load data", "error");
@@ -191,7 +193,7 @@ async function loadIntoTable(url, table, currentStaffId, currentStaffUsername) {
         tableBody.appendChild(errorRow);
     }
 }
-
+// Show sucess/failure notification 
 function showNotification(message, type = "success") {
     const notification = document.getElementById("notification");
     notification.textContent = message;
@@ -222,26 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         });
 
-    /*
-    // Tab navigation functionality
-    const maintenanceBtn = document.getElementById("maintenanceBtn");
-    const trendsBtn = document.getElementById("trendsBtn");
-    const maintenanceSection = document.getElementById("maintenanceSection");
-    const trendsSection = document.getElementById("trendsSection");
-    
-    maintenanceBtn.addEventListener('click', () => {
-        maintenanceBtn.classList.add('active');
-        trendsBtn.classList.remove('active');
-        maintenanceSection.classList.add('active');
-        trendsSection.classList.remove('active');
-    });
-    
-    trendsBtn.addEventListener('click', () => {
-        trendsBtn.classList.add('active');
-        maintenanceBtn.classList.remove('active');
-        trendsSection.classList.add('active');
-        maintenanceSection.classList.remove('active');
-    });*/
     const signOutButton = document.getElementById('sign-out-button');
     signOutButton.addEventListener('click', () => {
             signOut(auth).then(() => {

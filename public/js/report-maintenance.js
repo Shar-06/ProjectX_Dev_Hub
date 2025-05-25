@@ -1,3 +1,4 @@
+// fetch and display maintenance status data
 function showStatus() {
     fetch(`/api/v1/maintenances/status`, {
         method: 'GET',
@@ -20,7 +21,7 @@ function showStatus() {
         console.error('Error:', error);
     });
 }
-
+// Function to render the donut chart using Chart.js
 function renderStatusDonutChart(labels, values) {
     const ctx = document.getElementById('issueStatusChart').getContext('2d');
 
@@ -65,7 +66,7 @@ function renderStatusDonutChart(labels, values) {
         }
     });
 }
-
+// Function to fetch and display issues by facility
 function showIssuesByFacility() {
   fetch(`/api/v1/maintenances/issues-by-facility`, {
     method: 'GET',
@@ -136,7 +137,7 @@ function showIssuesByFacility() {
     })
     .catch(error => console.error('Error fetching usage trends:', error));
 }
-
+// Function to fetch and display staff performance leaderboard
 function showStaffPerformance() {
   fetch(`/api/v1/maintenances/staff-leaderboard`, {
     method: 'GET',
@@ -178,6 +179,7 @@ function showStaffPerformance() {
   .catch(err => console.error('Error loading staff performance:', err));
 }
 
+// Function to fetch and display recent maintenance issues
 function showRecentMaintenance() {
   fetch(`/api/v1/maintenances/recent`, {
     method: 'GET',
@@ -242,7 +244,7 @@ function showRecentMaintenance() {
   })
   .catch(err => console.error('Error loading recent maintenance:', err));
 }
-
+// Function to fetch and display average resolution time
 function showAveResolutionTime() {
     fetch('/api/v1/maintenances/average-resolution-time',
          {
@@ -261,7 +263,7 @@ function showAveResolutionTime() {
 }
 document.addEventListener('DOMContentLoaded', showRecentMaintenance);
 
-
+// Initialize all functions when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
     showStatus();
     showIssuesByFacility();

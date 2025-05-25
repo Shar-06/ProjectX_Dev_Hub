@@ -14,13 +14,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Function to create a booking created notification
 function createBookingNotification(currentUserid, currentUsername){
     const currentTime = new Date().toTimeString().split(' ')[0];;
     const currentDate = new Date().toISOString().split('T')[0];
     const viewStatus = "unread";
     const notificationType = "booking-created";
     const notificationMessage = "new booking has been created";
-    
+    // Fetch the current user's ID and username
     fetch(`/api/v1/notifications/post-notification`, {
             method: "POST",
             headers: {
@@ -36,6 +37,7 @@ function createBookingNotification(currentUserid, currentUsername){
         })
 }
 
+// Initialize all functions when the DOM is fully loaded 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const facilitiesSection = document.getElementById('facilities');

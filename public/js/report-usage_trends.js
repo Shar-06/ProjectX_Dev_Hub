@@ -1,4 +1,5 @@
  let facilityUsageChart;
+ // Function to fetch and display the most popular facility
  function showPopularFacility(){
         fetch('/api/v1/usagetrends/popular-facility', {
             method: 'GET',
@@ -19,7 +20,7 @@
         })
         .catch(error => console.error('Error fetching popular facility:', error));
 }
-
+// Function to fetch and display total hours and bookings
 function showTotalHours(startDate, endDate){
        fetch(`/api/v1/usagetrends/total-hours/${startDate}/${endDate}`, {
             method: 'GET',
@@ -40,7 +41,7 @@ function showTotalHours(startDate, endDate){
         })
         .catch(error => console.error('Error fetching total hours:', error));
 }
-
+// Function to fetch and display total bookings
 function showTotalBookings(startDate, endDate){
        fetch(`/api/v1/usagetrends/total-bookings/${startDate}/${endDate}`, {
             method: 'GET',
@@ -61,6 +62,7 @@ function showTotalBookings(startDate, endDate){
         })
         .catch(error => console.error('Error fetching total bookings:', error));
 }
+// Function to render the usage table
 function renderUsageTable(labels, datasets, facilities) {
     let tableHTML = '<table border="1" cellpadding="5" cellspacing="0">';
     tableHTML += '<thead><tr><th>Date</th>';
@@ -85,7 +87,7 @@ function renderUsageTable(labels, datasets, facilities) {
     // Inject the table HTML into the page
     document.getElementById('tableContainer').innerHTML = tableHTML;
 }
-
+// Function to fetch and display usage by facility
 function showUsageByFacility(startDate, endDate, facilityId){
     fetch(`/api/v1/usagetrends/usage/${startDate}/${endDate}/${facilityId}`,{
             method: 'GET',
@@ -147,6 +149,7 @@ function showUsageByFacility(startDate, endDate, facilityId){
         .catch(error => console.error('Error fetching usage trends:', error));
          renderUsageTable(labels, datasets, facilities);
 }
+// Function to show usage comparison for all facilities
 function showUsageComparison(startDate, endDate){
     fetch(`/api/v1/usagetrends/usage-comparison/${startDate}/${endDate}`,{
             method: 'GET',
@@ -209,6 +212,7 @@ function showUsageComparison(startDate, endDate){
         .catch(error => console.error('Error fetching usage trends:', error));
 }
 
+// Event listener for DOMContentLoaded to initialize the page
 document.addEventListener("DOMContentLoaded", function () {
     showPopularFacility();
 
