@@ -34,7 +34,6 @@ function createBookingNotification(currentUserid, currentUsername){
                 return response.json();
         })
         .then(() => {
-            alert("BOOKING UPDATED: notification has been created")
         })
 }
 
@@ -81,12 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     denyBtn.className = "deny-booking danger";
 
                     approveBtn.addEventListener("click", () => {
-                        console.log("Approving booking ID:", booking.id);
                         updateBookingStatus(booking.id, "Approved", row);
                     });
 
                     denyBtn.addEventListener("click", () => {
-                        console.log("Denying booking ID:", booking.id);
+
                         updateBookingStatus(booking.id, "Denied", row);
                     });
 
@@ -129,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(() => {
                 onAuthStateChanged(auth, (user) => {
                         if (user) {
-                            console.log(user.uid," and ",user.displayName);
+
                             createBookingNotification(user.uid,user.displayName);
                         }
                         else{}
