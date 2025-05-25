@@ -14,7 +14,7 @@ class reportingService {
         //return result.rows[0];
 
         if (result.rows.length === 0) {
-            throw new Error('No data found');
+            return [];
         }
 
         return result.rows[0];
