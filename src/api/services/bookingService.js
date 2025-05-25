@@ -2,7 +2,7 @@ const data = require('../../config/database');
 
 class bookingService {
     async getAllBookings() {
-        const query = 'SELECT * FROM "Booking" as b,"User" as u where u.id = b.resident_id ORDER BY date, timeslot ASC';
+        const query = 'SELECT b.id,date,facility_id,status,timeslot,email,name,role FROM "Booking" as b,"User" as u where u.id = b.resident_id ORDER BY date, timeslot ASC';
         const result = await data.query(query);
         return result.rows;
     }
