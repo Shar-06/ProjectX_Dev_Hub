@@ -45,7 +45,7 @@ class reportService {
         const created_date = moment().format('YYYY-MM-DD');
         const query = {
             text: `Insert into "MaintenanceReport" (status,facility_id,resident_id,description,created_date) values ($1,$2,$3,$4,$5) returning *`,
-            values: ['Pending', facility_id, resident_id, description, created_date]
+            values: ['not-started', facility_id, resident_id, description, created_date]
         };
 
         try {
