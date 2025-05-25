@@ -32,7 +32,6 @@ function createNewUserNotification(currentUserid, currentUsername){
                 return response.json();
         })
         .then(() => {
-            alert("NEW USER: notification has been created")
         })
 }
 
@@ -64,14 +63,9 @@ googleSignUpBtn.addEventListener('click', () => {
           // Add any additional custom data you want to store
           registrationDate: new Date().toISOString()
       };
-
-      console.log('User signed up successfully:', userData);
       
-      // You can now:
-      // 1. Log the complete user object to console
-      console.log('Full user object:', JSON.stringify(userData, null, 2));
-      
-      // 2. Send to your backend ( using fetch)
+ 
+      //Send to the backend
 
       fetch('/api/v1/users/post-user', {
           method: 'POST',
@@ -117,6 +111,6 @@ googleSignUpBtn.addEventListener('click', () => {
 auth.onAuthStateChanged((user) => {
   if (user) {
       // User is signed in
-      console.log('Already signed in user:', user);
+      console.log('Already signed');
   }
 });

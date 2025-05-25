@@ -35,17 +35,12 @@ window.addEventListener("DOMContentLoaded", () => {
       window.location.href='./html/admin.html';
       // ...
 
-      
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage);
     });
-
-
-    console.log(userName);
-    console.log(pwd);
   }
 
   function googleAuth(){
@@ -60,9 +55,6 @@ window.addEventListener("DOMContentLoaded", () => {
       // ...
       const userEmail = user.email;
       const userID = user.uid;
-
-      console.log("User ID: " + userID);
-      
       //fetch user role from database using email after a successful user authentication
       fetch(`/api/v1/users/id/${userID}`, {
         method: 'GET',

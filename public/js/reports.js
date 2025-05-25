@@ -33,10 +33,8 @@ function createReportNotification(currentUserid, currentUsername){
             
              if (!response.ok) throw new Error("Failed to create a facility issue report created notification");
                 return response.json();
-
         })
         .then(() => {
-            alert("FACILITY ISSUE REPORTED: notification has been created")
         })
 }
 
@@ -151,9 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalButtonText = submitButton.textContent;
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
-            
-            console.log('Submitting report data:', reportData);
-            
+                        
             const response = await fetch('/api/v1/reports/postReport', { 
                 method: 'POST',
                 headers: {
@@ -184,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (result.success) {
                 // Show success message
-                alert(`Report submitted successfully! Report ID: #${result.data?.id || 'N/A'}`);
+                alert(`Report submitted successfully!`);
                 
                 // Reset form
                 reportForm.reset();

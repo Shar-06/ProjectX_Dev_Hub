@@ -33,7 +33,6 @@ function createBookingNotification(currentUserid, currentUsername){
                 return response.json();
         })
         .then(() => {
-            alert("BOOKING CREATED: notification has been created")
         })
 }
 
@@ -201,7 +200,6 @@ bookingForm.addEventListener('submit', async (e) => {
     
     const date = bookingDateInput.value;
     const time = timeSlotSelect.value;
-    console.log("timeslot: ",time);
     const [startTime, endTime] = time.split('-');
     
     // Get participants
@@ -224,9 +222,6 @@ bookingForm.addEventListener('submit', async (e) => {
         resident_id: auth.currentUser ? auth.currentUser.uid : "guest-user"
     };
 
-    console.log('Booking created:', bookingData);
-    
-    
     try {
         // Send booking data to backend API
         const response = await fetch('/api/v1/bookings/post-booking', {
@@ -240,7 +235,6 @@ bookingForm.addEventListener('submit', async (e) => {
         const result = await response.json();
         
         if (result.success) {
-            console.log('Booking saved to database:', result.data);
             onAuthStateChanged(auth, (user) => {
         if (user) {
             // User is signed in, see docs for a list of available properties

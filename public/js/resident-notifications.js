@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const notifications = data.data || data;
         if(notifications.length != 0){
                     const notificationBookingsList = document.getElementById("notification-events-list");
-        console.log(notificationBookingsList);
-
         notifications.forEach(notification => {
             const li = document.createElement("li");
             li.className = "notification";
@@ -43,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else{
             const notificationBookingsList = document.getElementById("notification-events-list");
-            console.log(notificationBookingsList);
             const li = document.createElement("li");
             li.className = "notification";
             li.innerHTML = `
@@ -67,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const notifications = data.data || data;
         if(notifications.length != 0){
             const notificationBookingsList = document.getElementById("notification-approved-list");
-        console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
             const li = document.createElement("li");
@@ -95,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else{
             const notificationBookingsList = document.getElementById("notification-approved-list");
-            console.log(notificationBookingsList);
             const li = document.createElement("li");
             li.className = "notification";
             li.innerHTML = `
@@ -118,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const notifications = data.data || data;
         if(notifications.length != 0){
                     const notificationBookingsList = document.getElementById("notification-reports-list");
-        console.log(notificationBookingsList);
 
         notifications.forEach(notification => {
             const li = document.createElement("li");
@@ -146,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else{
             const notificationBookingsList = document.getElementById("notification-reports-list");
-            console.log(notificationBookingsList);
             const li = document.createElement("li");
             li.className = "notification";
             li.innerHTML = `

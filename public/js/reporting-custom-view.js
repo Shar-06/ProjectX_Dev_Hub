@@ -377,9 +377,6 @@ async function most_popular_facility(start_date, end_date) {
     const json = await response.json();
     const mostPopularName = json.data.name;
     const mostPopularCount = json.data.count;
-
-    //console.log("Most popular facility:", mostPopularName);
-
     const facilityNameElement = document.querySelector(".facilityName h2");
     const trophyImage = document.querySelector(".trophyImage");
     const bookingsCount = document.querySelector(".bookingsCount");
@@ -455,8 +452,6 @@ async function issues_by_facility(start_date,end_date) {
     const json = await response.json();
     const usageData = json.data;
 
-    //console.log(usageData);
-
     createBarChart(usageData);
 
   } catch (error) {
@@ -478,8 +473,6 @@ async function recent_maintenance_reports(start_date,end_date) {
     const json = await response.json();
     const usageData = json.data;
 
-    //console.log(usageData);
-
     createTable(usageData);
 
   } catch (error) {
@@ -500,9 +493,6 @@ async function recent_maintenance_reports_byFacility(start_date,end_date,facilit
 
     const json = await response.json();
     const usageData = json.data;
-
-    //console.log(usageData);
-
     createTable(usageData);
 
   } catch (error) {

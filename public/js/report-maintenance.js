@@ -76,17 +76,13 @@ function showIssuesByFacility() {
     .then(response => response.json())
     .then(data => {
       const usageComparison = data.data || data;
-      //console.log('Usage Comparison Data:', usageComparison);
 
       // Extract unique dates
       const labels = [...new Set(
         usageComparison.map(d => new Date(d.created_date).toISOString().split('T')[0])
       )].sort();
-      //console.log('Labels:', labels);
-
       // Extract unique facility names
       const facilities = [...new Set(usageComparison.map(d => d.name))];
-      //console.log('Facilities:', facilities);
 
       // Build datasets per facility
       const datasets = facilities.map(facility => {

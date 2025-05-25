@@ -33,7 +33,6 @@ function createUpdateReportNotification(currentUserid, currentUsername){
                 return response.json();
         })
         .then(() => {
-            alert("MAINTENANCE REPORT UPDATED: notification has been created")
         })
 }
 
@@ -136,7 +135,6 @@ async function loadIntoTable(url, table, currentStaffId, currentStaffUsername) {
             statusSelect.addEventListener("change", () => {
                 updateButton.disabled = statusSelect.value === currentStatus;
             });
-            console.log("currentStaffId", currentStaffId);
             
             // Handle status update
             updateButton.addEventListener("click", async () => {

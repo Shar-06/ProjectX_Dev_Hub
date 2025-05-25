@@ -77,9 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
         const notifications = data.data || data;
         if(notifications.length != 0){
-                    const notificationBookingsList = document.getElementById("notification-reports-list");
-        console.log(notificationBookingsList);
-
+            const notificationBookingsList = document.getElementById("notification-reports-list");
         notifications.forEach(notification => {
             const li = document.createElement("li");
             li.className = "notification";
@@ -106,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else{
             const notificationBookingsList = document.getElementById("notification-reports-list");
-            console.log(notificationBookingsList);
             const li = document.createElement("li");
             li.className = "notification";
             li.innerHTML = `

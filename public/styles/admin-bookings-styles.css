@@ -121,7 +121,7 @@ th, td {
 }
 
 .approve-booking {
-    background-color: var(--approve);
+    background-color: #75dd06;
     color: white;
     border: none;
     padding: 0.3rem 0.8rem;
@@ -130,11 +130,13 @@ th, td {
 }
 
 .approve-booking:hover {
-    background-color: var(--approve-hover);
+    background-color: #72c718;
+    color:white;
+
 }
 
 .deny-booking {
-    background-color: var(--danger);
+    background-color: #d42c19;
     color: white;
     border: none;
     padding: 0.3rem 0.8rem;
@@ -144,7 +146,8 @@ th, td {
 }
 
 .deny-booking:hover {
-    background-color: #c0392b;
+    background-color: #b32313;
+    color: white;
 }
 
 article::-webkit-scrollbar {

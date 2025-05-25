@@ -34,7 +34,6 @@ function createEventNotification(currentUserid, currentUsername){
                 return response.json();
         })
         .then(() => {
-            alert("EVENT: notification has been created")
         })
 }
 
@@ -76,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
-                        console.log(user.uid," and ",user.displayName);
                         createEventNotification(user.uid,user.displayName);
                         }
                      else{}
