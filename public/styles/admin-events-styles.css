@@ -129,6 +129,7 @@ margin-bottom: 20px;
 
 .event-card:hover {
 transform: translateY(-4px);
+text-align: center;
 }
 
 .event-cover {
@@ -148,6 +149,7 @@ font-size: 14px;
 font-weight: bold;
 border-radius: 4px;
 cursor: pointer;
+text-align: center;
 transition: background-color 0.3s ease;
 }
 
@@ -175,6 +177,7 @@ padding: 2rem;
 border-radius: 8px;
 max-width: 500px;
 width: 90%;
+text-align: center;
 }
 
 .close-modal {
